@@ -1,3 +1,13 @@
+os-prober (0.14) UNRELEASED; urgency=low
+
+  * Joey Hess
+    - It's actually allowed and common for /etc/lsb-release to not include a
+      DISTRIB_DESCRIPTION or DISTRIB_CODENAME, so don't call such distros
+      "Unknown semi-LSB-compliant Linux distribution", just skip to the next
+      test. This affected FC2.
+
+ -- Joey Hess <joeyh@debian.org>  Fri, 27 Aug 2004 12:57:06 -0400
+
 os-prober (0.13) unstable; urgency=low
 
   * Giuseppe Sacco
