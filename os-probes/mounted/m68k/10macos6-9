@@ -1,0 +1,26 @@
+#!/bin/sh
+# Probe for OS 9 via System suitcase check.
+. /usr/share/os-prober/common.sh
+
+set -e
+
+debug() {
+  logger -t classic-prober "$@"
+}
+
+partition=$1
+mpoint=$2
+fstype=$3
+
+case "$fstype" in
+  hfs) debug "Partition is HFS" ;;
+  hfsplus) debug "Partition is HFS+ (Mac OS 9 only, we hope)" ;;
+esac
+
+if [ -e "$dir/System Folder/System" ]; then
+  label=$(count_next_label MacOS)
+  echo "${partition}:Macintosh System 6/7, OS 8/9:${label}:chain"
+  exit 0
+else
+  exit 1
+fi

@@ -18,7 +18,7 @@ install: build
 	dh_installdirs var/lib/os-prober/mount
 	dh_install os-prober linux-boot-prober bin
 	dh_install common.sh usr/share/os-prober
-	for probes in os-probes os-probes/mounted \
+	for probes in os-probes os-probes/mounted os-probes/init \
 	              linux-boot-probes linux-boot-probes/mounted; do \
 		dh_install $$probes/common/* usr/lib/$$probes; \
 		if [ -e "$$probes/$(ARCH)" ]; then \
