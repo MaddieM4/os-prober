@@ -5,7 +5,7 @@ mpoint=$2
 type=$3
 
 debug() {
-  logger -t microsoft-prober "debug: $@"
+  logger -t freedos-prober "debug: $@"
 }
 
 # Weed out stuff that doesn't apply to us
