@@ -1,3 +1,5 @@
+This thing needs a regression test suite.
+
 The grub linux-boot-probe has these limitations:
 
  - Does not handle grub present menus.
