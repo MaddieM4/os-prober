@@ -1,4 +1,4 @@
-os-prober (0.07) UNRELEASED; urgency=low
+os-prober (0.07) unstable; urgency=low
 
   * Colin Watson
     - Add a Mac OS 6-9 check for powerpc. This is currently a copy of the
@@ -7,7 +7,7 @@ os-prober (0.07) UNRELEASED; urgency=low
     - Send modprobe's standard output to syslog so that it doesn't confuse
       programs parsing os-prober's output.
 
- -- Colin Watson <cjwatson@debian.org>  Wed, 14 Apr 2004 12:07:53 +0100
+ -- Colin Watson <cjwatson@debian.org>  Sun, 18 Apr 2004 11:23:51 +0100
 
 os-prober (0.06) unstable; urgency=low
 
