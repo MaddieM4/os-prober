@@ -32,6 +32,7 @@ for type in $(grep -v nodev /proc/filesystems); do
 			if [ -n "$bootmnt" ]; then
 				set -- $bootmnt
 				boottomnt=""
+				mounted=""
 				if [ -e "$1" ]; then
 					bootpart="$1"
 					boottomnt="$1"
@@ -41,16 +42,34 @@ for type in $(grep -v nodev /proc/filesystems); do
 				elif [ -e "/target/$1" ]; then
 					bootpart="$1"
 					boottomnt="/target/$1"
+				elif echo "$1" | grep -q "LABEL="; then
+					debug "mounting boot partition by label for linux system on $partition: $1"
+					label=$(echo "$1" | cut -d = -f 2)
+					if /target/bin/mount -L "$label" -o ro $tmpmnt/boot -t "$3"; then
+						mounted=1
+					else
+						error "failed to mount by label"
+					fi
+				elif echo "$1" | grep -q "UUID="; then
+					debug "mounting boot partition by UUID for linux system on $partition: $1"
+					uuid=$(echo "$1" | cut -d = -f 2)
+					if /target/bin/mount -U "$uuid" -o ro $tmpmnt/boot -t "$3"; then
+						mounted=1
+					else
+						error "failed to mount by UUID"
+					fi
 				else
 					bootpart=""
 				fi
 
-				if [ -z "$bootpart" ]; then
-					debug "found boot partition $1 for linux system on $partition, but cannot map to existing device"
-				else
-					debug "found boot partition $bootpart for linux system on $partition"
-					if ! mount -o ro "$boottomnt" $tmpmnt/boot -t "$3"; then
-						error "failed to mount $boottomnt on $tmpmnt/boot"
+				if [ ! "$mounted" ]; then
+					if [ -z "$bootpart" ]; then
+						debug "found boot partition $1 for linux system on $partition, but cannot map to existing device"
+					else
+						debug "found boot partition $bootpart for linux system on $partition"
+						if ! mount -o ro "$boottomnt" $tmpmnt/boot -t "$3"; then
+							error "failed to mount $boottomnt on $tmpmnt/boot"
+						fi
 					fi
 				fi
 			fi
