@@ -3,6 +3,12 @@
 # (C) 2004 Joshua Kwan <joshk@triplehelix.org>
 
 ARCH=$(shell dpkg-architecture -qDEB_HOST_ARCH)
+ifeq (,$(wildcard debian/module-depends.$(ARCH)))
+OUTPUTSUBST=
+else
+OUTPUTSUBST=-- -V'module-depends=$(shell cat debian/module-depends.$(ARCH))'
+endif
+
 build:
 # Ye olde no-op.
 
@@ -38,7 +44,7 @@ binary-arch: build install
 	dh_fixperms
 	dh_installdeb
 	dh_shlibdeps
-	dh_gencontrol
+	dh_gencontrol $(OUTPUTSUBST)
 	dh_builddeb
 
 binary: binary-indep binary-arch

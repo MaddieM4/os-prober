@@ -9,6 +9,7 @@ Standards-Version: 3.6.1.0
 Package: os-prober
 XC-Package-Type: udeb
 Architecture: any
+Depends: ext3-modules, reiserfs-modules, xfs-modules, ${module-depends}
 Description: utility to detect other OSes on a set of drives
  This package is to be used by boot loader installers to detect other OSes
  available on a system, in a generic format, which it can then adapt to its
