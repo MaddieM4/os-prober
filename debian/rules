@@ -3,6 +3,10 @@
 # (C) 2004 Joshua Kwan <joshk@triplehelix.org>
 
 ARCH=$(shell dpkg-architecture -qDEB_HOST_ARCH)
+ifneq (,$(findstring :$(ARCH):,:i386:amd64:))
+ARCH=x86
+endif
+
 ifeq (,$(wildcard debian/module-depends.$(ARCH)))
 OUTPUTSUBST=
 else
