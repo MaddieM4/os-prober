@@ -1,3 +1,10 @@
+os-prober (0.06) UNRELEASED; urgency=low
+
+  * Colin Watson
+    - Add a Linux boot probe for /etc/yaboot.conf.
+
+ -- Colin Watson <cjwatson@debian.org>  Sun, 11 Apr 2004 11:40:25 +0100
+
 os-prober (0.05) unstable; urgency=low
 
   * Joey Hess
