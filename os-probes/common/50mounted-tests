@@ -10,7 +10,7 @@ fi
 
 for type in $(grep -v nodev /proc/filesystems); do
 	if mount -o ro -t $type $partition $tmpmnt 2>/dev/null; then
-		for test in /usr/share/os-prober/mounted/*; do
+		for test in /usr/lib/os-probes/mounted/*; do
 			if [ -f $test ] && [ -x $test ] && \
 			   $test $partition $tmpmnt $type; then
 				umount $tmpmnt

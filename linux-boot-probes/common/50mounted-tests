@@ -1,0 +1,89 @@
+#!/bin/sh
+# Sub-tests that require a mounted partition.
+set -e
+partition=$1
+
+log() {
+    logger -t linux-boot-prober "$@"
+}
+
+error() {
+    log "error: $@"
+}
+
+info() {
+    log "info: $@"
+}
+
+parsefstab () {
+	while read line; do
+		case "$line" in
+			"#"*)
+				:	
+			;;
+			*)
+				set -- $line
+				echo $1 $2 $3
+			;;
+		esac
+	done
+}
+
+tmpmnt=/var/lib/os-prober/mount
+if [ ! -d $tmpmnt ]; then
+	mkdir $tmpmnt
+fi
+
+for type in $(grep -v nodev /proc/filesystems); do
+	if mount -o ro -t $type $partition $tmpmnt 2>/dev/null; then
+		bootpart=""
+		if [ -e "$tmpmnt/etc/fstab" ]; then
+			# Try to mount any /boot partition.
+			bootmnt=$(parsefstab < $tmpmnt/etc/fstab | grep " /boot ") || true
+			if [ -n "$bootmnt" ]; then
+				set -- $bootmnt
+				if [ -e "$1" ]; then
+					bootpart="$1"
+				elif [ -e "$tmpmnt/$1" ]; then
+					bootpart=$(mapdevfs $tmpmnt/$1)
+				elif [ -e "/target/$1" ]; then
+					bootpart=$(mapdevfs /target/$1)
+				else
+					bootpart=""
+				fi
+
+				if [ -z "$bootpart" ]; then
+					info "found boot partition $1 for linux system on $partition, cannot map to existing device"
+				else
+					info "found boot partition $bootpart for linux system on $partition"
+					if ! mount -o ro "$bootpart" $tmpmnt/boot -t "$3"; then
+						info "failed to mount $bootpart on $tmpmnt/boot"
+					fi
+				fi
+			fi
+		fi
+		if [ -z "$bootpart" ]; then
+			bootpart="$partition"
+		fi
+		
+		for test in /usr/lib/linux-boot-probes/mounted/*; do
+			if [ -f $test ] && [ -x $test ] && \
+			   $test $partition $bootpart $tmpmnt $type; then
+				umount $tmpmnt/boot 2>/dev/null || true 	
+				umount $tmpmnt
+				rmdir $tmpmnt || true
+				exit 0
+			fi
+		done
+	
+		umount $tmpmnt/boot 2>/dev/null || true 	
+		umount $tmpmnt
+
+		break
+	fi
+done
+
+rmdir $tmpmnt || true
+
+# No tests found anything.
+exit 1

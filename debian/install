@@ -1,5 +1,0 @@
-common/*                usr/share/os-prober
-common.sh               usr/share/os-prober
-init/*                  usr/share/os-prober/init
-mounted/common/*        usr/share/os-prober/mounted
-os-prober               bin

@@ -1,0 +1,10 @@
+#!/bin/sh
+set -e
+partition="$1"
+
+for test in /usr/lib/linux-boot-probes/*; do
+	if [ -x $test ] && [ -f $test ] && \
+	   $test $partition; then
+	   	break
+	fi
+done

@@ -6,6 +6,10 @@ os-prober (0.03) UNRELEASED; urgency=low
     - Use /var/lib/os-prober as our sandbox.
   * Colin Watson
     - Add Mac OS X probing support.
+  * Joey Hess
+    - Added linux-boot-prober, with sorta working support for grub.
+    - Reorg the probes, and move to /usr/lib.
+    - Remove broken depends line.
 
  -- Joshua Kwan <joshk@triplehelix.org>  Tue,  6 Apr 2004 08:41:13 -0700
 
