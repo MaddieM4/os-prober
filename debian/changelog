@@ -1,3 +1,10 @@
+os-prober (0.09) UNRELEASED; urgency=low
+
+  * Guillem Jover
+    - Added more distros support.
+
+ -- Joey Hess <joeyh@debian.org>  Thu, 22 Apr 2004 12:07:11 -0400
+
 os-prober (0.08) unstable; urgency=low
 
   * Joey Hess

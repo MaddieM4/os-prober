@@ -12,18 +12,41 @@ if [ -e "`ls $dir/lib/ld-linux* 2>/dev/null`" ]; then
 	if [ -e "$dir/etc/debian_version" ]; then
 		short="Debian"
 		long=$(printf "Debian GNU/Linux (%s)\n" "$(cat $dir/etc/debian_version)")
-	# Mandrake may also have a redhat-release, so
-	# check this first.
+	# Mandrake and Fedora may also have a redhat-release, so
+	# check their files first.
 	elif [ -e "$dir/etc/mandrake-release" ]; then
 		short="Mandrake"
 		long=$(cat "$dir/etc/mandrake-release")
+	elif [ -e "$dir/etc/fedora-release" ]; then
+		short="Fedora"
+		long=$(cat "$dir/etc/fedora-release")
 	elif [ -e "$dir/etc/redhat-release" ]; then
 		short="RedHat"
 		long=$(cat "$dir/etc/redhat-release")
-	# Anything better than pkgtool?
+	elif [ -e "$dir/etc/SuSE-release" ]; then
+		short="SuSE"
+		long=$(head -1 "$dir/etc/SuSE-release")
+	elif [ -e "$dir/etc/gentoo-release" ]; then
+		short="Gentoo"
+		long=$(cat "$dir/etc/gentoo-release")
+	elif [ -e "$dir/etc/cobalt-release" ]; then
+		short="Cobalt"
+		long=$(cat "$dir/etc/cobalt-release")
+	elif [ -e "$dir/etc/yellowdog-release" ]; then
+		short="YellowDog"
+		long=$(cat "$dir/etc/yellowdog-release")
+	elif [ -e "$dir/etc/turbolinux-release" ]; then
+		short="Turbolinux"
+		long=$(cat "$dir/etc/turbolinux-release")
+	elif [ -e "$dir/etc/slackware-version" ]; then
+		short="Slackware"
+		long=$(printf "Slackware Linux (%s)\n" "$(cat $dir/etc/slackware-version)")
 	elif [ -e "$dir/sbin/pkgtool" ]; then
 		short="Slackware"
 		long="Slackware Linux"
+	elif grep -q OpenLinux "$dir/etc/issue"; then
+		short="Caldera"
+		long="Caldera OpenLinux"
 	else
 		short="Linux"
 		long="unknown Linux distribution"
