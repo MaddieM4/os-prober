@@ -21,10 +21,12 @@ for kernfile in /vmlinuz /vmlinux /boot/vmlinuz /boot/vmlinux /boot/vmlinuz* \
 		initrdname=$(echo "$kernfile" | sed "s/vmlinu[zx]/initrd\*/")
 		foundinitrd=0
 		for initrd in $(eval ls $mpoint$initrdname 2>/dev/null); do
-			initrd=$(echo "$initrd" | sed "s!^$mpoint!!")
-			echo "$partition:$kernbootpart::$kernfile:$initrd:root=$mappedpartition"
-			exitcode=0
-			foundinitrd=1
+			if [ -f "$initrd" ]; then
+				initrd=$(echo "$initrd" | sed "s!^$mpoint!!")
+				echo "$partition:$kernbootpart::$kernfile:$initrd:root=$mappedpartition"
+				exitcode=0
+				foundinitrd=1
+			fi
 		done
 		if [ "$foundinitrd" = 0 ]; then
 			echo "$partition:$kernbootpart::$kernfile::root=$mappedpartition"
