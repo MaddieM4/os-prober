@@ -29,4 +29,6 @@ elif [ -d "$2/dos" ]; then
 elif [ -e "$2/windows/win.com" ]; then
   echo "$1:Windows 95/98/Me:Windows9xMe:chain"
   exit 0
+else
+  exit 1
 fi

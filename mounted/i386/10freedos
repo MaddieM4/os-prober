@@ -18,4 +18,6 @@ esac
 if [ -e "$2/kernel.sys" -a -e "$2/command.com" ]; then
   echo "$1:FreeDOS:FreeDOS:chain"
   exit 0
+else
+  exit 1
 fi
