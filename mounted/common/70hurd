@@ -1,0 +1,14 @@
+#!/bin/sh
+set -e
+
+partition="$1"
+dir="$2"
+type="$3"
+
+# Could use a better test than this.
+if [ -e "$dir/lib/hurd" ]; then
+	echo "$partition:GNU/Hurd:Hurd:multiboot"
+	exit 0
+else
+	exit 1
+fi

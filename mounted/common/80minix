@@ -1,0 +1,14 @@
+#!/bin/sh
+set -e
+
+partition="$1"
+dir="$2"
+type="$3"
+
+if [ "$type" = minix ] && [ -f "$dir/minix" ]; then
+	# XXX will chain loading work?
+	echo "$partition:Minix:Minix:chain"
+	exit 0
+else
+	exit 1
+fi

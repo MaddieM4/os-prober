@@ -6,10 +6,10 @@ partition="$1"
 dir="$2"
 type="$3"
 
-if [ -d "$dir/etc" ]; then
+if [ -e "`ls $dir/lib/ld-linux* 2>/dev/null`" ]; then
 	if [ -e "$dir/etc/debian_version" ]; then
 		short="Debian"
-		long=$(printf "Debian (%s)\n" "$(cat $dir/etc/debian_version)")
+		long=$(printf "Debian GNU/Linux (%s)\n" "$(cat $dir/etc/debian_version)")
 	# Mandrake may also have a redhat-release, so
 	# check this first.
 	elif [ -e "$dir/etc/mandrake-release" ]; then
@@ -18,15 +18,17 @@ if [ -d "$dir/etc" ]; then
 	elif [ -e "$dir/etc/redhat-release" ]; then
 		short="RedHat"
 		long=$(cat "$dir/etc/redhat-release")
-	elif [ -e "`ls $dir/lib/ld-linux* 2>/dev/null`" ]; then
+	# Anything better than pkgtool?
+	elif [ -e "$dir/sbin/pkgtool" ]; then
+		short="Slackware"
+		long="Slackware Linux"
+	else
 		short="Linux"
 		long="unknown Linux distribution"
-	else
-		exit 1
 	fi
+	
+	echo "$partition:$long:$short:linux"
+	exit 0
 else
 	exit 1
 fi
-
-echo "$partition:$long:$short:linux"
-exit 0
