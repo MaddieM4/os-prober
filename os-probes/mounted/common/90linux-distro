@@ -17,8 +17,59 @@ if ls $dir/lib/ld*.so* >/dev/null 2>/dev/null; then
 	if [ -e "$dir/etc/debian_version" ]; then
 		short="Debian"
 		long=$(printf "Debian GNU/Linux (%s)\n" "$(cat $dir/etc/debian_version)")
-	# Mandrake and Fedora may also have a redhat-release, so
-	# check their files first.
+	# RPM derived distributions may also have a redhat-release or
+	# mandrake-release, so check their files first.
+	elif [ -e "$dir/etc/altlinux-release" ]; then
+		short="ALTLinux"
+		long=$(cat "$dir/etc/altlinux-release")
+	elif [ -e "$dir/etc/magic-release" ]; then
+		short="Magic"
+		long=$(cat "$dir/etc/magic-release")
+	elif [ -e "$dir/etc/blackPanther-release" ]; then
+		short="blackPanther"
+		long=$(cat "$dir/etc/blackPanther-release")
+	elif [ -e "$dir/etc/ark-release" ]; then
+		short="Ark"
+		long=$(cat "$dir/etc/ark-release")
+	elif [ -e "$dir/etc/arch-release" ]; then
+		short="Arch"
+		long=$(cat "$dir/etc/arch-release")
+	elif [ -e "$dir/etc/asplinux-release" ]; then
+		short="ASPLinux"
+		long=$(cat "$dir/etc/asplinux-release")
+	elif [ -e "$dir/etc/lvr-release" ]; then
+		short="LvR"
+		long=$(cat "$dir/etc/lvr-release")
+	elif [ -e "$dir/etc/caos-release" ]; then
+		short="cAos"
+		long=$(cat "$dir/etc/caos-release")
+	elif [ -e "$dir/etc/aurox-release" ]; then
+		short="Aurox"
+		long=$(cat "$dir/etc/aurox-release")
+	elif [ -e "$dir/etc/engarde-release" ]; then
+		short="EnGarde"
+		long=$(cat "$dir/etc/engarde-release")
+	elif [ -e "$dir/etc/vine-release" ]; then
+		short="Vine"
+		long=$(cat "$dir/etc/vine-release")
+	elif [ -e "$dir/etc/whitebox-release" ]; then
+		short="WhiteBox"
+		long=$(cat "$dir/etc/whitebox-release")
+	elif [ -e "$dir/etc/pld-release" ]; then
+		short="PLD"
+		long=$(cat "$dir/etc/pld-release")
+	elif [ -e "$dir/etc/startcom-release" ]; then
+		short="StartCom"
+		long=$(cat "$dir/etc/startcom-release")
+	elif [ -e "$dir/etc/trustix-release" ]; then
+		short="Trustix"
+		long=$(cat "$dir/etc/trustix-release")
+	elif [ -e "$dir/etc/openna-release" ]; then
+		short="OpenNA"
+		long=$(cat "$dir/etc/openna-release")
+	elif [ -e "$dir/etc/conectiva-release" ]; then
+		short="Conectiva"
+		long=$(cat "$dir/etc/conectiva-release")
 	elif [ -e "$dir/etc/mandrake-release" ]; then
 		short="Mandrake"
 		long=$(cat "$dir/etc/mandrake-release")
