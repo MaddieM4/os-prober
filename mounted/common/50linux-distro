@@ -9,7 +9,7 @@ type="$3"
 if [ -e "`ls $dir/lib/ld-linux* 2>/dev/null`" ]; then
 	if [ -e "$dir/etc/debian_version" ]; then
 		short="Debian"
-		long=$(printf "Debian GNU/Linux (%s)\n" "$(cat $dir/etc/debian_version)")
+		long=$(printf "Debian_GNU/Linux_(%s)\n" "$(cat $dir/etc/debian_version)")
 	# Mandrake may also have a redhat-release, so
 	# check this first.
 	elif [ -e "$dir/etc/mandrake-release" ]; then
@@ -21,10 +21,10 @@ if [ -e "`ls $dir/lib/ld-linux* 2>/dev/null`" ]; then
 	# Anything better than pkgtool?
 	elif [ -e "$dir/sbin/pkgtool" ]; then
 		short="Slackware"
-		long="Slackware Linux"
+		long="Slackware_Linux"
 	else
 		short="Linux"
-		long="unknown Linux distribution"
+		long="unknown_Linux_distribution"
 	fi
 	
 	echo "$partition:$long:$short:linux"

@@ -33,12 +33,12 @@ if [ -n "$description" ]; then
 		long="$description"
 	fi
 else
-	long="unknown semi-LSB-compliant linux distribution"
+	long="unknown_semi-LSB-compliant_linux_distribution"
 fi
 
 short=$(lsb_field "$file" DISTRIB_ID | sed 's/ //g')
 if [ -z "$short" ]; then
-	short="unknown LSB"
+	short="UnknownLSB"
 fi
 
 echo "$partition:$long:$short:linux"

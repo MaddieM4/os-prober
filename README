@@ -10,13 +10,13 @@ command. This command takes no arguments: it will scan all disks available
 on the system for other operating systems, and output a list of strings
 such as:
 
-"/dev/discs/.../part1:Windows NT/2000/XP:WinNT:chain"
+"/dev/discs/.../part1:Windows_NT/2000/XP:WinNT:chain"
  ^------------------^ ^----------------^ ^---^ ^---^
       partition        OS name for boot  short May change: type of boot loader
                        loader's pretty   name  required. Usually there is only
-		       output                  a 'linux' style bootloader or
-		                               a chain one for other partitions
-					       with their own boot sectors.
+		       output - spaces         a 'linux' style bootloader or
+		       represented by          a chain one for other partitions
+		       underscores             with their own boot sectors.
 
 Tests are executable programs in the directory /usr/share/os-prober/. Each
 test is called once per partition, with the partiton to check as its
@@ -33,9 +33,9 @@ parameters: partition, mount point, filesystem.
 Bootloader installer packages will then have to process this output (fairly
 trivial) to create valid configuration entries for the bootloader.
 
-Note that os-prober can find other linux installations, as well as other
+Note that os-prober can find other Linux installations, as well as other
 operating systems. It does not try to work out all the information needed
-to boot linux (initrd, kernel params, etc), instead that task is left to
-some other (as yet unwritten) program. In the case of linux systems, the
-partition detected to have a unux system on it may not even be bootable;
+to boot Linux (initrd, kernel params, etc), instead that task is left to
+some other (as yet unwritten) program. In the case of Linux systems, the
+partition detected to have a Linux system on it may not even be bootable;
 there may be a separate /boot partition.
