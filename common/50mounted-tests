@@ -3,7 +3,7 @@
 set -e
 partition=$1
 
-tmpmnt=/tmp/os-prober-mnt
+tmpmnt=/var/lib/os-prober/mount
 if [ ! -d $tmpmnt ]; then
 	mkdir $tmpmnt
 fi

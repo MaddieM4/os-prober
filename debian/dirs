@@ -1,0 +1,5 @@
+var/lib/os-prober/mount
+usr/share/os-prober
+usr/share/os-prober/mounted
+usr/share/os-prober/init
+bin

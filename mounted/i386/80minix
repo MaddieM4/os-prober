@@ -1,13 +1,16 @@
 #!/bin/sh
 set -e
 
+. /usr/share/os-prober/common.sh
+
 partition="$1"
 dir="$2"
 type="$3"
 
 if [ "$type" = minix ] && [ -f "$dir/minix" ]; then
 	# XXX will chain loading work?
-	echo "$partition:Minix:Minix:chain"
+        label=$(count_next_label Minix)
+	echo "$partition:Minix:$label:chain"
 	exit 0
 else
 	exit 1

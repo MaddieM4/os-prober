@@ -1,6 +1,8 @@
 #!/bin/sh
 # Detects all Microsoft OSes on a collection of partitions.
 
+. /usr/share/os-prober/common.sh
+
 partition=$1
 mpoint=$2
 type=$3
@@ -19,16 +21,19 @@ esac
 
 # 2000/XP/NT4.0
 if [ -e "$2/ntldr" -a -e "$2/NTDETECT.COM" ]; then
-  echo "$1:Windows NT/2000/XP:WindowsNT:chain"
-  exit 0
+  long="Windows NT/2000/XP"
+  short=WindowsNT
 # MS-DOS
 elif [ -d "$2/dos" ]; then
-  echo "$1:MS-DOS 5.x/6.x/Win3.1:MS-DOS:chain"
-  exit 0
+  long="MS-DOS 5.x/6.x/Win3.1"
+  short=MS-DOS
 # 95/98/Me
 elif [ -e "$2/windows/win.com" ]; then
-  echo "$1:Windows 95/98/Me:Windows9xMe:chain"
-  exit 0
+  long="Windows 95/98/Me"
+  short=Windows9xMe
 else
   exit 1
 fi
+
+label=$(count_next_label $short)
+echo "${partition}:${long}:${short}:chain"

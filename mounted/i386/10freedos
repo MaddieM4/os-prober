@@ -1,5 +1,7 @@
 #!/bin/sh
 
+. /usr/share/os-prober/common.sh
+
 partition=$1
 mpoint=$2
 type=$3
@@ -16,7 +18,8 @@ case "$type" in
 esac
 
 if [ -e "$2/kernel.sys" -a -e "$2/command.com" ]; then
-  echo "$1:FreeDOS:FreeDOS:chain"
+  label=$(count_next_label FreeDOS)
+  echo "$1:FreeDOS:$label:chain"
   exit 0
 else
   exit 1

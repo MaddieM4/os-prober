@@ -3,7 +3,7 @@
 # (C) 2004 Joshua Kwan <joshk@triplehelix.org>
 
 ARCH=$(shell dpkg-architecture -qDEB_HOST_ARCH)
-
+PLACE=debian/os-prober
 build:
 # Ye olde no-op.
 
@@ -16,12 +16,14 @@ install: build
 	dh_testdir
 	dh_testroot
 	dh_clean -k
-	dh_install os-prober bin
-	dh_install common/* usr/share/os-prober
-	if [ -d $(ARCH) ]; then dh_install $(ARCH)/* usr/share/os-prober; fi
-	dh_install mounted/common/* usr/share/os-prober/mounted
-	if [ -d mounted/$(ARCH) ]; then dh_install mounted/$(ARCH)/* usr/share/os-prober/mounted; fi
-	dh_install init/* usr/share/os-prober/init
+	dh_installdirs
+	dh_install
+ifneq (,$(wildcard $(ARCH)/))
+	dh_install $(ARCH)/* usr/share/os-prober
+endif
+ifneq (,$(wildcard mounted/$(ARCH)))
+	dh_install mounted/$(ARCH)/* usr/share/os-prober/mounted
+endif
 
 binary-indep: build install
 # Ye olde no-op.

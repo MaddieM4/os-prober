@@ -2,6 +2,8 @@
 # Test for linux distributions.
 set -e
 
+. /usr/share/os-prober/common.sh
+
 partition="$1"
 dir="$2"
 type="$3"
@@ -27,7 +29,8 @@ if [ -e "`ls $dir/lib/ld-linux* 2>/dev/null`" ]; then
 		long="unknown Linux distribution"
 	fi
 	
-	echo "$partition:$long:$short:linux"
+        label=$(count_next_label $short)
+	echo "$partition:$long:$label:linux"
 	exit 0
 else
 	exit 1

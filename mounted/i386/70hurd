@@ -1,13 +1,16 @@
 #!/bin/sh
 set -e
 
+. /usr/share/os-prober/common.sh
+
 partition="$1"
 dir="$2"
 type="$3"
 
 # Could use a better test than this.
 if [ -e "$dir/lib/hurd" ]; then
-	echo "$partition:GNU/Hurd:Hurd:multiboot"
+        label=$(count_next_label Hurd)
+	echo "$partition:GNU/Hurd:$label:multiboot"
 	exit 0
 else
 	exit 1
