@@ -1,0 +1,32 @@
+#!/bin/sh
+# Detects all Microsoft OSes on a collection of partitions.
+
+partition=$1
+mpoint=$2
+type=$3
+
+debug() {
+  logger -t microsoft-prober "debug: $@"
+}
+
+# Weed out stuff that doesn't apply to us
+case "$type" in
+  ntfs) debug "$1 is a NTFS partition" ;;
+  vfat) debug "$1 is a FAT32 partition" ;;
+  msdos) debug "$1 is a FAT16 partition" ;;
+  *) debug "$1 is not a MS partition: exiting"; exit 1 ;;
+esac
+
+# 2000/XP/NT4.0
+if [ -e "$2/ntldr" -a -e "$2/NTDETECT.COM" ]; then
+  echo "$1:Windows NT/2000/XP:WindowsNT:chain"
+  exit 0
+# MS-DOS
+elif [ -d "$2/dos" ]; then
+  echo "$1:MS-DOS 5.x/6.x/Win3.1:MS-DOS:chain"
+  exit 0
+# 95/98/Me
+elif [ -e "$2/windows/win.com" ]; then
+  echo "$1:Windows 95/98/Me:Windows9xMe:chain"
+  exit 0
+fi
