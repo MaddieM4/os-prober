@@ -1,6 +1,6 @@
 #!/bin/sh
 # Make sure filesystems are available.
 set +e	# ignore errors from modprobe
-for fs in ext2 reiserfs msdos vfat ntfs minix hfs hfsplus; do
+for fs in ext2 ext3 reiserfs xfs jfs msdos vfat ntfs minix hfs hfsplus; do
 	modprobe $fs 2>/dev/null | logger -t os-prober
 done

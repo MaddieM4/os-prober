@@ -6,6 +6,8 @@ os-prober (1.03) UNRELEASED; urgency=low
   * Frans Pop
     - Exclude partitions that are part of a software raid array.
       Closes: #273960.
+  * Colin Watson
+    - Probe ext3, xfs, and jfs modules too.
 
  -- Frans Pop <aragorn@tiscali.nl>  Fri, 11 Feb 2005 21:42:57 +0100
 
