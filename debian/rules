@@ -21,6 +21,7 @@ install: build
 	if [ -d $(ARCH) ]; then dh_install $(ARCH)/* usr/share/os-prober; fi
 	dh_install mounted/common/* usr/share/os-prober/mounted
 	if [ -d mounted/$(ARCH) ]; then dh_install mounted/$(ARCH)/* usr/share/os-prober/mounted; fi
+	dh_install init/* usr/share/os-prober/init
 
 binary-indep: build install
 # Ye olde no-op.
