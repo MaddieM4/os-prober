@@ -1,9 +1,13 @@
-os-prober (0.13) UNRELEASED; urgency=low
+os-prober (0.13) unstable; urgency=low
 
   * Giuseppe Sacco
     - Added preliminary test for Solaris/IA32. Closes: #255206
   * Joey Hess
     - Add support for fstabs with UUIDs or disk labels. Closes:#257794
+    - In fallback os-prober test, skip over symlinks, since they could point
+      from root into /boot or result in confusing duplicate entries.
+      Closes: #258624
+    - Make the fallback os-prober really find kernels matched by globs.
 
  -- Joey Hess <joeyh@debian.org>  Sat, 10 Jul 2004 14:32:17 -0400
 
