@@ -1,5 +1,5 @@
 #!/bin/sh
 # Make sure filesystems are available.
-for fs in ext2 reiserfs msdos vfat ntfs minix; do
+for fs in ext2 reiserfs msdos vfat ntfs minix hfsplus; do
 	modprobe $fs 2>/dev/null || true
 done

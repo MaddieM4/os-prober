@@ -4,6 +4,8 @@ os-prober (0.03) UNRELEASED; urgency=low
     - Allow for unique short names via functions in new common.sh library.
     - Revamp all the dh_install stuff.
     - Use /var/lib/os-prober as our sandbox.
+  * Colin Watson
+    - Add Mac OS X probing support.
 
  -- Joshua Kwan <joshk@triplehelix.org>  Tue,  6 Apr 2004 08:41:13 -0700
 
