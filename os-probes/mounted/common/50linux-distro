@@ -8,7 +8,11 @@ partition="$1"
 dir="$2"
 type="$3"
 
-if [ -e "`ls $dir/lib/ld-linux* 2>/dev/null`" ]; then
+# This test is inaccurate, but given separate / and /boot partitions and the
+# fact that only some architectures have ld-linux.so, I can't see anything
+# better. Make sure this test has a high number so that more accurate tests
+# can come first.
+if ls $dir/lib/ld*.so* >/dev/null 2>/dev/null; then
 	if [ -e "$dir/etc/debian_version" ]; then
 		short="Debian"
 		long=$(printf "Debian GNU/Linux (%s)\n" "$(cat $dir/etc/debian_version)")
