@@ -1,4 +1,4 @@
-os-prober (1.03) UNRELEASED; urgency=low
+os-prober (1.03) unstable; urgency=low
 
   * Joey Hess
     - Applied patch from Guillem Jover to detect many redhat derived
@@ -11,7 +11,7 @@ os-prober (1.03) UNRELEASED; urgency=low
   * Colin Watson
     - Probe ext3, xfs, and jfs modules too.
 
- -- Frans Pop <aragorn@tiscali.nl>  Sat, 12 Feb 2005 01:36:45 +0100
+ -- Joey Hess <joeyh@debian.org>  Fri, 11 Feb 2005 20:30:56 -0500
 
 os-prober (1.02) unstable; urgency=low
 
