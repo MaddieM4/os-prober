@@ -10,7 +10,7 @@ type="$3"
 if [ "$type" = minix ] && [ -f "$dir/minix" ]; then
 	# XXX will chain loading work?
         label=$(count_next_label Minix)
-	echo "$partition:Minix:$label:chain"
+	result "$partition:Minix:$label:chain"
 	exit 0
 else
 	exit 1

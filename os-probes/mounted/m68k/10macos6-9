@@ -4,10 +4,6 @@
 
 set -e
 
-debug() {
-  logger -t classic-prober "$@"
-}
-
 partition=$1
 mpoint=$2
 fstype=$3
@@ -19,7 +15,7 @@ esac
 
 if [ -e "$dir/System Folder/System" ]; then
   label=$(count_next_label MacOS)
-  echo "${partition}:Macintosh System 6/7, OS 8/9:${label}:chain"
+  result "${partition}:Macintosh System 6/7, OS 8/9:${label}:chain"
   exit 0
 else
   exit 1

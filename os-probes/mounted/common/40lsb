@@ -2,6 +2,8 @@
 # Test for LSB systems.
 set -e
 
+. /usr/share/os-prober/common.sh
+
 partition="$1"
 dir="$2"
 type="$3"
@@ -41,5 +43,5 @@ if [ -z "$short" ]; then
 	short="UnknownLSB"
 fi
 
-echo "$partition:$long:$short:linux"
+result "$partition:$long:$short:linux"
 exit 0

@@ -1,19 +1,8 @@
 #!/bin/sh
 # Sub-tests that require a mounted partition.
+. /usr/share/os-prober/common.sh
 set -e
 partition=$1
-
-log() {
-    logger -t linux-boot-prober "$@"
-}
-
-error() {
-    log "error: $@"
-}
-
-info() {
-    log "info: $@"
-}
 
 parsefstab () {
 	while read line; do
@@ -57,11 +46,11 @@ for type in $(grep -v nodev /proc/filesystems); do
 				fi
 
 				if [ -z "$bootpart" ]; then
-					info "found boot partition $1 for linux system on $partition, but cannot map to existing device"
+					debg "found boot partition $1 for linux system on $partition, but cannot map to existing device"
 				else
-					info "found boot partition $bootpart for linux system on $partition"
+					debug "found boot partition $bootpart for linux system on $partition"
 					if ! mount -o ro "$boottomnt" $tmpmnt/boot -t "$3"; then
-						info "failed to mount $boottomnt on $tmpmnt/boot"
+						error "failed to mount $boottomnt on $tmpmnt/boot"
 					fi
 				fi
 			fi
@@ -71,15 +60,18 @@ for type in $(grep -v nodev /proc/filesystems); do
 		fi
 		
 		for test in /usr/lib/linux-boot-probes/mounted/*; do
-			if [ -f $test ] && [ -x $test ] && \
-			   $test $partition $bootpart $tmpmnt $type; then
-				umount $tmpmnt/boot 2>/dev/null || true 	
-				umount $tmpmnt
-				rmdir $tmpmnt || true
-				exit 0
+			if [ -f $test ] && [ -x $test ]; then
+				debug "running $test $partition $bootpart $tmpmnt $type"
+				if $test $partition $bootpart $tmpmnt $type; then
+					debug "$test succeeded"
+					umount $tmpmnt/boot 2>/dev/null || true 	
+					umount $tmpmnt
+					rmdir $tmpmnt || true
+					exit 0
+				fi
 			fi
 		done
-	
+		
 		umount $tmpmnt/boot 2>/dev/null || true 	
 		umount $tmpmnt
 

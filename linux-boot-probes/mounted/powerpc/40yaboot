@@ -1,5 +1,7 @@
 #!/bin/sh
+. /usr/share/os-prober/common.sh
 set -e
+
 partition="$1"
 bootpart="$2"
 mpoint="$3"
@@ -26,8 +28,10 @@ recordstanza () {
 				parameters="root=$rootdev $parameters"
 			fi
 			parameters="${parameters% }"
-			echo "$rootpart:$bootpart:$title:$kernel:$initrd:$parameters"
+			record "$rootpart:$bootpart:$title:$kernel:$initrd:$parameters"
 			found_item=1
+		else
+			debug "cannot find $kernel or $initrd; not recording"
 		fi
 		title=
 		rootdev="$default_rootdev"
@@ -51,6 +55,7 @@ parse_yaboot_conf () {
 	bootpart="$3"
 	IFS=" 	="
 	while read line; do
+		debug "parsing: $line"
 		set -- $line
 		case $1 in
 			root)
@@ -94,6 +99,7 @@ case "`archdetect`" in
 esac
 
 if [ -e "$mpoint/etc/yaboot.conf" ]; then
+	debug "parsing yaboot.conf"
 	parse_yaboot_conf "$mpoint" "$partition" "$bootpart" < "$mpoint/etc/yaboot.conf"
 fi
 

@@ -7,10 +7,6 @@ partition=$1
 mpoint=$2
 type=$3
 
-debug() {
-  logger -t microsoft-prober "debug: $@"
-}
-
 # Weed out stuff that doesn't apply to us
 case "$type" in
   ntfs) debug "$1 is a NTFS partition" ;;
@@ -36,4 +32,4 @@ else
 fi
 
 label=$(count_next_label $short)
-echo "${partition}:${long}:${short}:chain"
+result "${partition}:${long}:${short}:chain"

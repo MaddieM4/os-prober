@@ -3,6 +3,8 @@
 set -e
 partition=$1
 
+. /usr/share/os-prober/common.sh
+
 tmpmnt=/var/lib/os-prober/mount
 if [ ! -d $tmpmnt ]; then
 	mkdir $tmpmnt
@@ -20,12 +22,16 @@ done
 
 for type in $types $delaytypes; do
 	if mount -o ro -t $type $partition $tmpmnt 2>/dev/null; then
+		debug "mounted as $type filesystem"
 		for test in /usr/lib/os-probes/mounted/*; do
-			if [ -f $test ] && [ -x $test ] && \
-			   $test $partition $tmpmnt $type; then
-				umount $tmpmnt
-				rmdir $tmpmnt || true
-				exit 0
+			debug "running subtest $test"
+			if [ -f $test ] && [ -x $test ]; then
+				if $test $partition $tmpmnt $type; then
+					debug "os found by subtest $test"
+					umount $tmpmnt
+					rmdir $tmpmnt || true
+					exit 0
+				fi
 			fi
 		done
 		umount $tmpmnt

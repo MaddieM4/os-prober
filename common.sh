@@ -22,3 +22,20 @@ count_next_label() {
   
   echo "${_labelprefix}${_cfor}"
 }
+
+log() {
+  logger -t "$(basename $0)" "$@"
+}
+
+error() {
+  log "error: $@"
+}
+
+debug() {
+  log "debug: $@"
+}
+
+result () {
+  log "result:" "$@"
+  echo "$@"
+}

@@ -1,12 +1,15 @@
 #!/bin/sh
 set -e
 
+. /usr/share/os-prober/common.sh
+
 partitions () {
 	find /dev/discs/ -follow -type b | grep /part
 }
 
 for prog in /usr/lib/os-probes/init/*; do
 	if [ -x $prog ] && [ -f $prog ]; then
+		debug "running init $prog"
 		$prog || true
 	fi
 done
@@ -14,9 +17,12 @@ done
 for partition in $(partitions); do
 	if ! grep -q "^$partition " /proc/mounts; then
 		for test in /usr/lib/os-probes/*; do
-			if [ -x $test ] && [ -f $test ] && \
-			   $test $partition; then
-			   	break
+			if [ -x $test ] && [ -f $test ]; then
+				debug "running $test on $partition"
+				if $test $partition; then
+					debug "os detected by $test"
+			   		break
+				fi
 			fi
 		done
 	fi

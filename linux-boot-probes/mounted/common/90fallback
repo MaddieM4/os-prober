@@ -1,7 +1,9 @@
 #!/bin/sh
 # Fallback in case nothing else works. Look for vmlinu[xz] file in root and
 # /boot, see if there is a matching initrd, and wing it.
+. /usr/share/os-prober/common.sh
 set -e
+
 partition="$1"
 bootpart="$2"
 mpoint="$3"
@@ -23,13 +25,13 @@ for kernfile in /vmlinuz /vmlinux /boot/vmlinuz /boot/vmlinux /boot/vmlinuz* \
 		for initrd in $(eval ls $mpoint$initrdname 2>/dev/null); do
 			if [ -f "$initrd" ]; then
 				initrd=$(echo "$initrd" | sed "s!^$mpoint!!")
-				echo "$partition:$kernbootpart::$kernfile:$initrd:root=$mappedpartition"
+				result "$partition:$kernbootpart::$kernfile:$initrd:root=$mappedpartition"
 				exitcode=0
 				foundinitrd=1
 			fi
 		done
 		if [ "$foundinitrd" = 0 ]; then
-			echo "$partition:$kernbootpart::$kernfile::root=$mappedpartition"
+			result "$partition:$kernbootpart::$kernfile::root=$mappedpartition"
 			exitcode=0
 		fi
 	fi

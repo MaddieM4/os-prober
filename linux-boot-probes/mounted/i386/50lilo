@@ -1,11 +1,25 @@
 #!/bin/sh
+. /usr/share/os-prober/common.sh
 set -e
+
 partition="$1"
 bootpart="$2"
 mpoint="$3"
 type="$4"
 
 found_item=0
+
+title=""
+rootdev=""
+kernel=""
+parameters=""
+initrd=""
+read_only=""
+default_rootdev=""
+default_kernel=""
+default_parameters=""
+default_initrd=""
+default_read_only=""
 
 dequote () {
 	item="${1%\"}"
@@ -22,8 +36,10 @@ recordstanza () {
 				parameters="root=$rootdev $parameters"
 			fi
 			parameters=${parameters% }
-			echo "$rootpart:$bootpart:$title:$kernel:$initrd:$parameters"
+			result "$rootpart:$bootpart:$title:$kernel:$initrd:$parameters"
 			found_item=1
+		else
+			debug "cannot find $kernel or $initrd, not recording"
 		fi
 		title=""
 		rootdev="$default_rootdev"
@@ -47,6 +63,7 @@ parse_lilo_conf () {
 	bootpart="$3"
 	IFS=" 	="
 	while read line; do
+		debug "parsing: $line"
 		set -- $line
 		case $1 in
 			root)
@@ -79,6 +96,7 @@ parse_lilo_conf () {
 }
 
 if [ -e "$mpoint/etc/lilo.conf" ]; then
+	debug "parsing lilo.conf"
 	parse_lilo_conf "$mpoint" "$partition" "$bootpart" < "$mpoint/etc/lilo.conf"
 fi
 

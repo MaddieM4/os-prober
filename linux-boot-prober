@@ -1,10 +1,15 @@
 #!/bin/sh
+. /usr/share/os-prober/common.sh
+
 set -e
 partition="$1"
 
 for test in /usr/lib/linux-boot-probes/*; do
-	if [ -x $test ] && [ -f $test ] && \
-	   $test $partition; then
-	   	break
+	debug "running $test"
+	if [ -x $test ] && [ -f $test ]; then
+		if $test $partition; then
+			debug "linux detected by $test"
+	   		break
+		fi
 	fi
 done
