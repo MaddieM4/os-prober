@@ -5,15 +5,13 @@ This is a small shell library that may be depended on by any bootloader
 installer package to detect other filesystems with operating systems on
 them.
 
-(What follows below is more of a design plan/proposal than anything.)
-
-All one has to do is Depend on os-prober, and then run the os-prober command
-This command takes no arguments: it will scan all disks available on
-the system for other operating systems, and output a list of strings such
-as:
+All one has to do is Depend on os-prober, and then run the os-prober
+command. This command takes no arguments: it will scan all disks available
+on the system for other operating systems, and output a list of strings
+such as:
 
 "/dev/discs/.../part1:Windows NT/2000/XP:WinNT:chain"
- ^------------------^ ^----------------^ ^---^^---^
+ ^------------------^ ^----------------^ ^---^ ^---^
       partition        OS name for boot  short May change: type of boot loader
                        loader's pretty   name  required. Usually there is only
 		       output                  a 'linux' style bootloader or
@@ -34,3 +32,8 @@ parameters: partition, mount point, filesystem.
 
 Bootloader installer packages will then have to process this output (fairly
 trivial) to create valid configuration entries for the bootloader.
+
+Note that os-prober can find other linux installations, as well as other
+operating systems. It does not try to work out all the information needed
+to boot linux (initrd, kernel params, etc), instead that task is left to
+some other (as yet unwritten) program.

@@ -2,21 +2,20 @@
 # Test for LSB systems.
 set -e
 
+partition="$1"
+dir="$2"
+type="$3"
+
 lsb_field () {
 	file="$1"
 	field="$2"
 	grep ^"$field" "$file" | cut -d = -f 2 | sed 's/^"//' | sed 's/"$//' | sed 's/:/ /g'
 }
 
-partition="$1"
-dir="$2"
-type="$3"
-
-if [ ! -e "$dir/etc/lsb-release" ]; then
+file="$dir/etc/lsb-release"
+if [ ! -e "$file" ]; then
 	exit 1
 fi
-
-file="$dir/etc/lsb-release"
 
 release=$(lsb_field "$file" DISTRIB_RELEASE)
 if [ -z "$release" ]; then
