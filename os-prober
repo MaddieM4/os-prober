@@ -1,0 +1,17 @@
+#!/bin/sh
+# Simple script that passes the list of viable partitions to each
+# test program.
+
+set -e
+
+# XXX
+partitions="$(cat /some/file/with/nice/partitions)"
+
+for partition in $partitions; do
+	for test in /usr/share/os-prober/*; do
+		if [ -x $test ] && [ -f $test ] && \
+		   $test $partition; then
+			exit 0
+		fi
+	done
+done

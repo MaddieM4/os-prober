@@ -1,0 +1,32 @@
+#!/bin/sh
+# Test for linux distributions.
+set -e
+
+partition="$1"
+dir="$2"
+type="$3"
+
+if [ -d "$dir/etc" ]; then
+	if [ -e "$dir/etc/debian_version" ]; then
+		short="Debian"
+		long=$(printf "Debian (%s)\n" "$(cat $dir/etc/debian_version)")
+	# Mandrake may also have a redhat-release, so
+	# check this first.
+	elif [ -e "$dir/etc/mandrake-release" ]; then
+		short="Mandrake"
+		long=$(cat "$dir/etc/mandrake-release")
+	elif [ -e "$dir/etc/redhat-release" ]; then
+		short="RedHat"
+		long=$(cat "$dir/etc/redhat-release")
+	elif [ -e "`ls $dir/lib/ld-linux* 2>/dev/null`" ]; then
+		short="Linux"
+		long="unknwon Linux distribution"
+	else
+		exit 1
+	fi
+else
+	exit 1
+fi
+
+echo "$partition:$long:$short:linux"
+exit 0

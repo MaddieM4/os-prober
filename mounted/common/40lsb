@@ -1,0 +1,46 @@
+#!/bin/sh
+# Test for LSB systems.
+set -e
+
+lsb_field () {
+	file="$1"
+	field="$2"
+	grep ^"$field" "$file" | cut -d = -f 2 | sed 's/^"//' | sed 's/"$//' | sed 's/:/ /g'
+}
+
+partition="$1"
+dir="$2"
+type="$3"
+
+if [ ! -e "$dir/etc/lsb-release" ]; then
+	exit 1
+fi
+
+file="$dir/etc/lsb-release"
+
+release=$(lsb_field "$file" DISTRIB_RELEASE)
+if [ -z "$release" ]; then
+	release=$(lsb_field "$file" DISTRIB_CODENAME)
+fi
+description=$(lsb_field "$file" DISTRIB_DESCRIPTION)
+if [ -z "$description" ]; then
+	description=$(lsb_field "$file" DISTRIB_CODENAME)
+fi
+
+if [ -n "$description" ]; then
+	if [ -n "$release" ]; then
+		long="$description ($release)"
+	else
+		long="$description"
+	fi
+else
+	long="unknown semi-LSB-compliant linux distribution"
+fi
+
+short=$(lsb_field "$file" DISTRIB_ID)
+if [ -z "$short" ]; then
+	short="unknown LSB"
+fi
+
+echo "$partition:$long:$short:linux"
+exit 0

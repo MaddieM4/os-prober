@@ -1,0 +1,28 @@
+#!/bin/sh
+# Sub-tests that require a mounted partition.
+set -e
+partition=$1
+
+tmpmnt=/tmp/os-prober-mnt
+if [ ! -d $tmpmnt ]; then
+	mkdir $tmpmnt
+fi
+
+for type in $(grep -v nodev /proc/filesystems); do
+	if mount -o ro -t $type $partition $tmpmnt; then
+		for test in /usr/share/os-prober/mounted/*; do
+			if [ -f $test ] && [ -x $test ] && \
+			   $test $partition $tmpmnt $type; then
+				umount $tmpmnt
+				rmdir $tmpmnt || true
+				exit 0
+			fi
+		done
+		umount $tmpmnt
+	fi
+done
+
+rmdir $tmpmnt || true
+
+# No tests found anything.
+exit 1
