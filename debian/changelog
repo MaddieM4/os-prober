@@ -1,4 +1,4 @@
-os-prober (1.02) UNRELEASED; urgency=low
+os-prober (1.02) unstable; urgency=low
 
   * Joshua Kwan
     - I don't have time to test/improve os-prober these days, so removing
@@ -6,7 +6,7 @@ os-prober (1.02) UNRELEASED; urgency=low
   * Colin Watson
     - Install i386 tests on amd64 too (closes: #261378).
 
- -- Joshua Kwan <joshk@triplehelix.org>  Wed, 20 Oct 2004 17:30:29 -0700
+ -- Colin Watson <cjwatson@debian.org>  Thu, 21 Oct 2004 14:02:05 +0100
 
 os-prober (1.01) unstable; urgency=low
 
