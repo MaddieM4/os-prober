@@ -33,7 +33,7 @@ if [ -n "$description" ]; then
 		long="$description"
 	fi
 else
-	long="unknown_semi-LSB-compliant_linux_distribution"
+	long="Unknown semi-LSB-compliant Linux distribution"
 fi
 
 short=$(lsb_field "$file" DISTRIB_ID | sed 's/ //g')
