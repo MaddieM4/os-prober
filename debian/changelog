@@ -6,10 +6,12 @@ os-prober (1.03) UNRELEASED; urgency=low
   * Frans Pop
     - Exclude partitions that are part of a software raid array.
       Closes: #273960.
+    - Don't use the description from Windows' boot.ini if it contains
+      non-ascii (or other unusual) characters. Closes: #293859.
   * Colin Watson
     - Probe ext3, xfs, and jfs modules too.
 
- -- Frans Pop <aragorn@tiscali.nl>  Fri, 11 Feb 2005 21:42:57 +0100
+ -- Frans Pop <aragorn@tiscali.nl>  Sat, 12 Feb 2005 01:36:45 +0100
 
 os-prober (1.02) unstable; urgency=low
 
