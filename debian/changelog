@@ -1,10 +1,11 @@
-os-prober (0.15) UNRELEASED; urgency=low
+os-prober (1.00) unstable; urgency=low
 
   * Joey Hess
     - Fedora uses a grub.conf. This may or may not be linked to menu.lst
       (unknown). Look for it if menu.lst is not found.
+    - Gratuitous version number bump.
 
- -- Joey Hess <joeyh@debian.org>  Wed, 29 Sep 2004 18:11:33 -0400
+ -- Joey Hess <joeyh@debian.org>  Sun,  3 Oct 2004 18:27:10 -0400
 
 os-prober (0.14) unstable; urgency=low
 
