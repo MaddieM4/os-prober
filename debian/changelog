@@ -1,3 +1,12 @@
+os-prober (0.05) UNRELEASED; urgency=low
+
+  * Joey Hess
+    - Fix broken mounting of /boot partitions.
+    - Fix grub probe to support systems that have /boot on a separate
+      partition, by looking for kernels in /boot as well.
+
+ -- Joey Hess <joeyh@debian.org>  Sat, 10 Apr 2004 16:06:49 -0400
+
 os-prober (0.04) unstable; urgency=low
 
   * Joey Hess

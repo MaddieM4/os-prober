@@ -42,22 +42,26 @@ for type in $(grep -v nodev /proc/filesystems); do
 			bootmnt=$(parsefstab < $tmpmnt/etc/fstab | grep " /boot ") || true
 			if [ -n "$bootmnt" ]; then
 				set -- $bootmnt
+				boottomnt=""
 				if [ -e "$1" ]; then
 					bootpart="$1"
+					boottomnt="$1"
 				elif [ -e "$tmpmnt/$1" ]; then
-					bootpart=$(mapdevfs $tmpmnt/$1)
+					bootpart="$1"
+					boottomnt="$tmpmnt/$1"
 				elif [ -e "/target/$1" ]; then
-					bootpart=$(mapdevfs /target/$1)
+					bootpart="$1"
+					boottomnt="/target/$1"
 				else
 					bootpart=""
 				fi
 
 				if [ -z "$bootpart" ]; then
-					info "found boot partition $1 for linux system on $partition, cannot map to existing device"
+					info "found boot partition $1 for linux system on $partition, but cannot map to existing device"
 				else
 					info "found boot partition $bootpart for linux system on $partition"
-					if ! mount -o ro "$bootpart" $tmpmnt/boot -t "$3"; then
-						info "failed to mount $bootpart on $tmpmnt/boot"
+					if ! mount -o ro "$boottomnt" $tmpmnt/boot -t "$3"; then
+						info "failed to mount $boottomnt on $tmpmnt/boot"
 					fi
 				fi
 			fi

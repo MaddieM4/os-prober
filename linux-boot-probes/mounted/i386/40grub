@@ -22,6 +22,11 @@ parse_grub_menu () {
 				kernel="$2"
 				shift 2
 				parameters="$@"
+				# Systems with a separate /boot will not have
+				# the path to the kernel in menu.lst.
+				if [ "$partition" != "$bootpart" ]; then
+					kernel="/boot$kernel"
+				fi
 			;;
 			initrd)
 				initrd="$2"
