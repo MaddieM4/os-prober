@@ -30,6 +30,10 @@ parse_grub_menu () {
 			;;
 			initrd)
 				initrd="$2"
+				# Initrd same.
+				if [ "$partition" != "$bootpart" ]; then
+					initrd="/boot$initrd"
+				fi
 			;;
 			boot)
 				if [ -n "$kernel" ] && \
