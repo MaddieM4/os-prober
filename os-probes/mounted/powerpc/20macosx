@@ -1,5 +1,6 @@
-#!/bin/sh
+#!/bin/sh -e
 # Detects Mac OS X. I don't yet know how Mac OS <= 9 fits into this.
+. /usr/share/os-prober/common.sh
 
 partition=$1
 mpoint=$2
@@ -21,7 +22,8 @@ esac
 # shell will be nasty.
 
 if [ -e "$2/mach_kernel" ]; then
-  echo "$1:Mac OS X:MacOSX:chain"
+  label="$(count_next_label MacOSX)"
+  echo "$1:Mac OS X:$label:macosx"
   exit 0
 else
   exit 1
