@@ -7,23 +7,30 @@ partitions () {
 	find /dev/discs/ -follow -type b | grep /part
 }
 
-test_raid () {
-	[ -f /proc/mdstat ] || return 1
-
+realdev () {
+	# Using 'readlink -f' here would be simpler but is not (yet) supported by busybox
 	disk=$(echo $1 | cut -d"/" -f1-4)
 	[ -z "$disk" ] && return 1
 	part=$(echo $1 | sed "s:$disk::")
 
 	realdev=$(readlink $disk | sed "s:^\.\./::")
 	[ -z "$realdev" ] && return 1
+	echo "/dev/$realdev$part"
+	return 0
+}
 
-	if grep -q "^md.*$realdev$part" /proc/mdstat ; then
+test_raid () {
+	[ -f /proc/mdstat ] || return 1
+
+	if grep -q "^md.*$1" /proc/mdstat ; then
 		debug "$1: part of software raid array"
 		return 0
 	else
 		return 1
 	fi
 }
+
+rm -f /var/lib/os-prober/*
 
 for prog in /usr/lib/os-probes/init/*; do
 	if [ -x $prog ] && [ -f $prog ]; then
@@ -33,12 +40,19 @@ for prog in /usr/lib/os-probes/init/*; do
 done
 
 for partition in $(partitions); do
-	# Skip partitions used in software RAID arrays
-	test_raid $partition && continue
 
-	if ! grep -q "^$partition " /proc/mounts; then
+	# Partman mounts partitions on /dev/ide/ and /dev/scsi, not /dev/discs
+	# Determine the real device for the partition (on failure use $partition)
+	if ! realpart=$(realdev $partition) ; then
+		realpart=$partition
+	fi
+
+	# Skip partitions used in software RAID arrays
+	test_raid $realpart && continue
+
+	if ! grep -q "^$realpart " /proc/mounts ; then
 		for test in /usr/lib/os-probes/*; do
-			if [ -x $test ] && [ -f $test ]; then
+			if [ -f $test ] && [ -x $test ]; then
 				debug "running $test on $partition"
 				if $test $partition; then
 					debug "os detected by $test"
@@ -47,9 +61,9 @@ for partition in $(partitions); do
 			fi
 		done
 	else
-		mpoint=$(grep "^$partition " /proc/mounts | cut -d " " -f 2)
+		mpoint=$(grep "^$realpart " /proc/mounts | cut -d " " -f 2)
 		if [ "$mpoint" != "/target" ] && [ "$mpoint" != "/" ]; then
-			type=$(grep "^$partition " /proc/mounts | cut -d " " -f 3)
+			type=$(grep "^$realpart " /proc/mounts | cut -d " " -f 3)
 			for test in /usr/lib/os-probes/mounted/*; do
 				if [ -f $test ] && [ -x $test ]; then
 					debug "running $test on mounted $partition"

@@ -1,3 +1,13 @@
+os-prober (1.06) UNRELEASED; urgency=low
+
+  * Frans Pop
+    - Make idempotent by deleting files in /var/lib/os-prober/ on start
+      (resets count_next_label).
+    - Properly determine whether partitions are mounted or not by getting
+      the real device names. Closes: #251794, #251662.
+
+ -- Frans Pop <aragorn@tiscali.nl>  Sat,  2 Apr 2005 17:13:27 +0200
+
 os-prober (1.05) unstable; urgency=low
 
   * Colin Watson
