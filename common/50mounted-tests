@@ -19,6 +19,7 @@ for type in $(grep -v nodev /proc/filesystems); do
 			fi
 		done
 		umount $tmpmnt
+		break
 	fi
 done
 
