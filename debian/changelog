@@ -10,6 +10,8 @@ os-prober (0.03) UNRELEASED; urgency=low
     - Added linux-boot-prober, with sorta working support for grub.
     - Reorg the probes, and move to /usr/lib.
     - Remove broken depends line.
+    - Add a linux probe that searches for kernels and initrds with no
+      bootloader config file, as a fallback.
 
  -- Joshua Kwan <joshk@triplehelix.org>  Tue,  6 Apr 2004 08:41:13 -0700
 
