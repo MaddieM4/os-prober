@@ -1,3 +1,9 @@
+os-prober (0.02) unstable; urgency=low
+
+  * Include init dir in the udeb.
+
+ -- Joey Hess <joeyh@debian.org>  Sun,  4 Apr 2004 00:43:12 -0500
+
 os-prober (0.01) unstable; urgency=low
 
   * Initial Release.
