@@ -1,5 +1,5 @@
-os-prober (0.01) UNRELEASED; urgency=low
+os-prober (0.01) unstable; urgency=low
 
   * Initial Release.
 
- -- Joshua Kwan <joshk@triplehelix.org>  Thu, 01 Apr 2004 19:59:17 -0500
+ -- Joey Hess <joeyh@debian.org>  Sat,  3 Apr 2004 23:45:29 -0500
