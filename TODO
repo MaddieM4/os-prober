@@ -10,7 +10,7 @@ The lilo linux-boot-probe has these limitations:
  - Doesn't map from devfs to normal is the lilo.conf uses debfs names
    (valid?)
 
-linux-boot-proper:
+linux-boot-prober:
 
 - Partition names in boot loader config may have changed during
   the debian install, so cannot be trusted. Fix up root= lines,
