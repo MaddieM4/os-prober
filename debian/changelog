@@ -1,4 +1,4 @@
-os-prober (0.03) UNRELEASED; urgency=low
+os-prober (0.03) unstable; urgency=low
 
   * Joshua Kwan
     - Allow for unique short names via functions in new common.sh library.
@@ -14,7 +14,7 @@ os-prober (0.03) UNRELEASED; urgency=low
       bootloader config file, as a fallback.
     - Add a linux boot probe that parses /etc/lilo.conf.
 
- -- Joshua Kwan <joshk@triplehelix.org>  Tue,  6 Apr 2004 08:41:13 -0700
+ -- Joey Hess <joeyh@debian.org>  Wed,  7 Apr 2004 21:40:39 -0400
 
 os-prober (0.02) unstable; urgency=low
 
