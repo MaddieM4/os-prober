@@ -63,6 +63,9 @@ parse_grub_menu () {
 if [ -e "$mpoint/boot/grub/menu.lst" ]; then
 	debug "parsing menu.lst"
 	parse_grub_menu "$mpoint" "$partition" "$bootpart" < "$mpoint/boot/grub/menu.lst"
+elif [ -e "$mpoint/boot/grub/grub.conf" ]; then
+	debug "parsing grub.conf"
+	parse_grub_menu "$mpoint" "$partition" "$bootpart" < "$mpoint/boot/grub/grub.conf"
 fi
 
 if [ "$found_item" = 0 ]; then
