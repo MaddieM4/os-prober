@@ -47,6 +47,7 @@ for type in $(grep -v nodev /proc/filesystems); do
 					label=$(echo "$1" | cut -d = -f 2)
 					if /target/bin/mount -L "$label" -o ro $tmpmnt/boot -t "$3"; then
 						mounted=1
+						bootpart=$(mount | grep $tmpmnt/boot | cut -d " " -f 1)
 					else
 						error "failed to mount by label"
 					fi
@@ -55,6 +56,7 @@ for type in $(grep -v nodev /proc/filesystems); do
 					uuid=$(echo "$1" | cut -d = -f 2)
 					if /target/bin/mount -U "$uuid" -o ro $tmpmnt/boot -t "$3"; then
 						mounted=1
+						bootpart=$(mount | grep $tmpmnt/boot | cut -d " " -f 1)
 					else
 						error "failed to mount by UUID"
 					fi
