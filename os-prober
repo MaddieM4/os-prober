@@ -22,7 +22,8 @@ realdev () {
 test_raid () {
 	[ -f /proc/mdstat ] || return 1
 
-	if grep -q "^md.*$1" /proc/mdstat ; then
+	# /proc/mdstat has the device names without leading /dev/
+	if grep -q "^md.*$(echo $1 | sed "s:^/dev/::")" /proc/mdstat ; then
 		debug "$1: part of software raid array"
 		return 0
 	else
