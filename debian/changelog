@@ -4,6 +4,8 @@ os-prober (0.07) UNRELEASED; urgency=low
     - Add a Mac OS 6-9 check for powerpc. This is currently a copy of the
       m68k version with a different loader name for yaboot's benefit, which
       may not be ideal ...
+    - Send modprobe's standard output to syslog so that it doesn't confuse
+      programs parsing os-prober's output.
 
  -- Colin Watson <cjwatson@debian.org>  Wed, 14 Apr 2004 12:07:53 +0100
 
