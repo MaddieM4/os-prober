@@ -51,13 +51,13 @@ more lines in the form:
  ^------------------^ ^------------------^ ^---^ ^------^ ^--------^ ^------------^
    root partition       boot partition     label  kernel    initrd    kernel params
 
-The root partition and boot parttion may of course be the same. No
+The root partition and boot partition may of course be the same. No
 guarantee is made that any partitions referred to in the kernel parameters
-will still be in the same place after Debian is installer, or that the
+will still be in the same place after Debian is installed, or that the
 /etc/fstab of the system will be right, or that the system will even boot.
 The initrd field may be empty if there is no initrd. The label is whatever
 label was used in the boot loader for this linux installation, and it may
-be quite long or very short (or nonexistant), and may be innaccurate,
+be quite long or very short (or nonexistent), and may be inaccurate,
 confusing, or non-unique. See TODO for other limitations.
 
 The tests used by linux-boot-loader are in the directory
