@@ -11,7 +11,7 @@ for partition in $partitions; do
 	for test in /usr/share/os-prober/*; do
 		if [ -x $test ] && [ -f $test ] && \
 		   $test $partition; then
-			exit 0
+		   	break
 		fi
 	done
 done
