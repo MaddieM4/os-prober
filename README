@@ -10,13 +10,13 @@ command. This command takes no arguments: it will scan all disks available
 on the system for other operating systems, and output a list of strings
 such as:
 
-"/dev/discs/.../part1:Windows_NT/2000/XP:WinNT:chain"
+"/dev/discs/.../part1:Windows NT/2000/XP:WinNT:chain"
  ^------------------^ ^----------------^ ^---^ ^---^
       partition        OS name for boot  short May change: type of boot loader
                        loader's pretty   name  required. Usually there is only
-		       output - spaces         a 'linux' style bootloader or
-		       represented by          a chain one for other partitions
-		       underscores             with their own boot sectors.
+		       output                  a 'linux' style bootloader or
+		                               a chain one for other partitions
+		                               with their own boot sectors.
 
 Tests are executable programs in the directory /usr/share/os-prober/. Each
 test is called once per partition, with the partiton to check as its
