@@ -1,3 +1,11 @@
+os-prober (0.04) UNRELEASED; urgency=low
+
+  * Joey Hess
+    - Return "hurd" as the OS type for hurd, rather than "multiboot".
+      The latter is not enough info to boot the hurd.
+
+ -- Joey Hess <joeyh@debian.org>  Fri,  9 Apr 2004 22:18:54 -0400
+
 os-prober (0.03) unstable; urgency=low
 
   * Joshua Kwan
