@@ -1,11 +1,11 @@
-os-prober (0.11) UNRELEASED; urgency=low
+os-prober (0.11) unstable; urgency=low
 
   * Colin Watson
     - Make linux-distro test work on architectures that don't have
       /lib/ld-linux.so* (closes: #244076).
     - Fix a typo in the yaboot parser.
 
- -- Colin Watson <cjwatson@debian.org>  Fri,  7 May 2004 02:26:17 +0100
+ -- Colin Watson <cjwatson@debian.org>  Sun,  9 May 2004 16:35:43 +0100
 
 os-prober (0.10) unstable; urgency=low
 
