@@ -20,7 +20,7 @@ if [ -d "$dir/etc" ]; then
 		long=$(cat "$dir/etc/redhat-release")
 	elif [ -e "`ls $dir/lib/ld-linux* 2>/dev/null`" ]; then
 		short="Linux"
-		long="unknwon Linux distribution"
+		long="unknown Linux distribution"
 	else
 		exit 1
 	fi
