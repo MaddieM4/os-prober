@@ -36,4 +36,6 @@ trivial) to create valid configuration entries for the bootloader.
 Note that os-prober can find other linux installations, as well as other
 operating systems. It does not try to work out all the information needed
 to boot linux (initrd, kernel params, etc), instead that task is left to
-some other (as yet unwritten) program.
+some other (as yet unwritten) program. In the case of linux systems, the
+partition detected to have a unux system on it may not even be bootable;
+there may be a separate /boot partition.
