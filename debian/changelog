@@ -3,6 +3,8 @@ os-prober (0.06) UNRELEASED; urgency=low
   * Colin Watson
     - Add a Linux boot probe for /etc/yaboot.conf.
     - Make sure hfs is available for the Mac OS 9 check.
+    - Delay hfs until last in mounted checks so that we can tell the
+      difference between that and hfsplus.
 
  -- Colin Watson <cjwatson@debian.org>  Sun, 11 Apr 2004 11:40:25 +0100
 

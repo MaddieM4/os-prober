@@ -9,6 +9,16 @@ if [ ! -d $tmpmnt ]; then
 fi
 
 for type in $(grep -v nodev /proc/filesystems); do
+	# hfsplus filesystems are mountable as hfs. Try hfs last so that we
+	# can tell the difference.
+	if [ "$type" = hfs ]; then
+		delaytypes="${delaytypes:+$delaytypes }$type"
+	else
+		types="${types:+$types }$type"
+	fi
+done
+
+for type in $types $delaytypes; do
 	if mount -o ro -t $type $partition $tmpmnt 2>/dev/null; then
 		for test in /usr/lib/os-probes/mounted/*; do
 			if [ -f $test ] && [ -x $test ] && \
