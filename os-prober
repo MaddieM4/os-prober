@@ -7,31 +7,26 @@ partitions () {
 	find /dev/discs/ -follow -type b | grep /part
 }
 
-realdev () {
-	# Using 'readlink -f' here would be simpler but is not (yet) supported by busybox
-	disk=$(echo $1 | cut -d"/" -f1-4)
-	[ -z "$disk" ] && return 1
-	part=$(echo $1 | sed "s:$disk::")
-
-	realdev=$(readlink $disk | sed "s:^\.\./::")
-	[ -z "$realdev" ] && return 1
-	echo "/dev/$realdev$part"
-	return 0
+parse_proc_mounts () {
+	while read line; do
+		set -- $line
+		echo "$(mapdevfs $1) $2 $3"
+	done
 }
 
-test_raid () {
-	[ -f /proc/mdstat ] || return 1
-
-	# /proc/mdstat has the device names without leading /dev/
-	if grep -q "^md.*$(echo $1 | sed "s:^/dev/::")" /proc/mdstat ; then
-		debug "$1: part of software raid array"
-		return 0
-	else
-		return 1
-	fi
+parse_proc_mdstat () {
+	while read line; do
+		for word in $line; do
+			if $(echo $word | grep -q "/part") ; then
+				raidpart="/dev/$(echo $word | sed "s:\[.*$::")"
+				echo "$(mapdevfs $raidpart)"
+			fi
+		done
+	done
 }
 
-rm -f /var/lib/os-prober/*
+# Needed for idempotency
+rm -f /var/lib/os-prober/labels
 
 for prog in /usr/lib/os-probes/init/*; do
 	if [ -x $prog ] && [ -f $prog ]; then
@@ -40,18 +35,25 @@ for prog in /usr/lib/os-probes/init/*; do
 	fi
 done
 
-for partition in $(partitions); do
+# Partman mounts partitions on /dev/ide/ and /dev/scsi, not /dev/discs
+# Therefore we use mapdevfs to match partitions with mount points
+# and partitions used in RAID
+grep "^/dev/" /proc/mounts | parse_proc_mounts >/tmp/mounted-map || true
+. >/tmp/raided-map
+if [ -f /proc/mdstat ] ; then
+	grep "^md" /proc/mdstat | parse_proc_mdstat >/tmp/raided-map || true
+fi
 
-	# Partman mounts partitions on /dev/ide/ and /dev/scsi, not /dev/discs
-	# Determine the real device for the partition (on failure use $partition)
-	if ! realpart=$(realdev $partition) ; then
-		realpart=$partition
-	fi
+for partition in $(partitions); do
+	mapped=$(mapdevfs $partition)
 
 	# Skip partitions used in software RAID arrays
-	test_raid $realpart && continue
+	if grep -q "^$mapped" /tmp/raided-map ; then
+		debug "$partition: part of software raid array"
+		continue
+	fi
 
-	if ! grep -q "^$realpart " /proc/mounts ; then
+	if ! grep -q "^$mapped " /tmp/mounted-map ; then
 		for test in /usr/lib/os-probes/*; do
 			if [ -f $test ] && [ -x $test ]; then
 				debug "running $test on $partition"
@@ -62,9 +64,9 @@ for partition in $(partitions); do
 			fi
 		done
 	else
-		mpoint=$(grep "^$realpart " /proc/mounts | cut -d " " -f 2)
+		mpoint=$(grep "^$mapped " /tmp/mounted-map | cut -d " " -f 2)
 		if [ "$mpoint" != "/target" ] && [ "$mpoint" != "/" ]; then
-			type=$(grep "^$realpart " /proc/mounts | cut -d " " -f 3)
+			type=$(grep "^$mapped " /tmp/mounted-map | cut -d " " -f 3)
 			for test in /usr/lib/os-probes/mounted/*; do
 				if [ -f $test ] && [ -x $test ]; then
 					debug "running $test on mounted $partition"
