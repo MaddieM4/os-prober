@@ -2,6 +2,7 @@ os-prober (0.12) UNRELEASED; urgency=low
 
   * Colin Watson
     - Fix syntax error in already-mounted case.
+    - Cope with empty initrd parameter in yaboot.conf parser.
 
  -- Colin Watson <cjwatson@debian.org>  Sun,  9 May 2004 18:56:38 +0100
 

@@ -17,22 +17,28 @@ dequote () {
 recordstanza () {
 	if [ -n "$kernel" ]; then
 		# TODO: handle device=/partition= to find images
-		if [ -e "$mpoint/$kernel" ] && [ -e "$mpoint/$initrd" ]; then
-			if [ -z "$title" ]; then
-				title="$(basename "$kernel")"
-			fi
-			if [ "$read_only" ]; then
-				parameters="ro $parameters"
-			fi
-			if [ "$rootdev" ]; then
-				parameters="root=$rootdev $parameters"
-			fi
-			parameters="${parameters% }"
-			result "$rootpart:$bootpart:$title:$kernel:$initrd:$parameters"
-			found_item=1
-		else
-			debug "cannot find $kernel or $initrd; not recording"
+		if ! [ -e "$mpoint/$kernel" ]; then
+			debug "cannot find $kernel; not recording"
+			return
 		fi
+		if [ "$initrd" ] && ! [ -e "$mpoint/$initrd" ]; then
+			debug "cannot find $initrd: not recording"
+			return
+		fi
+
+		if [ -z "$title" ]; then
+			title="$(basename "$kernel")"
+		fi
+		if [ "$read_only" ]; then
+			parameters="ro $parameters"
+		fi
+		if [ "$rootdev" ]; then
+			parameters="root=$rootdev $parameters"
+		fi
+		parameters="${parameters% }"
+		result "$rootpart:$bootpart:$title:$kernel:$initrd:$parameters"
+		found_item=1
+
 		title=
 		rootdev="$default_rootdev"
 		kernel="$default_kernel"
