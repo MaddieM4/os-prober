@@ -24,13 +24,16 @@ if [ -e "$2/ntldr" -a -e "$2/NTDETECT.COM" ]; then
     scsicount=`grep -e "^scsi" $2/boot.ini | wc -l`
     msoscount=`expr ${multicount} + ${scsicount}`
     if [ $msoscount -eq 1 ]; then
-      defaultmspart=`grep -e "^default=" $2/boot.ini | cut -d '=' -f2 | cut -d '\' -f1`
-      long=`grep -e "^$defaultmspart.*=" $2/boot.ini | cut -d '"' -f2 | tr ':' ' '`
+      # We need to remove a Carriage Return at the end of the line...
+      defaultmspart=`grep -e "^default=" $2/boot.ini | cut -d '=' -f2 | tr -d '\r'`
+      # Escape any backslashes in defaultmspart
+      grepexp="^$(echo $defaultmspart | sed -e 's/\\/\\\\/')="
+      long=`grep -e "$grepexp" $2/boot.ini | cut -d '"' -f2 | tr ':' ' '`
       if [ -z "$long" ]; then
-        long='Windows NT/2000/XP'
+        long="Windows NT/2000/XP"
       fi
     else
-      long='Windows NT/2000/XP (loader)'
+      long="Windows NT/2000/XP (loader)"
     fi
   fi
 # MS-DOS
