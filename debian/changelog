@@ -3,8 +3,11 @@ os-prober (1.03) UNRELEASED; urgency=low
   * Joey Hess
     - Applied patch from Guillem Jover to detect many redhat derived
       distributions.
+  * Frans Pop
+    - Exclude partitions that are part of a software raid array.
+      Closes: #273960.
 
- -- Joey Hess <joeyh@debian.org>  Sat, 29 Jan 2005 08:25:55 +0100
+ -- Frans Pop <aragorn@tiscali.nl>  Fri, 11 Feb 2005 21:42:57 +0100
 
 os-prober (1.02) unstable; urgency=low
 

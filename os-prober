@@ -7,6 +7,24 @@ partitions () {
 	find /dev/discs/ -follow -type b | grep /part
 }
 
+test_raid () {
+	[ -f /proc/mdstat ] || return 1
+
+	disk=$(echo $1 | cut -d"/" -f1-4)
+	[ -z "$disk" ] && return 1
+	part=$(echo $1 | sed "s:$disk::")
+
+	realdev=$(readlink $disk | sed "s:^\.\./::")
+	[ -z "$realdev" ] && return 1
+
+	if grep -q "^md.*$realdev$part" /proc/mdstat ; then
+		debug "$1: part of software raid array"
+		return 0
+	else
+		return 1
+	fi
+}
+
 for prog in /usr/lib/os-probes/init/*; do
 	if [ -x $prog ] && [ -f $prog ]; then
 		debug "running init $prog"
@@ -15,6 +33,9 @@ for prog in /usr/lib/os-probes/init/*; do
 done
 
 for partition in $(partitions); do
+	# Skip partitions used in software RAID arrays
+	test_raid $partition && continue
+
 	if ! grep -q "^$partition " /proc/mounts; then
 		for test in /usr/lib/os-probes/*; do
 			if [ -x $test ] && [ -f $test ]; then
