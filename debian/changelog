@@ -1,4 +1,4 @@
-os-prober (0.05) UNRELEASED; urgency=low
+os-prober (0.05) unstable; urgency=low
 
   * Joey Hess
     - Fix broken mounting of /boot partitions.
