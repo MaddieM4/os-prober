@@ -1,4 +1,4 @@
-os-prober (0.04) UNRELEASED; urgency=low
+os-prober (0.04) unstable; urgency=low
 
   * Joey Hess
     - Return "hurd" as the OS type for hurd, rather than "multiboot".
