@@ -1,0 +1,35 @@
+#!/usr/bin/make -f
+# debhelper rules for os-prober
+# (C) 2004 Joshua Kwan <joshk@triplehelix.org>
+
+build:
+# Ye olde no-op.
+
+clean:
+	dh_testdir
+	dh_testroot
+	dh_clean
+
+install: build
+	dh_testdir
+	dh_testroot
+	dh_clean -k
+	dh_installdirs
+
+binary-indep: build install
+# Ye olde no-op.
+
+binary-arch: build install
+	dh_testdir
+	dh_testroot
+	dh_link
+	dh_strip
+	dh_compress
+	dh_fixperms
+	dh_installdeb
+	dh_shlibdeps
+	dh_gencontrol
+	dh_builddeb
+
+binary: binary-indep binary-arch
+.PHONY: build clean binary-indep binary-arch binary install

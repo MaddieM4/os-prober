@@ -1,0 +1,16 @@
+Source: os-prober
+Section: debian-installer
+Priority: optional
+Maintainer: Debian Install System Team <debian-boot@lists.debian.org>
+Build-Depends: debhelper (>= 4.2)
+Standards-Version: 3.6.1.0
+
+Package: os-prober
+XC-Package-Type: udeb
+Architecture: any
+Depends: ntfs-modules [i386], fat-modules [i386]
+Description: Library for detecting other OSes on a set of drives
+ This is a small shell library that may be depended on by any bootloader
+ installer package to detect other filesystems with operating systems on
+ them. See the README in the source package for how to adapt this to your
+ specific boot loader.
