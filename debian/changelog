@@ -1,4 +1,4 @@
-os-prober (0.06) UNRELEASED; urgency=low
+os-prober (0.06) unstable; urgency=low
 
   * Colin Watson
     - Add a Linux boot probe for /etc/yaboot.conf.
@@ -6,8 +6,9 @@ os-prober (0.06) UNRELEASED; urgency=low
     - Delay hfs until last in mounted checks so that we can tell the
       difference between that and hfsplus.
     - Add count to Mac OS X labels; change loader type to macosx.
+    - Add myself to Uploaders.
 
- -- Colin Watson <cjwatson@debian.org>  Sun, 11 Apr 2004 11:40:25 +0100
+ -- Colin Watson <cjwatson@debian.org>  Wed, 14 Apr 2004 01:15:53 +0100
 
 os-prober (0.05) unstable; urgency=low
 
