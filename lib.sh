@@ -9,7 +9,7 @@ partitions="$(cat /some/file/with/nice/partitions)"
 
 for $detector in /usr/share/os-prober/*.sh; do
   if [ "$detector" = "lib.sh" ]; then continue; fi
-  source $detector
+  . $detector
   # this will echo stuff to stdout in the right format
   probe $partitions
 done
