@@ -1,3 +1,10 @@
+os-prober (0.13) UNRELEASED; urgency=low
+
+  * Giuseppe Sacco
+    - Added preliminary test for Solaris/IA32.
+
+ -- Giuseppe Sacco <eppesuig@debian.org>  Sun, 20 Jun 2004 12:46:03 +0200
+
 os-prober (0.12) unstable; urgency=low
 
   * Colin Watson
