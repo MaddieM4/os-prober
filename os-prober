@@ -28,7 +28,7 @@ for partition in $(partitions); do
 	else
 		mpoint=$(grep "^$partition " /proc/mounts | cut -d " " -f 2)
 		if [ "$mpoint" != "/target" ] && [ "$mpoint" != "/" ]; then
-			type=$(grep "^$partition " /proc/mounts | cut -d " "-f 3)
+			type=$(grep "^$partition " /proc/mounts | cut -d " " -f 3)
 			for test in /usr/lib/os-probes/mounted/*; do
 				if [ -f $test ] && [ -x $test ]; then
 					debug "running $test on mounted $partition"
