@@ -18,7 +18,7 @@ esac
 # 2000/XP/NT4.0
 if [ -e "$2/ntldr" -a -e "$2/NTDETECT.COM" ]; then
   long="Windows NT/2000/XP"
-  short=WindowsNT
+  short=Windows
 # MS-DOS
 elif [ -d "$2/dos" ]; then
   long="MS-DOS 5.x/6.x/Win3.1"
