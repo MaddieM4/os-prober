@@ -1,3 +1,14 @@
+os-prober (0.08) unstable; urgency=low
+
+  * Joey Hess
+    - Initialise variables in lilo and grub probes, to avoid inheriting
+      settings for things like $initrd from the kernel command line.
+      This fixes processing of things like lilo.conf stanzas that do not set
+      an initrd. Thanks to Frans Pop.
+    - Add some extra debug logging.
+
+ -- Joey Hess <joeyh@debian.org>  Tue, 20 Apr 2004 16:40:16 -0400
+
 os-prober (0.07) unstable; urgency=low
 
   * Colin Watson
