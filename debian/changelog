@@ -1,3 +1,10 @@
+os-prober (0.03) UNRELEASED; urgency=low
+
+  * Joshua Kwan
+    - use underscores for spaces, to avoid parsing ambiguity
+
+ -- Joshua Kwan <joshk@triplehelix.org>  Sun,  4 Apr 2004 19:18:23 -0700
+
 os-prober (0.02) unstable; urgency=low
 
   * Include init dir in the udeb.
