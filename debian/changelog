@@ -1,3 +1,11 @@
+os-prober (1.05) UNRELEASED; urgency=low
+
+  * Colin Watson
+    - 'boot' is implicit at the end of a grub menu entry. Cope with it being
+      missing (part of #258623).
+
+ -- Colin Watson <cjwatson@debian.org>  Sat, 26 Mar 2005 16:50:10 +0000
+
 os-prober (1.04) unstable; urgency=low
 
   * Joey Hess

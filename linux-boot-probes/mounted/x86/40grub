@@ -9,6 +9,19 @@ type="$4"
 
 found_item=0
 
+entry_result () {
+	if [ -n "$kernel" ] && \
+	   [ -e "$mpoint/$kernel" ] && \
+	   [ -e "$mpoint/$initrd" ]; then
+		result "$rootpart:$bootpart:$title:$kernel:$initrd:$parameters"
+		found_item=1
+	fi
+	kernel=""
+	parameters=""
+	initrd=""
+	title=""
+}
+
 parse_grub_menu () {
 	mpoint="$1"
 	rootpart="$2"
@@ -24,6 +37,7 @@ parse_grub_menu () {
 		set -- $line
 		case "$1" in
 			title)
+				entry_result
 				shift 1
 				title="$(echo $@ | sed 's/://g')"
 			;;
@@ -45,19 +59,12 @@ parse_grub_menu () {
 				fi
 			;;
 			boot)
-				if [ -n "$kernel" ] && \
-				   [ -e "$mpoint/$kernel" ] && \
-				   [ -e "$mpoint/$initrd" ]; then
-					result "$rootpart:$bootpart:$title:$kernel:$initrd:$parameters"
-					found_item=1
-				fi
-				kernel=""
-				parameters=""
-				initrd=""
-				title=""
+				entry_result
 			;;
 		esac
 	done
+
+	entry_result
 }
 
 if [ -e "$mpoint/boot/grub/menu.lst" ]; then
