@@ -28,7 +28,7 @@ recordstanza () {
 				parameters="root=$rootdev $parameters"
 			fi
 			parameters="${parameters% }"
-			record "$rootpart:$bootpart:$title:$kernel:$initrd:$parameters"
+			result "$rootpart:$bootpart:$title:$kernel:$initrd:$parameters"
 			found_item=1
 		else
 			debug "cannot find $kernel or $initrd; not recording"
