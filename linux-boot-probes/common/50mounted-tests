@@ -46,7 +46,7 @@ for type in $(grep -v nodev /proc/filesystems); do
 				fi
 
 				if [ -z "$bootpart" ]; then
-					debg "found boot partition $1 for linux system on $partition, but cannot map to existing device"
+					debug "found boot partition $1 for linux system on $partition, but cannot map to existing device"
 				else
 					debug "found boot partition $bootpart for linux system on $partition"
 					if ! mount -o ro "$boottomnt" $tmpmnt/boot -t "$3"; then
