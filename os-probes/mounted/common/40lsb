@@ -43,5 +43,6 @@ if [ -z "$short" ]; then
 	short="UnknownLSB"
 fi
 
-result "$partition:$long:$short:linux"
+label=$(count_next_label $short)
+result "$partition:$long:$label:linux"
 exit 0

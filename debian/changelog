@@ -1,3 +1,11 @@
+os-prober (1.04) unstable; urgency=low
+
+  * Joey Hess
+    - Fix micosoft and lsb tests to use count_next_label to get unique
+      short labels. Closes: #299001
+
+ -- Joey Hess <joeyh@debian.org>  Fri, 11 Mar 2005 14:06:00 -0500
+
 os-prober (1.03) unstable; urgency=low
 
   * Joey Hess

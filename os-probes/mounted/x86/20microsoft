@@ -53,5 +53,5 @@ else
 fi
 
 label=$(count_next_label $short)
-result "${partition}:${long}:${short}:chain"
+result "${partition}:${long}:${label}:chain"
 exit 0
