@@ -28,14 +28,6 @@ parse_proc_mdstat () {
 # Needed for idempotency
 rm -f /var/lib/os-prober/labels
 
-if [ -x /bin/archdetect ]; then
-	archdetect=$(archdetect)
-else
-	archdetect=unknown/generic
-fi
-arch=${archdetect%/*}
-subarch=${archdetect#*/}
-
 for prog in /usr/lib/os-probes/init/*; do
 	if [ -x $prog ] && [ -f $prog ]; then
 		debug "running init $prog"
@@ -53,16 +45,6 @@ if [ -f /proc/mdstat ] ; then
 fi
 
 for partition in $(partitions); do
-	# For Sparc we assume Sun disklabel and skip partition 3 as that
-	# should be the "whole disk" partition
-	case "$arch" in
-	    sparc)
-		if echo $partition | grep -q "/part3" ; then
-			debug "$partition: skipping Sun disklabel whole disk partition"
-			continue
-		fi ;;
-	esac
-
 	mapped=$(mapdevfs $partition)
 
 	# Skip partitions used in software RAID arrays
