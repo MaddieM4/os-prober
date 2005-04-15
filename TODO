@@ -19,3 +19,7 @@ linux-boot-prober:
   as noted above, drive names may have changed!
 - Maybe do some probing before partitioning and store info?
   Or don't support adding partitions before existing /boot partitions.
+
+Make it build a deb too, this probing could be useful outside d-i.
+(If this is done, be sure to audit it for /tmp usage, which we do not care
+about in d-i.)
