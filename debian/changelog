@@ -1,4 +1,4 @@
-os-prober (1.06) UNRELEASED; urgency=low
+os-prober (1.06) unstable; urgency=low
 
   * Frans Pop
     - Make idempotent by deleting files in /var/lib/os-prober/ on start
@@ -7,7 +7,7 @@ os-prober (1.06) UNRELEASED; urgency=low
       mapdevfs to match device names. Closes: #251794, #251662.
     - Add dependency on di-utils-mapdevfs.
 
- -- Frans Pop <aragorn@tiscali.nl>  Mon, 11 Apr 2005 22:20:24 +0200
+ -- Joey Hess <joeyh@debian.org>  Sun,  1 May 2005 16:52:18 -0400
 
 os-prober (1.05) unstable; urgency=low
 
