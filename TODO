@@ -7,7 +7,7 @@ The grub linux-boot-probe has these limitations:
 
 The lilo linux-boot-probe has these limitations:
 
- - Doesn't map from devfs to normal is the lilo.conf uses debfs names
+ - Doesn't map from devfs to normal if the lilo.conf uses devfs names
    (valid?)
 
 linux-boot-prober:
