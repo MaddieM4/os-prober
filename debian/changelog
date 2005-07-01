@@ -1,3 +1,10 @@
+os-prober (1.07) UNRELEASED; urgency=low
+
+  * Matt Kraai
+    - Add support for QNX.
+
+ -- Matt Kraai <kraai@debian.org>  Wed, 29 Jun 2005 11:14:46 -0700
+
 os-prober (1.06) unstable; urgency=low
 
   * Frans Pop
