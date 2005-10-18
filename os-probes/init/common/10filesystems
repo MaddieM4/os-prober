@@ -1,6 +1,17 @@
 #!/bin/sh
 # Make sure filesystems are available.
 set +e	# ignore errors from modprobe
-for fs in ext2 ext3 reiserfs xfs jfs msdos vfat ntfs minix hfs hfsplus qnx4; do
-	modprobe $fs 2>/dev/null | logger -t os-prober
-done
+
+FILESYSTEMS='ext2 ext3 reiserfs xfs jfs msdos vfat ntfs minix hfs hfsplus qnx4'
+
+if [ ! -e /var/lib/os-prober/modules ]; then
+	for fs in $FILESYSTEMS; do
+		ANNA_QUIET=1 DEBIAN_FRONTEND=none log-output -t os-prober \
+			anna-install "$fs-modules" || true
+	done
+	depmod -a >/dev/null 2>&1 || true
+	for fs in $FILESYSTEMS; do
+		modprobe $fs 2>/dev/null | logger -t os-prober
+	done
+	touch /var/lib/os-prober/modules
+fi

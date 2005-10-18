@@ -7,12 +7,6 @@ ifneq (,$(findstring :$(ARCH):,:i386:amd64:))
 ARCH=x86
 endif
 
-ifeq (,$(wildcard debian/module-depends.$(ARCH)))
-OUTPUTSUBST=
-else
-OUTPUTSUBST=-- -V'module-depends=$(shell cat debian/module-depends.$(ARCH))'
-endif
-
 build:
 # Ye olde no-op.
 
@@ -48,7 +42,7 @@ binary-arch: build install
 	dh_fixperms
 	dh_installdeb
 	dh_shlibdeps
-	dh_gencontrol $(OUTPUTSUBST)
+	dh_gencontrol
 	dh_builddeb
 
 binary: binary-indep binary-arch

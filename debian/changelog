@@ -1,3 +1,10 @@
+os-prober (1.08) UNRELEASED; urgency=low
+
+  * Install necessary kernel modules on the fly using anna-install, rather
+    than depending on them. Requires anna >= 1.16.
+
+ -- Colin Watson <cjwatson@debian.org>  Tue, 18 Oct 2005 12:21:26 +0100
+
 os-prober (1.07) unstable; urgency=low
 
   [ Matt Kraai ]
