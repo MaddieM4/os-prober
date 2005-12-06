@@ -1,3 +1,10 @@
+os-prober (1.09) UNRELEASED; urgency=low
+
+  * To make it easier to use os-prober outside d-i, add a mapdevfs shim and
+    avoid using anna-install if it isn't present.
+
+ -- Colin Watson <cjwatson@debian.org>  Tue,  6 Dec 2005 23:08:00 +0000
+
 os-prober (1.08) unstable; urgency=low
 
   [ Colin Watson ]
