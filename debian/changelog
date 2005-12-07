@@ -5,6 +5,7 @@ os-prober (1.09) UNRELEASED; urgency=low
   * Fix count_for to avoid failing outside d-i if /var/lib/os-prober/labels
     is missing.
   * Look for partitions in /sys/block if /dev/discs isn't present.
+  * Add /usr/share/common-licenses/GPL reference to debian/copyright.
 
  -- Colin Watson <cjwatson@debian.org>  Tue,  6 Dec 2005 23:08:00 +0000
 
