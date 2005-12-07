@@ -6,11 +6,19 @@ Uploaders: Joey Hess <joeyh@debian.org>, Colin Watson <cjwatson@debian.org>
 Build-Depends: debhelper (>= 4.2)
 Standards-Version: 3.6.1.0
 
-Package: os-prober
+Package: os-prober-udeb
 XC-Package-Type: udeb
 Architecture: any
 Depends: di-utils-mapdevfs, anna (>= 1.16)
+Provides: os-prober
 Description: utility to detect other OSes on a set of drives
  This package is to be used by boot loader installers to detect other OSes
  available on a system, in a generic format, which it can then adapt to its
  own configuration format.
+
+Package: os-prober
+Architecture: any
+Section: utils
+Description: utility to detect other OSes on a set of drives
+ This package detects other OSes available on a system and outputs the
+ results in a generic machine-readable format.

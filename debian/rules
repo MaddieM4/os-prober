@@ -19,8 +19,9 @@ install: build
 	dh_testdir
 	dh_testroot
 	dh_clean -k
-	dh_installdirs var/lib/os-prober/mount
-	dh_install os-prober linux-boot-prober bin
+	dh_installdirs -A -a var/lib/os-prober/mount
+	dh_install -pos-prober-udeb os-prober linux-boot-prober bin
+	dh_install -pos-prober os-prober linux-boot-prober usr/bin
 	dh_install common.sh usr/share/os-prober
 	for probes in os-probes os-probes/mounted os-probes/init \
 	              linux-boot-probes linux-boot-probes/mounted; do \
@@ -29,13 +30,18 @@ install: build
 			dh_install $$probes/$(ARCH)/* usr/lib/$$probes; \
 		fi; \
 	done
+	cp -a debian/os-prober-udeb/usr/share debian/os-prober-udeb/usr/lib \
+		debian/os-prober/usr/
 
 binary-indep: build install
 # Ye olde no-op.
 
+binary-arch: DH_OPTIONS=-a
 binary-arch: build install
 	dh_testdir
 	dh_testroot
+	dh_installdocs
+	dh_installchangelogs
 	dh_link
 	dh_strip
 	dh_compress
