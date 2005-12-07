@@ -1,6 +1,6 @@
 count_for() {
   _labelprefix=$1
-  _result=$(grep "^${_labelprefix} " /var/lib/os-prober/labels 2>/dev/null)
+  _result=$(grep "^${_labelprefix} " /var/lib/os-prober/labels 2>/dev/null || true)
 
   if [ -z "$_result" ]; then
     return
