@@ -4,7 +4,21 @@ set -e
 . /usr/share/os-prober/common.sh
 
 partitions () {
-	find /dev/discs/ -follow -type b | grep /part
+	if [ -d /dev/discs ]; then
+		find /dev/discs/ -follow -type b | grep /part
+	elif [ -d /sys/block ]; then
+		for part in /sys/block/*/*[0-9]; do
+			if [ -f "$part/start" ]; then
+				name="$(echo "${part##*/}" | sed 's,[!.],/,g')"
+				if [ -e "/dev/$name" ]; then
+					echo "/dev/$name"
+				fi
+			fi
+		done
+	else
+		echo "Cannot find list of partitions!" >&2
+		exit 1
+	fi
 }
 
 parse_proc_mounts () {
