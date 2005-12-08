@@ -19,7 +19,7 @@ install: build
 	dh_testdir
 	dh_testroot
 	dh_clean -k
-	dh_installdirs -A -a var/lib/os-prober/mount
+	dh_installdirs -A -a var/lib/os-prober
 	dh_install -pos-prober-udeb os-prober linux-boot-prober bin
 	dh_install -pos-prober os-prober linux-boot-prober usr/bin
 	dh_install common.sh usr/share/os-prober
