@@ -94,15 +94,19 @@ parse_yaboot_conf () {
 	recordstanza
 }
 
-case "`archdetect`" in
-	powerpc/powermac_newworld)
-	;;
-	powerpc/chrp)
-	;;
-	*)
-		exit 1
-	;;
-esac
+# Avoid failing if archdetect is missing (running outside d-i). This is
+# suboptimal but will do for now.
+if type archdetect >/dev/null 2>&1; then
+	case "`archdetect`" in
+		powerpc/powermac_newworld)
+		;;
+		powerpc/chrp)
+		;;
+		*)
+			exit 1
+		;;
+	esac
+fi
 
 if [ -e "$mpoint/etc/yaboot.conf" ]; then
 	debug "parsing yaboot.conf"

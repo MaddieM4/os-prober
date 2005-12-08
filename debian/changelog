@@ -8,6 +8,7 @@ os-prober (1.09) UNRELEASED; urgency=low
   * Add /usr/share/common-licenses/GPL reference to debian/copyright.
   * Rename os-prober to os-prober-udeb (leaving a Provides: behind) and
     create an os-prober deb.
+  * Avoid yaboot probe failing outside d-i due to archdetect being missing.
 
  -- Colin Watson <cjwatson@debian.org>  Tue,  6 Dec 2005 23:08:00 +0000
 
