@@ -19,6 +19,7 @@ Description: utility to detect other OSes on a set of drives
 Package: os-prober
 Architecture: any
 Section: utils
+Priority: extra
 Description: utility to detect other OSes on a set of drives
  This package detects other OSes available on a system and outputs the
  results in a generic machine-readable format.

@@ -1,3 +1,9 @@
+os-prober (1.10) UNRELEASED; urgency=low
+
+  * Drop os-prober's priority to extra to match overrides.
+
+ -- Colin Watson <cjwatson@debian.org>  Sat, 10 Dec 2005 22:44:39 +0000
+
 os-prober (1.09) unstable; urgency=low
 
   * To make it easier to use os-prober outside d-i, add a mapdevfs shim and
