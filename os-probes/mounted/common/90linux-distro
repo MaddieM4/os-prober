@@ -81,7 +81,7 @@ if ls $dir/lib/ld*.so* >/dev/null 2>/dev/null; then
 		long=$(cat "$dir/etc/redhat-release")
 	elif [ -e "$dir/etc/SuSE-release" ]; then
 		short="SuSE"
-		long=$(head -1 "$dir/etc/SuSE-release")
+		long=$(head -n 1 "$dir/etc/SuSE-release")
 	elif [ -e "$dir/etc/gentoo-release" ]; then
 		short="Gentoo"
 		long=$(cat "$dir/etc/gentoo-release")

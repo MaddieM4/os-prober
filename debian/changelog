@@ -1,8 +1,12 @@
 os-prober (1.10) UNRELEASED; urgency=low
 
+  [ Colin Watson ]
   * Drop os-prober's priority to extra to match overrides.
 
- -- Colin Watson <cjwatson@debian.org>  Sat, 10 Dec 2005 22:44:39 +0000
+  [ Frans Pop ]
+  * Old-style options for head/tail are no longer supported by new busybox.
+
+ -- Frans Pop <fjp@debian.org>  Mon,  1 May 2006 13:45:06 +0200
 
 os-prober (1.09) unstable; urgency=low
 
