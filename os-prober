@@ -44,7 +44,6 @@ rm -f /var/lib/os-prober/labels
 
 for prog in /usr/lib/os-probes/init/*; do
 	if [ -x $prog ] && [ -f $prog ]; then
-		debug "running init $prog"
 		$prog || true
 	fi
 done
