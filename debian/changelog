@@ -1,3 +1,13 @@
+os-prober (1.12) UNRELEASED; urgency=low
+
+  * Patch from VMiklos to sed off (hdn,n) from the front of a kernel path,
+    as seen in SuSE grub configs. Closes: #258623 although this is fixed
+    imprefectly since it assumes stripping the string is enough.
+  * Patch from VMiklos to not require an initrd be specified in the grub
+    probe.
+
+ -- Joey Hess <joeyh@debian.org>  Sun, 18 Jun 2006 18:53:35 -0400
+
 os-prober (1.11) unstable; urgency=low
 
   * Remove a useless debug message.

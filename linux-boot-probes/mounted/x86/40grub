@@ -11,8 +11,7 @@ found_item=0
 
 entry_result () {
 	if [ -n "$kernel" ] && \
-	   [ -e "$mpoint/$kernel" ] && \
-	   [ -e "$mpoint/$initrd" ]; then
+	   [ -e "$mpoint/$kernel" ]; then
 		result "$rootpart:$bootpart:$title:$kernel:$initrd:$parameters"
 		found_item=1
 	fi
@@ -42,7 +41,10 @@ parse_grub_menu () {
 				title="$(echo $@ | sed 's/://g')"
 			;;
 			kernel)
-				kernel="$2"
+				# Hack alert: sed off any (hdn,n) but
+				# assume the kernel is on the same
+				# partition.
+				kernel="$(echo $2 | sed 's/(.*)//')"
 				shift 2
 				parameters="$@"
 				# Systems with a separate /boot will not have

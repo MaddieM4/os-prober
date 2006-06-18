@@ -4,6 +4,9 @@ The grub linux-boot-probe has these limitations:
 
  - Does not handle grub present menus.
  - Does not support things like (hd0,1)/path/to/file
+   although in the case of the kernel it will strip
+   off the drive specification, and look for the file in the current
+   partition.
 
 The lilo linux-boot-probe has these limitations:
 
