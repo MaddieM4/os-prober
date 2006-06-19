@@ -2,6 +2,10 @@
 # Sub-tests that require a mounted partition.
 . /usr/share/os-prober/common.sh
 set -e
+if [ "$1" = "--mounted" ]; then
+	mounted="--mounted"
+	shift 1
+fi
 partition=$1
 
 parsefstab () {
@@ -23,6 +27,11 @@ if [ ! -d $tmpmnt ]; then
 	mkdir $tmpmnt
 fi
 
+oldmnt=$(mount |grep "$partition "|cut -d' ' -f 3)
+if [ -n "$mounted" ] && [ -n "$oldmnt" ]; then
+	oldopts=$(mount |grep "$partition "|sed 's/.*(\(.*\)).*/\1/')
+	umount $partition
+fi
 for type in $(grep -v nodev /proc/filesystems); do
 	if mount -o ro -t $type $partition $tmpmnt 2>/dev/null; then
 		bootpart=""
@@ -87,6 +96,9 @@ for type in $(grep -v nodev /proc/filesystems); do
 					debug "$test succeeded"
 					umount $tmpmnt/boot 2>/dev/null || true 	
 					umount $tmpmnt
+					if [ -n "$mounted" ] && [ -n "$oldmnt" ]; then
+						mount $partition $oldmnt -o $oldopts
+					fi
 					rmdir $tmpmnt || true
 					exit 0
 				fi
@@ -95,6 +107,9 @@ for type in $(grep -v nodev /proc/filesystems); do
 		
 		umount $tmpmnt/boot 2>/dev/null || true 	
 		umount $tmpmnt
+		if [ -n "$mounted" ] && [ -n "$oldmnt" ]; then
+			mount $partition $oldmnt -o $oldopts
+		fi
 
 		break
 	fi

@@ -62,8 +62,13 @@ installation, and it may be quite long or very short (or nonexistent), and
 may be inaccurate, confusing, or non-unique. See TODO for other
 limitations.
 
-The tests used by linux-boot-loader are in the directory
+The tests used by linux-boot-prober are in the directory
 /usr/lib/linux-boot-probes/ and also in /usr/lib/linux-boot-probes/mounted,
 and they are called in a similar way as the os-probes described above.
 The mounted probes are passed parameters for the root partition, the boot
 partition, and the directory the filesystems are mounted in.
+
+By default, linux-boot-prober skips over partitions that are currently
+mounted, so it will not find eg, a just installed system mounted at
+/target. If "--mounted" is passed to it before the partition to scan, then
+it will also scan mounted filesystems.

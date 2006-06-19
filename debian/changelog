@@ -5,8 +5,11 @@ os-prober (1.12) UNRELEASED; urgency=low
     imprefectly since it assumes stripping the string is enough.
   * Patch from VMiklos to not require an initrd be specified in the grub
     probe.
+  * Patch from VMiklos to add --mounted option to linux-boot-prober.
+    May not be useful for d-i but in other situations including for the
+    Frugalware installer.
 
- -- Joey Hess <joeyh@debian.org>  Sun, 18 Jun 2006 18:53:35 -0400
+ -- Joey Hess <joeyh@debian.org>  Mon, 19 Jun 2006 18:43:54 -0400
 
 os-prober (1.11) unstable; urgency=low
 
