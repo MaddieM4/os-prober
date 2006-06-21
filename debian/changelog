@@ -1,5 +1,6 @@
 os-prober (1.12) UNRELEASED; urgency=low
 
+  [ Joey Hess ]
   * Patch from VMiklos to sed off (hdn,n) from the front of a kernel path,
     as seen in SuSE grub configs. Closes: #258623 although this is fixed
     imprefectly since it assumes stripping the string is enough.
@@ -9,7 +10,13 @@ os-prober (1.12) UNRELEASED; urgency=low
     May not be useful for d-i but in other situations including for the
     Frugalware installer.
 
- -- Joey Hess <joeyh@debian.org>  Mon, 19 Jun 2006 18:43:54 -0400
+  [ Frans Pop ]
+  * When parsing a lilo configuration, dereference symbolic links. Not doing
+    this will break booting the old OS if the link was in / and there was a
+    separate /boot partition. And grub in general prefers full paths.
+    Closes: #259825.
+
+ -- Frans Pop <fjp@debian.org>  Wed, 21 Jun 2006 21:43:48 +0200
 
 os-prober (1.11) unstable; urgency=low
 

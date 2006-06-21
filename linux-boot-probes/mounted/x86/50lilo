@@ -71,14 +71,16 @@ parse_lilo_conf () {
 			;;
 			image)
 				recordstanza
-				kernel=$(dequote "$2")
+				# Dereference if symbolic link
+				kernel=$(readlink -f $(dequote "$2"))
 			;;
 			append)
 				shift 1
 				parameters=$(dequote "${line#append=}")
 			;;
 			initrd)
-				initrd=$(dequote "$2")
+				# Dereference if symbolic link
+				initrd=$(readlink -f $(dequote "$2"))
 				;;
 			label)
 				shift 1
