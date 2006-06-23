@@ -15,8 +15,10 @@ os-prober (1.12) UNRELEASED; urgency=low
     this will break booting the old OS if the link was in / and there was a
     separate /boot partition. And grub in general prefers full paths.
     Closes: #259825.
+  * Use environment variable to pass --mounted option to lower level scripts
+    instead of perpetuating the parameter.
 
- -- Frans Pop <fjp@debian.org>  Wed, 21 Jun 2006 21:43:48 +0200
+ -- Frans Pop <fjp@debian.org>  Fri, 23 Jun 2006 21:20:16 +0200
 
 os-prober (1.11) unstable; urgency=low
 

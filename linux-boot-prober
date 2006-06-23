@@ -2,16 +2,20 @@
 . /usr/share/os-prober/common.sh
 
 set -e
+
+DO_MOUNTED=""
 if [ "$1" = "--mounted" ]; then
-	mounted="--mounted"
+	DO_MOUNTED="1"
 	shift 1
 fi
+export DO_MOUNTED
+
 partition="$1"
 
 for test in /usr/lib/linux-boot-probes/*; do
 	debug "running $test"
 	if [ -x $test ] && [ -f $test ]; then
-		if $test $mounted $partition; then
+		if $test $partition; then
 			debug "linux detected by $test"
 	   		break
 		fi
