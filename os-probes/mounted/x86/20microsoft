@@ -15,8 +15,12 @@ case "$type" in
   *) debug "$1 is not a MS partition: exiting"; exit 1 ;;
 esac
 
+# Vista/Longhorn
+if [ -e "$2/bootmgr ] && [ -e "$2/Boot/BCD" ]; then
+  long="Windows Vista/Longhorn (loader)"
+  short=Windows
 # 2000/XP/NT4.0
-if [ -e "$2/ntldr" -a -e "$2/NTDETECT.COM" ]; then
+elif [ -e "$2/ntldr" ] && [ -e "$2/NTDETECT.COM" ]; then
   long="Windows NT/2000/XP"
   short=Windows
   if [ -e "$2/boot.ini" ]; then
