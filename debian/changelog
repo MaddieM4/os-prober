@@ -1,8 +1,8 @@
-os-prober (1.13) UNRELEASED; urgency=low
+os-prober (1.13) unstable; urgency=low
 
   * Add support for detecting Windows Vista/Longhorn.
 
- -- Frans Pop <fjp@debian.org>  Thu, 20 Jul 2006 19:42:24 +0200
+ -- Frans Pop <fjp@debian.org>  Tue, 25 Jul 2006 13:06:13 +0200
 
 os-prober (1.12) unstable; urgency=low
 
