@@ -16,7 +16,7 @@ case "$type" in
 esac
 
 # Vista/Longhorn
-if [ -e "$2/bootmgr ] && [ -e "$2/Boot/BCD" ]; then
+if [ -e "$2/bootmgr" ] && [ -e "$2/Boot/BCD" ]; then
   long="Windows Vista/Longhorn (loader)"
   short=Windows
 # 2000/XP/NT4.0
