@@ -1,3 +1,10 @@
+os-prober (1.14) UNRELEASED; urgency=low
+
+  * Use udevinfo if available in parse_proc_mdstat to figure out whether a
+    device is a partition.
+
+ -- Colin Watson <cjwatson@debian.org>  Mon, 21 Aug 2006 16:31:56 +0100
+
 os-prober (1.13) unstable; urgency=low
 
   * Add support for detecting Windows Vista/Longhorn.

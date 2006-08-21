@@ -31,10 +31,19 @@ parse_proc_mounts () {
 parse_proc_mdstat () {
 	while read line; do
 		for word in $line; do
-			if $(echo $word | grep -q "/part") ; then
-				raidpart="/dev/$(echo $word | sed "s:\[.*$::")"
-				echo "$(mapdevfs $raidpart)"
+			dev="${word%%[*}"
+			# TODO: factor this out to something in di-utils if
+			# it's needed elsewhere
+			if [ -d /sys ] && type udevinfo >/dev/null 2>&1; then
+				if ! udevinfo -q path -n "/dev/$dev" | \
+				     grep -q '/.*/.*/'; then
+					continue
+				fi
+			elif ! echo "$dev" | grep -q "/part"; then
+				continue
 			fi
+			raidpart="/dev/$dev"
+			echo "$(mapdevfs $raidpart)"
 		done
 	done
 }
