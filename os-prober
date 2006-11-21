@@ -35,7 +35,7 @@ parse_proc_mdstat () {
 			# TODO: factor this out to something in di-utils if
 			# it's needed elsewhere
 			if [ -d /sys/block ] && type udevinfo >/dev/null 2>&1; then
-				if ! udevinfo -q path -n "/dev/$dev" | \
+				if ! udevinfo -q path -n "/dev/$dev" 2>/dev/null | \
 				     grep -q '/.*/.*/'; then
 					continue
 				fi

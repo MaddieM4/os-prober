@@ -1,3 +1,9 @@
+os-prober (1.15) UNRELEASED; urgency=low
+
+  * Discard stderr from udevinfo call in parse_proc_mdstat.
+
+ -- Colin Watson <cjwatson@debian.org>  Tue, 21 Nov 2006 09:44:42 +0000
+
 os-prober (1.14) unstable; urgency=low
 
   * Use udevinfo if available in parse_proc_mdstat to figure out whether a
