@@ -5,6 +5,7 @@ os-prober (1.15) UNRELEASED; urgency=low
 
   [ Fabio M. Di Nitto ]
   * Nuke os-probes/x86. Empty useless dir.
+  * Use -qs to grep and avoid an annoying warning when running os-probes.
 
  -- Colin Watson <cjwatson@debian.org>  Tue, 21 Nov 2006 09:44:42 +0000
 

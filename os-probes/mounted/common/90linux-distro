@@ -100,7 +100,7 @@ if ls $dir/lib/ld*.so* >/dev/null 2>/dev/null; then
 	elif [ -e "$dir/sbin/pkgtool" ]; then
 		short="Slackware"
 		long="Slackware Linux"
-	elif grep -q OpenLinux "$dir/etc/issue"; then
+	elif grep -qs OpenLinux "$dir/etc/issue"; then
 		short="Caldera"
 		long="Caldera OpenLinux"
 	else
