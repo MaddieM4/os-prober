@@ -1,6 +1,12 @@
 os-prober (1.15) UNRELEASED; urgency=low
 
+  [ Colin Watson ]
+
   * Discard stderr from udevinfo call in parse_proc_mdstat.
+
+  [ Fabio M. Di Nitto ]
+
+  * Nuke os-probes/x86. Empty useless dir.
 
  -- Colin Watson <cjwatson@debian.org>  Tue, 21 Nov 2006 09:44:42 +0000
 
