@@ -1,4 +1,4 @@
-os-prober (1.15) UNRELEASED; urgency=low
+os-prober (1.15) unstable; urgency=low
 
   [ Colin Watson ]
   * Discard stderr from udevinfo call in parse_proc_mdstat.
@@ -7,7 +7,7 @@ os-prober (1.15) UNRELEASED; urgency=low
   * Nuke os-probes/x86. Empty useless dir.
   * Use -qs to grep and avoid an annoying warning when running os-probes.
 
- -- Colin Watson <cjwatson@debian.org>  Tue, 21 Nov 2006 09:44:42 +0000
+ -- Frans Pop <fjp@debian.org>  Thu, 21 Dec 2006 16:29:06 +0100
 
 os-prober (1.14) unstable; urgency=low
 
