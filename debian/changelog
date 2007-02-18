@@ -1,3 +1,9 @@
+os-prober (1.16) UNRELEASED; urgency=low
+
+  * Support for recognising Pardus linux.
+
+ -- Joey Hess <joeyh@debian.org>  Sun, 18 Feb 2007 15:53:48 -0500
+
 os-prober (1.15) unstable; urgency=low
 
   [ Colin Watson ]
