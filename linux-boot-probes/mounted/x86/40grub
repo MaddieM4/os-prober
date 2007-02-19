@@ -63,6 +63,12 @@ parse_grub_menu () {
 			boot)
 				entry_result
 			;;
+			module)
+				log "Skipping entry '$title':"
+				log "parsing of entries containing 'module' lines is currently not supported"
+				# Emptying kernel will invalidate the entry
+				kernel=""
+			;;
 		esac
 	done
 

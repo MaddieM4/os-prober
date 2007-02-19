@@ -1,8 +1,13 @@
 os-prober (1.16) UNRELEASED; urgency=low
 
+  [ Joey Hess ]
   * Support for recognising Pardus linux.
 
- -- Joey Hess <joeyh@debian.org>  Sun, 18 Feb 2007 15:53:48 -0500
+  [ Frans Pop ]
+  * Skip grub entries that have "module" lines as we currently don't support
+    those. Based on #399882 where they were used for entries related to Xen.
+
+ -- Frans Pop <fjp@debian.org>  Mon, 19 Feb 2007 03:50:37 +0100
 
 os-prober (1.15) unstable; urgency=low
 
