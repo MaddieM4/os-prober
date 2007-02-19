@@ -97,6 +97,9 @@ if ls $dir/lib/ld*.so* >/dev/null 2>/dev/null; then
 	elif [ -e "$dir/etc/pardus-release" ]; then
 		short="Pardus"
 		long=$(cat "$dir/etc/pardus-release")
+	elif [ -e "$dir/etc/kanotix-version" ]; then
+		short="Kanotix"
+		long=$(cat "$dir/etc/kanotix-version")
 	elif [ -e "$dir/etc/slackware-version" ]; then
 		short="Slackware"
 		long=$(printf "Slackware Linux (%s)\n" "$(cat $dir/etc/slackware-version)")

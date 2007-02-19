@@ -6,8 +6,9 @@ os-prober (1.16) UNRELEASED; urgency=low
   [ Frans Pop ]
   * Skip grub entries that have "module" lines as we currently don't support
     those. Based on #399882 where they were used for entries related to Xen.
+  * Support for recognizing Kanotix linux.
 
- -- Frans Pop <fjp@debian.org>  Mon, 19 Feb 2007 03:50:37 +0100
+ -- Frans Pop <fjp@debian.org>  Mon, 19 Feb 2007 15:02:07 +0100
 
 os-prober (1.15) unstable; urgency=low
 
