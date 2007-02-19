@@ -74,7 +74,7 @@ fi
 
 for partition in $(partitions); do
 	if ! mapped=$(mapdevfs $partition); then
-		log "Error executing 'mapdevfs $partition'"
+		log "Device '$partition' does not exist; skipping"
 		continue
 	fi
 
