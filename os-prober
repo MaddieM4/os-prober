@@ -19,6 +19,12 @@ partitions () {
 		echo "Cannot find list of partitions!" >&2
 		exit 1
 	fi
+
+	# Also detect OSes on LVM volumes (assumes LVM is active)
+	if type lvs >/dev/null 2>&1; then
+		echo "$(lvs --noheadings --separator : -o vg_name,lv_name |
+			sed "s|^  \(.*\):\(.*\).*$|/dev/\1/\2|")"
+	fi
 }
 
 parse_proc_mounts () {
@@ -67,7 +73,10 @@ if [ -f /proc/mdstat ] ; then
 fi
 
 for partition in $(partitions); do
-	mapped=$(mapdevfs $partition)
+	if ! mapped=$(mapdevfs $partition); then
+		log "Error executing 'mapdevfs $partition'"
+		continue
+	fi
 
 	# Skip partitions used in software RAID arrays
 	if grep -q "^$mapped" /tmp/raided-map ; then

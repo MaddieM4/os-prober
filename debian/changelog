@@ -7,8 +7,10 @@ os-prober (1.16) UNRELEASED; urgency=low
   * Skip grub entries that have "module" lines as we currently don't support
     those. Based on #399882 where they were used for entries related to Xen.
   * Support for recognizing Kanotix linux.
+  * Add support for probing other operating systems on LVM partitions. This
+    will only work if LVM support has already been loaded. Closes: #277901.
 
- -- Frans Pop <fjp@debian.org>  Mon, 19 Feb 2007 15:02:07 +0100
+ -- Frans Pop <fjp@debian.org>  Mon, 19 Feb 2007 18:09:41 +0100
 
 os-prober (1.15) unstable; urgency=low
 
