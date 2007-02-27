@@ -1,3 +1,10 @@
+os-prober (1.17) UNRELEASED; urgency=low
+
+  * Check for both upper and lowercase filenames when detecting Windows
+    NT/XP/2000. Thanks to Thanatermesis.
+
+ -- Frans Pop <fjp@debian.org>  Tue, 27 Feb 2007 14:36:25 +0100
+
 os-prober (1.16) unstable; urgency=low
 
   [ Joey Hess ]
