@@ -4,9 +4,7 @@ set -e
 . /usr/share/os-prober/common.sh
 
 partitions () {
-	if [ -d /dev/discs ]; then
-		find /dev/discs/ -follow -type b | grep /part
-	elif [ -d /sys/block ]; then
+	if [ -d /sys/block ]; then
 		for part in /sys/block/*/*[0-9]; do
 			if [ -f "$part/start" ]; then
 				name="$(echo "${part##*/}" | sed 's,[!.],/,g')"
@@ -40,12 +38,8 @@ parse_proc_mdstat () {
 			dev="${word%%[*}"
 			# TODO: factor this out to something in di-utils if
 			# it's needed elsewhere
-			if [ -d /sys/block ] && type udevinfo >/dev/null 2>&1; then
-				if ! udevinfo -q path -n "/dev/$dev" 2>/dev/null | \
-				     grep -q '/.*/.*/'; then
-					continue
-				fi
-			elif ! echo "$dev" | grep -q "/part"; then
+			if ! udevinfo -q path -n "/dev/$dev" 2>/dev/null | \
+			     grep -q '/.*/.*/'; then
 				continue
 			fi
 			raidpart="/dev/$dev"
