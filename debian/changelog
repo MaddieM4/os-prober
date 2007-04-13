@@ -2,7 +2,7 @@ os-prober (1.18) UNRELEASED; urgency=low
 
   * Add detection for Dell Utility partition (can be chainloaded).
     Closes: #417279.
-  * Code cleanup: reply on the presence of udevinfo.
+  * Remove support for devfs style paths.
 
  -- Frans Pop <fjp@debian.org>  Thu, 12 Apr 2007 17:21:33 +0200
 

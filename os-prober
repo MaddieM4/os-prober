@@ -38,8 +38,12 @@ parse_proc_mdstat () {
 			dev="${word%%[*}"
 			# TODO: factor this out to something in di-utils if
 			# it's needed elsewhere
-			if ! udevinfo -q path -n "/dev/$dev" 2>/dev/null | \
-			     grep -q '/.*/.*/'; then
+			if [ -d /sys/block ] && type udevinfo >/dev/null 2>&1; then
+				if ! udevinfo -q path -n "/dev/$dev" 2>/dev/null | \
+				     grep -q '/.*/.*/'; then
+					continue
+				fi
+			elif ! echo "$dev" | grep -q "/part"; then
 				continue
 			fi
 			raidpart="/dev/$dev"
