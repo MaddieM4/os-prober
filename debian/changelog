@@ -1,3 +1,12 @@
+os-prober (1.19) UNRELEASED; urgency=low
+
+  * Make the microsoft OS test completely case-insensative in the file and
+    directory named it looks for. This is reportedly needed at least for
+    Vista (Boot/BCD vs boot/bcd), and was already done on an ad-hoc basis
+    for 2000/XP/NT4.0.
+
+ -- Joey Hess <joeyh@debian.org>  Wed, 30 May 2007 13:31:02 -0400
+
 os-prober (1.18) unstable; urgency=low
 
   * Add detection for Dell Utility partition (can be chainloaded).
