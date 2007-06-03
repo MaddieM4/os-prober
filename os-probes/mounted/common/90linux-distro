@@ -109,6 +109,9 @@ if ls $dir/lib/ld*.so* >/dev/null 2>/dev/null; then
 	elif grep -qs OpenLinux "$dir/etc/issue"; then
 		short="Caldera"
 		long="Caldera OpenLinux"
+	elif [ -e "$dir/etc/frugalware-release" ]; then
+		short="Frugalware Linux"
+		long=$(cat "$dir/etc/frugalware-release")
 	else
 		short="Linux"
 		long="unknown Linux distribution"

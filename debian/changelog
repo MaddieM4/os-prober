@@ -4,8 +4,9 @@ os-prober (1.19) UNRELEASED; urgency=low
     directory named it looks for. This is reportedly needed at least for
     Vista (Boot/BCD vs boot/bcd), and was already done on an ad-hoc basis
     for 2000/XP/NT4.0.
+  * Patch from VMiklos to add support for recognising Frugalware.
 
- -- Joey Hess <joeyh@debian.org>  Wed, 30 May 2007 13:31:02 -0400
+ -- Joey Hess <joeyh@debian.org>  Sun, 03 Jun 2007 11:54:59 -0400
 
 os-prober (1.18) unstable; urgency=low
 
