@@ -1,12 +1,17 @@
 os-prober (1.19) UNRELEASED; urgency=low
 
+  [ Joey Hess ]
   * Make the microsoft OS test completely case-insensative in the file and
     directory named it looks for. This is reportedly needed at least for
     Vista (Boot/BCD vs boot/bcd), and was already done on an ad-hoc basis
     for 2000/XP/NT4.0.
   * Patch from VMiklos to add support for recognising Frugalware.
 
- -- Joey Hess <joeyh@debian.org>  Sun, 03 Jun 2007 11:54:59 -0400
+  [ Frans Pop ]
+  * Skip partitions that are on a disk that is part of a fake (ata) RAID
+    device.
+
+ -- Frans Pop <fjp@debian.org>  Sat, 16 Jun 2007 10:05:46 +0200
 
 os-prober (1.18) unstable; urgency=low
 

@@ -3,10 +3,22 @@ set -e
 
 . /usr/share/os-prober/common.sh
 
+on_fakeraid () {
+	type dmraid >/dev/null 2>&1 || return 1
+	local parent=${1%/*}
+	local device=/dev/${parent##*/}
+	if dmraid -r -c | grep -q $device; then
+		return 0
+	fi
+	return 1
+}
+
 partitions () {
+	# Exclude partitions that are on devices that are part of a fake
+	# (ata) RAID device. TODO: add support for the fake RAID itself.
 	if [ -d /sys/block ]; then
 		for part in /sys/block/*/*[0-9]; do
-			if [ -f "$part/start" ]; then
+			if [ -f "$part/start" ] && ! on_fakeraid $part; then
 				name="$(echo "${part##*/}" | sed 's,[!.],/,g')"
 				if [ -e "/dev/$name" ]; then
 					echo "/dev/$name"
