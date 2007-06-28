@@ -11,6 +11,14 @@ os-prober (1.19) UNRELEASED; urgency=low
   * Skip partitions that are on a disk that is part of a fake (ata) RAID
     device.
 
+  [ Fabio M. Di Nitto ]
+  * Skip partitions that have the "whole_disk" sysfs attribute set.
+    The kernel set the attribute for partitions like SUN Whole Disk.
+    These partitions that encompass the whole disk can be mounted
+    and often confused for the first partition on the disk.
+    In situations where the OS is on the first partition, it would be
+    detected twice in the first and the whole disk partition.
+
  -- Frans Pop <fjp@debian.org>  Sat, 16 Jun 2007 10:05:46 +0200
 
 os-prober (1.18) unstable; urgency=low
