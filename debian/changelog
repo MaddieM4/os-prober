@@ -8,8 +8,7 @@ os-prober (1.19) UNRELEASED; urgency=low
   * Patch from VMiklos to add support for recognising Frugalware.
 
   [ Frans Pop ]
-  * Skip partitions that are on a disk that is part of a fake (ata) RAID
-    device.
+  * Skip partitions on a physical disk that is part of a Serial ATA RAID disk.
 
   [ Fabio M. Di Nitto ]
   * Skip partitions that have the "whole_disk" sysfs attribute set.

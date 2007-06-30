@@ -3,7 +3,7 @@ set -e
 
 . /usr/share/os-prober/common.sh
 
-on_fakeraid () {
+on_sataraid () {
 	type dmraid >/dev/null 2>&1 || return 1
 	local parent=${1%/*}
 	local device=/dev/${parent##*/}
@@ -14,12 +14,13 @@ on_fakeraid () {
 }
 
 partitions () {
-	# Exclude partitions that are on devices that are part of a fake
-	# (ata) RAID device. TODO: add support for the fake RAID itself.
 	# Exclude partitions that have whole_disk sysfs attribute set.
+	# Exclude partitions on physical disks that are part of a Serial
+	# ATA RAID disk. TODO: add support for the SATA RAID disk itself.
 	if [ -d /sys/block ]; then
 		for part in /sys/block/*/*[0-9]; do
-			if [ -f "$part/start" ] && ! on_fakeraid $part && [ ! -f "$part/whole_disk" ]; then
+			if [ -f "$part/start" ] && \
+			   [ ! -f "$part/whole_disk" ] && ! on_sataraid $part; then
 				name="$(echo "${part##*/}" | sed 's,[!.],/,g')"
 				if [ -e "/dev/$name" ]; then
 					echo "/dev/$name"
