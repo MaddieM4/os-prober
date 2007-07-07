@@ -34,7 +34,7 @@ partitions () {
 
 	# Also detect OSes on LVM volumes (assumes LVM is active)
 	if type lvs >/dev/null 2>&1; then
-		echo "$(log-output --pass-stdout \
+		echo "$(log-output -t os-prober --pass-stdout \
 			lvs --noheadings --separator : -o vg_name,lv_name |
 			sed "s|-|--|g;s|^[[:space:]]*\(.*\):\(.*\)$|/dev/mapper/\1-\2|")"
 	fi
