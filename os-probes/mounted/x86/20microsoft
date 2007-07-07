@@ -15,17 +15,6 @@ case "$type" in
 	*) debug "$1 is not a MS partition: exiting"; exit 1 ;;
 esac
 
-item_in_dir () {
-	if [ "$1" = "-q" ]; then
-		q="-q"
-		shift 1
-	else
-		q=""
-	fi
-	# find files with any case
-	ls -1 "$2" | grep $q -i "$1"
-}
-
 # Vista/Longhorn
 if item_in_dir -q bootmgr "$2" && item_in_dir -q boot "$2" &&
    item_in_dir -q bcd $2/$(item_in_dir boot "$2"); then

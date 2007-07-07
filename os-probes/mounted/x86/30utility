@@ -16,8 +16,8 @@ esac
 
 # Dell Utility partitions have partition type 0xde, but no idea how to
 # cleanly detect that from shell
-if [ -e "$2/dellbio.bin" ] && \
-  ([ -e "$2/delldiag.exe" ] || [ -e "$2/delldiag.com" ]); then
+if item_in_dir -q dellbio.bin "$2" && \
+   (item_in_dir -q delldiag.exe "$2" || item_in_dir -q delldiag.com "$2"); then
 	long="Dell Utility Partition"
 	short=DellUtility
 else

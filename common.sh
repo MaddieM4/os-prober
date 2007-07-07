@@ -46,3 +46,14 @@ if ! type mapdevfs >/dev/null 2>&1; then
     echo "$1"
   }
 fi
+
+item_in_dir () {
+	if [ "$1" = "-q" ]; then
+		q="-q"
+		shift 1
+	else
+		q=""
+	fi
+	# find files with any case
+	ls -1 "$2" | grep $q -i "$1"
+}

@@ -10,6 +10,7 @@ os-prober (1.19) UNRELEASED; urgency=low
   [ Frans Pop ]
   * Skip partitions on a physical disk that is part of a Serial ATA RAID disk.
   * Use log-output when checking for volume groups.
+  * Also use the case insensitive test for Dell Utility partition detection.
 
   [ Fabio M. Di Nitto ]
   * Skip partitions that have the "whole_disk" sysfs attribute set.
@@ -19,7 +20,7 @@ os-prober (1.19) UNRELEASED; urgency=low
     In situations where the OS is on the first partition, it would be
     detected twice in the first and the whole disk partition.
 
- -- Frans Pop <fjp@debian.org>  Sat, 07 Jul 2007 19:27:45 +0200
+ -- Frans Pop <fjp@debian.org>  Sat, 07 Jul 2007 19:33:56 +0200
 
 os-prober (1.18) unstable; urgency=low
 
