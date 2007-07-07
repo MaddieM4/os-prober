@@ -55,5 +55,5 @@ item_in_dir () {
 		q=""
 	fi
 	# find files with any case
-	ls -1 "$2" | grep $q -i "$1"
+	ls -1 "$2" | grep $q -i "^$1$"
 }
