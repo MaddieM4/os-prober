@@ -8,6 +8,9 @@ os-prober (1.20) UNRELEASED; urgency=low
     handle mount-by-UUID correctly.
   * Use mktemp -d rather than /tmp, to make use outside d-i safer.
   * Merge from Ubuntu:
+    - Try to install fs-core-modules and fs-secondary-modules udebs. These
+      are specific to the Ubuntu kernel udeb layout, but it's fairly cheap
+      to check for them as well and saves on divergence here.
     - Add os-probes/mounted/sparc/80solaris to recognize Solaris/SPARC
       (Fabio M. Di Nitto).
     - Add linux-boot-probes/mounted/sparc/50silo support (Fabio M. Di
