@@ -3,6 +3,8 @@ set -e
 
 . /usr/share/os-prober/common.sh
 
+require_tmpdir
+
 on_sataraid () {
 	type dmraid >/dev/null 2>&1 || return 1
 	local parent=${1%/*}
@@ -79,10 +81,10 @@ done
 # Partman mounts partitions on /dev/ide/ and /dev/scsi, not /dev/discs
 # Therefore we use mapdevfs to match partitions with mount points
 # and partitions used in RAID
-grep "^/dev/" /proc/mounts | parse_proc_mounts >/tmp/mounted-map || true
-: >/tmp/raided-map
+grep "^/dev/" /proc/mounts | parse_proc_mounts >"$OS_PROBER_TMP/mounted-map" || true
+: >"$OS_PROBER_TMP/raided-map"
 if [ -f /proc/mdstat ] ; then
-	grep "^md" /proc/mdstat | parse_proc_mdstat >/tmp/raided-map || true
+	grep "^md" /proc/mdstat | parse_proc_mdstat >"$OS_PROBER_TMP/raided-map" || true
 fi
 
 for partition in $(partitions); do
@@ -92,12 +94,12 @@ for partition in $(partitions); do
 	fi
 
 	# Skip partitions used in software RAID arrays
-	if grep -q "^$mapped" /tmp/raided-map ; then
+	if grep -q "^$mapped" "$OS_PROBER_TMP/raided-map" ; then
 		debug "$partition: part of software raid array"
 		continue
 	fi
 
-	if ! grep -q "^$mapped " /tmp/mounted-map ; then
+	if ! grep -q "^$mapped " "$OS_PROBER_TMP/mounted-map" ; then
 		for test in /usr/lib/os-probes/*; do
 			if [ -f $test ] && [ -x $test ]; then
 				debug "running $test on $partition"
@@ -108,9 +110,9 @@ for partition in $(partitions); do
 			fi
 		done
 	else
-		mpoint=$(grep "^$mapped " /tmp/mounted-map | cut -d " " -f 2)
+		mpoint=$(grep "^$mapped " "$OS_PROBER_TMP/mounted-map" | cut -d " " -f 2)
 		if [ "$mpoint" != "/target" ] && [ "$mpoint" != "/" ]; then
-			type=$(grep "^$mapped " /tmp/mounted-map | cut -d " " -f 3)
+			type=$(grep "^$mapped " "$OS_PROBER_TMP/mounted-map" | cut -d " " -f 3)
 			for test in /usr/lib/os-probes/mounted/*; do
 				if [ -f $test ] && [ -x $test ]; then
 					debug "running $test on mounted $partition"

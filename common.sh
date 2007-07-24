@@ -1,3 +1,10 @@
+require_tmpdir() {
+  if [ -z "$OS_PROBER_TMP" ]; then
+    export OS_PROBER_TMP="$(mktemp -d /tmp/os-prober.XXXXXX)"
+    trap "rm -rf $OS_PROBER_TMP" EXIT HUP INT QUIT TERM
+  fi
+}
+
 count_for() {
   _labelprefix=$1
   _result=$(grep "^${_labelprefix} " /var/lib/os-prober/labels 2>/dev/null || true)
@@ -10,14 +17,16 @@ count_for() {
 }
 
 count_next_label() {
+  require_tmpdir
+
   _labelprefix=$1
   _cfor="$(count_for ${_labelprefix})"
 
   if [ -z "$_cfor" ]; then
     echo "${_labelprefix} 1" >> /var/lib/os-prober/labels
   else
-    sed "s/^${_labelprefix} ${_cfor}/${_labelprefix} $(($_cfor + 1))/" /var/lib/os-prober/labels > /tmp/os-prober.tmp
-    mv /tmp/os-prober.tmp /var/lib/os-prober/labels
+    sed "s/^${_labelprefix} ${_cfor}/${_labelprefix} $(($_cfor + 1))/" /var/lib/os-prober/labels > "$OS_PROBER_TMP/os-prober.tmp"
+    mv "$OS_PROBER_TMP/os-prober.tmp" /var/lib/os-prober/labels
   fi
   
   echo "${_labelprefix}${_cfor}"

@@ -6,6 +6,7 @@ os-prober (1.20) UNRELEASED; urgency=low
     menu.lst files if you do repeated test installs on multiple partitions.
   * Use readlink -f in mapdevfs shim so that os-prober runs outside d-i
     handle mount-by-UUID correctly.
+  * Use mktemp -d rather than /tmp, to make use outside d-i safer.
 
  -- Colin Watson <cjwatson@debian.org>  Tue, 24 Jul 2007 17:49:13 +0100
 
