@@ -1,6 +1,6 @@
 require_tmpdir() {
   if [ -z "$OS_PROBER_TMP" ]; then
-    if type mktemp; then
+    if type mktemp >/dev/null 2>&1; then
       export OS_PROBER_TMP="$(mktemp -d /tmp/os-prober.XXXXXX)"
       trap "rm -rf $OS_PROBER_TMP" EXIT HUP INT QUIT TERM
     else
