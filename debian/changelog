@@ -19,6 +19,7 @@ os-prober (1.20) UNRELEASED; urgency=low
     - Tighten check for whether we're running in d-i; anna-install isn't
       quite enough because if you're running d-i code outside d-i it's
       sometimes reasonable to install a shim for anna-install.
+  * Don't probe partitions mounted on /target/boot.
 
  -- Colin Watson <cjwatson@debian.org>  Tue, 24 Jul 2007 17:49:13 +0100
 
