@@ -43,7 +43,7 @@ result () {
 # shim to make it easier to use os-prober outside d-i
 if ! type mapdevfs >/dev/null 2>&1; then
   mapdevfs () {
-    echo "$1"
+    readlink -f "$1"
   }
 fi
 
