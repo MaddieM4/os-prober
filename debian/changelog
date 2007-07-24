@@ -12,6 +12,7 @@ os-prober (1.20) UNRELEASED; urgency=low
       (Fabio M. Di Nitto).
     - Add linux-boot-probes/mounted/sparc/50silo support (Fabio M. Di
       Nitto).
+    - Try to load ufs module, for Solaris support (Fabio M. Di Nitto).
     - Tighten check for whether we're running in d-i; anna-install isn't
       quite enough because if you're running d-i code outside d-i it's
       sometimes reasonable to install a shim for anna-install.
