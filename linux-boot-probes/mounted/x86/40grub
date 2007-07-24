@@ -10,7 +10,8 @@ type="$4"
 found_item=0
 
 entry_result () {
-	if [ -n "$kernel" ] && \
+	if [ "$ignore_item" = 0 ] && \
+	   [ -n "$kernel" ] && \
 	   [ -e "$mpoint/$kernel" ]; then
 		result "$rootpart:$bootpart:$title:$kernel:$initrd:$parameters"
 		found_item=1
@@ -19,6 +20,7 @@ entry_result () {
 	parameters=""
 	initrd=""
 	title=""
+	ignore_item=0
 }
 
 parse_grub_menu () {
@@ -30,6 +32,7 @@ parse_grub_menu () {
 	parameters=""
 	initrd=""
 	title=""
+	ignore_item=0
 
 	while read line; do
 		debug "parsing: $line"
@@ -39,6 +42,11 @@ parse_grub_menu () {
 				entry_result
 				shift 1
 				title="$(echo $@ | sed 's/://g')"
+				if echo "$title" | grep -q '(on /dev/[^)]*)$'; then
+					log "Skipping entry '$title':"
+					log "appears to be an automatic reference taken from another menu.lst"
+					ignore_item=1
+				fi
 			;;
 			kernel)
 				# Hack alert: sed off any (hdn,n) but
@@ -66,8 +74,7 @@ parse_grub_menu () {
 			module)
 				log "Skipping entry '$title':"
 				log "parsing of entries containing 'module' lines is currently not supported"
-				# Emptying kernel will invalidate the entry
-				kernel=""
+				ignore_item=1
 			;;
 		esac
 	done
