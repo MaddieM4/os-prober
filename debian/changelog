@@ -23,6 +23,8 @@ os-prober (1.20) UNRELEASED; urgency=low
   * Teach linux-boot-prober to deal with mounted partitions correctly,
     unless they're mounted on /, /target, or /target/boot (LP: #14780). This
     should largely obsolete the --mounted option.
+  * Only use /target/bin/mount if it exists, in order to work better outside
+    d-i.
 
  -- Colin Watson <cjwatson@debian.org>  Tue, 24 Jul 2007 17:49:13 +0100
 
