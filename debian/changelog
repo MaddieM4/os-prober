@@ -1,3 +1,9 @@
+os-prober (1.21) UNRELEASED; urgency=low
+
+  * Remove the largely obsolete --mounted option.
+
+ -- Joey Hess <joeyh@debian.org>  Thu, 26 Jul 2007 17:08:33 -0400
+
 os-prober (1.20) unstable; urgency=low
 
   * Skip grub-installer's "(on /dev/blah)" entries detected in GRUB
