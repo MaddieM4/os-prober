@@ -20,6 +20,9 @@ os-prober (1.20) UNRELEASED; urgency=low
       quite enough because if you're running d-i code outside d-i it's
       sometimes reasonable to install a shim for anna-install.
   * Don't probe partitions mounted on /target/boot.
+  * Teach linux-boot-prober to deal with mounted partitions correctly,
+    unless they're mounted on /, /target, or /target/boot (LP: #14780). This
+    should largely obsolete the --mounted option.
 
  -- Colin Watson <cjwatson@debian.org>  Tue, 24 Jul 2007 17:49:13 +0100
 

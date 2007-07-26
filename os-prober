@@ -42,13 +42,6 @@ partitions () {
 	fi
 }
 
-parse_proc_mounts () {
-	while read line; do
-		set -- $line
-		echo "$(mapdevfs $1) $2 $3"
-	done
-}
-
 parse_proc_mdstat () {
 	while read line; do
 		for word in $line; do
