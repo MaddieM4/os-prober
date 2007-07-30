@@ -12,6 +12,7 @@ case "$type" in
 	ntfs) debug "$1 is a NTFS partition" ;;
 	vfat) debug "$1 is a FAT32 partition" ;;
 	msdos) debug "$1 is a FAT16 partition" ;;
+	fuse) debug "$1 is a FUSE partition" ;; # might be ntfs-3g
 	*) debug "$1 is not a MS partition: exiting"; exit 1 ;;
 esac
 
