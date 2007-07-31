@@ -6,6 +6,7 @@ os-prober (1.21) UNRELEASED; urgency=low
   [ Colin Watson ]
   * Recognise filesystems of type 'fuse' as applicable to the Microsoft
     probe (thanks, Agostino Russo).
+  * Handle vga= options in lilo.conf (LP: #59525).
 
  -- Joey Hess <joeyh@debian.org>  Thu, 26 Jul 2007 17:08:33 -0400
 

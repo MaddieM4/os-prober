@@ -15,6 +15,7 @@ kernel=""
 parameters=""
 initrd=""
 read_only=""
+added_parameters=0
 default_rootdev=""
 default_kernel=""
 default_parameters=""
@@ -24,6 +25,17 @@ default_read_only=""
 dequote () {
 	item="${1%\"}"
 	echo "${item#\"}"
+}
+
+addparams () {
+	# Any parameters we find replace the default parameters, but
+	# otherwise append.
+	if [ "$added_parameters" = 0 ]; then
+		parameters="$1"
+		added_parameters=1
+	else
+		parameters="${parameters:+$parameters }$1"
+	fi
 }
 
 recordstanza () {
@@ -47,6 +59,7 @@ recordstanza () {
 		parameters="$default_parameters"
 		initrd="$default_initrd"
 		read_only="$default_read_only"
+		added_parameters=0
 	else
 		# Everything before set default values.
 		default_rootdev="$rootdev"
@@ -75,8 +88,7 @@ parse_lilo_conf () {
 				kernel=$(readlink -f $(dequote "$2"))
 			;;
 			append)
-				shift 1
-				parameters=$(dequote "${line#append=}")
+				addparams "$(dequote "${line#append=}")"
 			;;
 			initrd)
 				# Dereference if symbolic link
@@ -91,6 +103,9 @@ parse_lilo_conf () {
 			;;
 			read-only)
 				read_only=1
+			;;
+			vga)
+				addparams "$line"
 			;;
 		esac
 	done
