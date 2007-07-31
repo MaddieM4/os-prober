@@ -68,7 +68,5 @@ and they are called in a similar way as the os-probes described above.
 The mounted probes are passed parameters for the root partition, the boot
 partition, and the directory the filesystems are mounted in.
 
-By default, linux-boot-prober skips over partitions that are currently
-mounted, so it will not find eg, a just installed system mounted at
-/target. If "--mounted" is passed to it before the partition to scan, then
-it will also scan mounted filesystems.
+linux-boot-prober skips over partitions that are currently mounted on /,
+/target, or /target/boot.
