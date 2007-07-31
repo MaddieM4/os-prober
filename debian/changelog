@@ -1,4 +1,4 @@
-os-prober (1.21) UNRELEASED; urgency=low
+os-prober (1.21) unstable; urgency=low
 
   [ Joey Hess ]
   * Remove the largely obsolete --mounted option.
@@ -8,7 +8,7 @@ os-prober (1.21) UNRELEASED; urgency=low
     probe (thanks, Agostino Russo).
   * Handle vga= options in lilo.conf (LP: #59525).
 
- -- Joey Hess <joeyh@debian.org>  Thu, 26 Jul 2007 17:08:33 -0400
+ -- Colin Watson <cjwatson@debian.org>  Tue, 31 Jul 2007 17:03:10 +0100
 
 os-prober (1.20) unstable; urgency=low
 
