@@ -10,13 +10,13 @@ command. This command takes no arguments: it will scan all disks available
 on the system for other operating systems, and output a list of strings
 such as:
 
- /dev/discs/.../part1:Windows NT/2000/XP:WinNT:chain
- ^------------------^ ^----------------^ ^---^ ^---^
-      partition        OS name for boot  short May change: type of boot loader
-                       loader's pretty   name  required. Usually there is only
-		       output                  a 'linux' style bootloader or
-		                               a chain one for other partitions
-		                               with their own boot sectors.
+ /dev/sda1:Windows NT/2000/XP:WinNT:chain
+ ^-------^ ^----------------^ ^---^ ^---^
+   part.    OS name for boot  short May change: type of boot loader
+            loader's pretty   name  required. Usually there is only
+            output                  a 'linux' style bootloader or
+                                    a chain one for other partitions
+                                    with their own boot sectors.
 
 Tests are executable programs in the directory /usr/lib/os-probes/. Each
 test is called once per partition, with the partiton to check as its
@@ -41,26 +41,25 @@ linux-boot-prober.
 linux-boot-prober
 -----------------
 
-The linux-boot-prober command should be run with a single argument
+the linux-boot-prober command should be run with a single argument
 consisting of a partition that is known to have a linux root filesystem on
 it, as returned by the os-prober command. It will try to work out how to
 boot that linux installation, and if it is successful, will output one or
 more lines in the form:
 
- /dev/discs/.../part2:/dev/discs/.../part1:Linux:/vmlinuz:/initrd.gz:root=/dev/hda1
- ^------------------^ ^------------------^ ^---^ ^------^ ^--------^ ^------------^
-   root partition       boot partition     label  kernel    initrd    kernel params
+ /dev/sda2:/dev/sda1:Linux:/vmlinuz:/initrd.gz:root=/dev/sda1
+ ^-------^ ^-------^ ^---^ ^------^ ^--------^ ^------------^
+   root      boot    label  kernel    initrd    kernel params
+   part.     part.
 
-The root partition and boot partition may of course be the same. The boot
-partition may be given in devfs syntax, or not, depending on how it is
-determined. No guarantee is made that any partitions referred to in the
-kernel parameters will still be in the same place after Debian is
-installed, or that the /etc/fstab of the system will be right, or that the
-system will even boot. The initrd field may be empty if there is no initrd.
-The label is whatever label was used in the boot loader for this linux
-installation, and it may be quite long or very short (or nonexistent), and
-may be inaccurate, confusing, or non-unique. See TODO for other
-limitations.
+The root partition and boot partition may of course be the same. No guarantee
+is made that any partitions referred to in the kernel parameters will still be
+in the same place after Debian is installed, or that the /etc/fstab of the
+system will be right, or that the system will even boot. The initrd field may
+be empty if there is no initrd.  The label is whatever label was used in the
+boot loader for this linux installation, and it may be quite long or very
+short (or nonexistent), and may be inaccurate, confusing, or non-unique. See
+TODO for other limitations.
 
 The tests used by linux-boot-prober are in the directory
 /usr/lib/linux-boot-probes/ and also in /usr/lib/linux-boot-probes/mounted,

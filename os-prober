@@ -71,9 +71,8 @@ for prog in /usr/lib/os-probes/init/*; do
 	fi
 done
 
-# Partman mounts partitions on /dev/ide/ and /dev/scsi, not /dev/discs
-# Therefore we use mapdevfs to match partitions with mount points
-# and partitions used in RAID
+# We need to properly canonicalize partitions with mount points and partitions
+# used in RAID
 grep "^/dev/" /proc/mounts | parse_proc_mounts >"$OS_PROBER_TMP/mounted-map" || true
 : >"$OS_PROBER_TMP/raided-map"
 if [ -f /proc/mdstat ] ; then
