@@ -11,6 +11,8 @@ os-prober (1.22) UNRELEASED; urgency=low
   * Accept fuseblk as well as fuse in the Microsoft probe.
   * Make sure to select only the first mountpoint for a given device (in
     case of bind mounts).
+  * Treat the lpia architecture (used in the Ubuntu mobile project) as x86,
+    since it is.
 
  -- Jérémy Bobbio <lunar@debian.org>  Thu, 06 Sep 2007 11:11:17 +0200
 
