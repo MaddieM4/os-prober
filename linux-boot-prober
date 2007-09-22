@@ -24,9 +24,9 @@ if ! grep -q "^$mapped " "$OS_PROBER_TMP/mounted-map"; then
 		fi
 	done
 else
-	mpoint=$(grep "^$mapped " "$OS_PROBER_TMP/mounted-map" | cut -d " " -f 2)
+	mpoint=$(grep "^$mapped " "$OS_PROBER_TMP/mounted-map" | head -n1 | cut -d " " -f 2)
 	if [ "$mpoint" != "/target/boot" ] && [ "$mpoint" != "/target" ] && [ "$mpoint" != "/" ]; then
-		type=$(grep "^$mapped " "$OS_PROBER_TMP/mounted-map" | cut -d " " -f 3)
+		type=$(grep "^$mapped " "$OS_PROBER_TMP/mounted-map" | head -n1 | cut -d " " -f 3)
 		if ! grep -q " $mpoint/boot " "$OS_PROBER_TMP/mounted-map"; then
 			mountboot="$(linux_mount_boot "$partition" "$mpoint")"
 			bootpart="${mountboot%% *}"
