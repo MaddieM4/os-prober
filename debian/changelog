@@ -2,6 +2,8 @@ os-prober (1.23) UNRELEASED; urgency=low
 
   * If fuseblk is in /proc/filesystems and ntfs-3g is present, try mounting
     filesystems as ntfs-3g.
+  * Try finding a LABEL/UUID-capable /bin/mount in $tmpmnt as well as in
+    /target.
 
  -- Colin Watson <cjwatson@debian.org>  Thu, 22 Nov 2007 18:16:02 +0000
 

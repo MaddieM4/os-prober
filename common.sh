@@ -104,7 +104,9 @@ linux_mount_boot () {
 		if [ -n "$bootmnt" ]; then
 			set -- $bootmnt
 			boottomnt=""
-			if [ -x /target/bin/mount ]; then
+			if [ -x "$tmpmnt/bin/mount" ]; then
+				smart_mount="$tmpmnt/bin/mount"
+			elif [ -x /target/bin/mount ]; then
 				smart_mount=/target/bin/mount
 			else
 				smart_mount=mount
