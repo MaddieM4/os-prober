@@ -104,11 +104,17 @@ linux_mount_boot () {
 		if [ -n "$bootmnt" ]; then
 			set -- $bootmnt
 			boottomnt=""
+			# This is an awful hack and isn't guaranteed to
+			# work, but is the best we can do until busybox
+			# mount supports -L/-U.
 			if [ -x "$tmpmnt/bin/mount" ]; then
+				smart_ldlp="$tmpmnt/lib"
 				smart_mount="$tmpmnt/bin/mount"
 			elif [ -x /target/bin/mount ]; then
+				smart_ldlp=/target/lib
 				smart_mount=/target/bin/mount
 			else
+				smart_ldlp=
 				smart_mount=mount
 			fi
 			if [ -e "$1" ]; then
@@ -123,7 +129,7 @@ linux_mount_boot () {
 			elif echo "$1" | grep -q "LABEL="; then
 				debug "mounting boot partition by label for linux system on $partition: $1"
 				label=$(echo "$1" | cut -d = -f 2)
-				if $smart_mount -L "$label" -o ro $tmpmnt/boot -t "$3"; then
+				if LD_LIBRARY_PATH=$smart_ldlp $smart_mount -L "$label" -o ro $tmpmnt/boot -t "$3"; then
 					mounted=1
 					bootpart=$(mount | grep $tmpmnt/boot | cut -d " " -f 1)
 				else
@@ -132,7 +138,7 @@ linux_mount_boot () {
 			elif echo "$1" | grep -q "UUID="; then
 				debug "mounting boot partition by UUID for linux system on $partition: $1"
 				uuid=$(echo "$1" | cut -d = -f 2)
-				if $smart_mount -U "$uuid" -o ro $tmpmnt/boot -t "$3"; then
+				if LD_LIBRARY_PATH=$smart_ldlp $smart_mount -U "$uuid" -o ro $tmpmnt/boot -t "$3"; then
 					mounted=1
 					bootpart=$(mount | grep $tmpmnt/boot | cut -d " " -f 1)
 				else
