@@ -15,6 +15,10 @@ for type in $(grep -v nodev /proc/filesystems); do
 	# can tell the difference.
 	if [ "$type" = hfs ]; then
 		delaytypes="${delaytypes:+$delaytypes }$type"
+	elif [ "$type" = fuseblk ]; then
+		if type ntfs-3g >/dev/null 2>&1; then
+			types="${types:+$types }ntfs-3g"
+		fi
 	else
 		types="${types:+$types }$type"
 	fi
