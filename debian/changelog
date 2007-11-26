@@ -1,4 +1,4 @@
-os-prober (1.23) UNRELEASED; urgency=low
+os-prober (1.23) unstable; urgency=low
 
   * If fuseblk is in /proc/filesystems and ntfs-3g is present, try mounting
     filesystems as ntfs-3g.
@@ -9,7 +9,7 @@ os-prober (1.23) UNRELEASED; urgency=low
   * Adjust Microsoft probe to cope with NTFS partitions appearing with type
     ntfs-3g.
 
- -- Colin Watson <cjwatson@debian.org>  Thu, 22 Nov 2007 18:16:02 +0000
+ -- Colin Watson <cjwatson@debian.org>  Mon, 26 Nov 2007 15:20:17 +0000
 
 os-prober (1.22) unstable; urgency=low
 
