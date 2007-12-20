@@ -43,6 +43,11 @@ partitions () {
 }
 
 parse_proc_mdstat () {
+	if type udevadm >/dev/null 2>&1; then
+		udevinfo () {
+			udevadm info "$@"
+		}
+	fi
 	while read line; do
 		for word in $line; do
 			dev="${word%%[*}"
