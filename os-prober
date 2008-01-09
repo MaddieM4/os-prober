@@ -5,6 +5,14 @@ set -e
 
 require_tmpdir
 
+log_output () {
+	if type log-output >/dev/null 2>&1; then
+		log-output -t os-prober --pass-stdout $@
+	else
+		$@
+	fi
+}
+
 on_sataraid () {
 	type dmraid >/dev/null 2>&1 || return 1
 	local parent=${1%/*}
@@ -36,8 +44,7 @@ partitions () {
 
 	# Also detect OSes on LVM volumes (assumes LVM is active)
 	if type lvs >/dev/null 2>&1; then
-		echo "$(log-output -t os-prober --pass-stdout \
-			lvs --noheadings --separator : -o vg_name,lv_name |
+		echo "$(log_output lvs --noheadings --separator : -o vg_name,lv_name |
 			sed "s|-|--|g;s|^[[:space:]]*\(.*\):\(.*\)$|/dev/mapper/\1-\2|")"
 	fi
 }

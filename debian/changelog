@@ -1,7 +1,11 @@
 os-prober (1.24) UNRELEASED; urgency=low
 
+  [ Colin Watson ]
   * udev 117 merged all udev tools into a single binary called udevadm.
     Check for this and use it instead of udevinfo if available.
+
+  [ Joey Hess ]
+  * Avoid using log-output when run outside of d-i.
 
  -- Colin Watson <cjwatson@debian.org>  Thu, 20 Dec 2007 11:40:34 +0000
 
