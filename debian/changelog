@@ -6,6 +6,7 @@ os-prober (1.24) UNRELEASED; urgency=low
 
   [ Joey Hess ]
   * Avoid using log-output when run outside of d-i.
+  * Add preliminary support for grub2's grub.cfg file. Closes: #464928
 
  -- Colin Watson <cjwatson@debian.org>  Thu, 20 Dec 2007 11:40:34 +0000
 
