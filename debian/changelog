@@ -1,4 +1,4 @@
-os-prober (1.24) UNRELEASED; urgency=low
+os-prober (1.24) unstable; urgency=low
 
   [ Colin Watson ]
   * udev 117 merged all udev tools into a single binary called udevadm.
@@ -8,7 +8,7 @@ os-prober (1.24) UNRELEASED; urgency=low
   * Avoid using log-output when run outside of d-i.
   * Add preliminary support for grub2's grub.cfg file. Closes: #464928
 
- -- Colin Watson <cjwatson@debian.org>  Thu, 20 Dec 2007 11:40:34 +0000
+ -- Otavio Salvador <otavio@debian.org>  Fri, 15 Feb 2008 15:23:52 -0200
 
 os-prober (1.23) unstable; urgency=low
 
