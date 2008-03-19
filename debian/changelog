@@ -1,3 +1,9 @@
+os-prober (1.25) UNRELEASED; urgency=low
+
+  * Disable excessive debug messages when parsing grub configs (see #471501).
+
+ -- Frans Pop <fjp@debian.org>  Wed, 19 Mar 2008 14:50:09 +0100
+
 os-prober (1.24) unstable; urgency=low
 
   [ Colin Watson ]
