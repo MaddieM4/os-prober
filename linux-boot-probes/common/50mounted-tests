@@ -22,7 +22,9 @@ for type in $(grep -v nodev /proc/filesystems); do
 				if $test $partition $bootpart $tmpmnt $type; then
 					debug "$test succeeded"
 					umount $tmpmnt/boot 2>/dev/null || true 	
-					umount $tmpmnt
+					if ! umount $tmpmnt; then
+						warn "failed to umount $tmpmnt"
+					fi
 					rmdir $tmpmnt || true
 					exit 0
 				fi
@@ -30,7 +32,9 @@ for type in $(grep -v nodev /proc/filesystems); do
 		done
 		
 		umount $tmpmnt/boot 2>/dev/null || true 	
-		umount $tmpmnt
+		if ! umount $tmpmnt; then
+			warn "failed to umount $tmpmnt"
+		fi
 
 		break
 	fi

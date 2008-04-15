@@ -1,6 +1,14 @@
 os-prober (1.25) UNRELEASED; urgency=low
 
+  [ Frans Pop ]
   * Disable excessive debug messages when parsing grub configs (see #471501).
+
+  [ Joey Hess ]
+  * Warn if umount fails for some reason (such as a desktop environment
+    keeping the mount point busy).
+  * Avoid exiting test scripts when a umount fails, as that can result in
+    incomplete OS detection, and does not result in os-prober as a whole
+    failing.
 
  -- Frans Pop <fjp@debian.org>  Wed, 19 Mar 2008 14:50:09 +0100
 

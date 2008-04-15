@@ -44,6 +44,10 @@ error() {
   log "error: $@"
 }
 
+warn() {
+  log "warning: $@"
+}
+
 debug() {
   log "debug: $@"
 }
