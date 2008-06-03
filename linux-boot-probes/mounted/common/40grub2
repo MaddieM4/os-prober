@@ -78,8 +78,6 @@ parse_grub_menu () {
 	entry_result
 }
 
-parse_grub_menu "/" "/dev/mapper/kodama-root" "/dev/hda1" < /boot/grub/grub.cfg
-
 if [ -e "$mpoint/boot/grub/grub.cfg" ]; then
 	debug "parsing grub.cfg"
 	parse_grub_menu "$mpoint" "$partition" "$bootpart" < "$mpoint/boot/grub/grub.cfg"
