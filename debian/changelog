@@ -3,7 +3,7 @@ os-prober (1.26) unstable; urgency=HIGH
   * Remove hardcoded line in grub2 that must have slipped in during testing.
     Closes: #476389
 
- -- Joey Hess <joeyh@debian.org>  Tue, 03 Jun 2008 13:34:45 -0400
+ -- Joey Hess <joeyh@debian.org>  Tue, 03 Jun 2008 13:35:39 -0400
 
 os-prober (1.25) unstable; urgency=low
 
