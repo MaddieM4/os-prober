@@ -112,6 +112,9 @@ if ls $dir/lib/ld*.so* >/dev/null 2>/dev/null; then
 	elif [ -e "$dir/etc/frugalware-release" ]; then
 		short="Frugalware Linux"
 		long=$(cat "$dir/etc/frugalware-release")
+	elif [ -e "$dir/etc/kdemar-release" ]; then
+		short="K-DEMar"
+		long=$(printf "K-DEMar GNU/Linux (%s)\n" "$(cat $dir/etc/kdemar-release)")
 	else
 		short="Linux"
 		long="unknown Linux distribution"

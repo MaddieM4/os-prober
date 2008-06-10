@@ -1,3 +1,10 @@
+os-prober (1.27) UNRELEASED; urgency=low
+
+  * Add support for detecting K-DEMar based on an example from Adonay Sanz.
+    Closes: #485617
+
+ -- Joey Hess <joeyh@debian.org>  Tue, 10 Jun 2008 14:33:07 -0400
+
 os-prober (1.26) unstable; urgency=HIGH
 
   * Remove hardcoded line in grub2 that must have slipped in during testing.
