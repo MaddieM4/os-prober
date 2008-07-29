@@ -1,9 +1,10 @@
-os-prober (1.27) UNRELEASED; urgency=low
+os-prober (1.27) unstable; urgency=low
 
+  [ Joey Hess ]
   * Add support for detecting K-DEMar based on an example from Adonay Sanz.
     Closes: #485617
 
- -- Joey Hess <joeyh@debian.org>  Tue, 10 Jun 2008 14:33:07 -0400
+ -- Otavio Salvador <otavio@debian.org>  Tue, 29 Jul 2008 12:33:43 -0300
 
 os-prober (1.26) unstable; urgency=HIGH
 
