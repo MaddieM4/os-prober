@@ -25,9 +25,9 @@ on_sataraid () {
 
 partitions () {
 	# Exclude partitions that have whole_disk sysfs attribute set.
-	# Exclude partitions on physical disks that are part of a Serial
-	# ATA RAID disk. TODO: add support for the SATA RAID disk itself.
 	if [ -d /sys/block ]; then
+		# Exclude partitions on physical disks that are part of a
+		# Serial ATA RAID disk.
 		for part in /sys/block/*/*[0-9]; do
 			if [ -f "$part/start" ] && \
 			   [ ! -f "$part/whole_disk" ] && ! on_sataraid $part; then
@@ -37,6 +37,15 @@ partitions () {
 				fi
 			fi
 		done
+
+		# Add Serial ATA RAID devices
+		if type dmraid >/dev/null 2>&1; then
+			for raidset in $(dmraid -sa -c | grep -v "No RAID disks"); do
+				for part in /dev/mapper/$raidset*[0-9]; do
+					echo "$part"
+				done
+			done
+		fi
 	else
 		echo "Cannot find list of partitions!" >&2
 		exit 1

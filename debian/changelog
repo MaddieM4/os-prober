@@ -1,3 +1,11 @@
+os-prober (1.28) UNRELEASED; urgency=low
+
+  [ Giuseppe Iuculano ]
+  * Probe all partitions that are a part of active dmraid arrays.
+    Patch based on work done by Luke Yelavich <themuso@ubuntu.com> in Ubuntu.
+
+ -- Frans Pop <fjp@debian.org>  Mon, 15 Sep 2008 13:20:04 +0200
+
 os-prober (1.27) unstable; urgency=low
 
   [ Joey Hess ]
