@@ -40,7 +40,7 @@ partitions () {
 
 		# Add Serial ATA RAID devices
 		if type dmraid >/dev/null 2>&1; then
-			for raidset in $(dmraid -sa -c | grep -v "No RAID disks"); do
+			for raidset in $(dmraid -sa -c | grep -iv "No RAID disks"); do
 				for part in /dev/mapper/$raidset*[0-9]; do
 					echo "$part"
 				done
