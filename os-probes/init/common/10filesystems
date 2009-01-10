@@ -2,7 +2,7 @@
 # Make sure filesystems are available.
 set +e	# ignore errors from modprobe
 
-FILESYSTEMS='ext2 ext3 reiserfs xfs jfs msdos vfat ntfs minix hfs hfsplus qnx4 ufs'
+FILESYSTEMS='ext2 ext3 ext4 reiserfs xfs jfs msdos vfat ntfs minix hfs hfsplus qnx4 ufs'
 # The Ubuntu kernel udebs put a number of filesystem modules in
 # fs-{core,secondary}-modules. It's fairly cheap to check for these too.
 FILESYSTEMS="$FILESYSTEMS fs-core fs-secondary"
