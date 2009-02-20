@@ -1,9 +1,8 @@
 os-prober (1.29) UNRELEASED; urgency=low
 
   * Merge from Ubuntu:
-    - 'dmraid -c -s' changed its output format in 1.0.0.rc15; cope with both
-      old and new.
     - Load ext4 module if available.
+    - Check dmraid's exit code rather than parsing its output.
 
  -- Colin Watson <cjwatson@debian.org>  Fri, 26 Dec 2008 14:10:19 +0000
 
