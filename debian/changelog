@@ -1,8 +1,12 @@
 os-prober (1.29) UNRELEASED; urgency=low
 
+  [ Colin Watson ]
   * Merge from Ubuntu:
     - Load ext4 module if available.
     - Check dmraid's exit code rather than parsing its output.
+
+  [ Frans Pop ]
+  * Remove myself as uploader.
 
  -- Colin Watson <cjwatson@debian.org>  Fri, 26 Dec 2008 14:10:19 +0000
 

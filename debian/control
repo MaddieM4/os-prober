@@ -2,7 +2,7 @@ Source: os-prober
 Section: debian-installer
 Priority: optional
 Maintainer: Debian Install System Team <debian-boot@lists.debian.org>
-Uploaders: Joey Hess <joeyh@debian.org>, Colin Watson <cjwatson@debian.org>, Frans Pop <fjp@debian.org>
+Uploaders: Joey Hess <joeyh@debian.org>, Colin Watson <cjwatson@debian.org>
 Build-Depends: debhelper (>= 4.2)
 Standards-Version: 3.6.1.0
 Vcs-Svn: svn://svn.debian.org/d-i/trunk/packages/os-prober
