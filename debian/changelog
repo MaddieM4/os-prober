@@ -1,4 +1,4 @@
-os-prober (1.29) UNRELEASED; urgency=low
+os-prober (1.29) unstable; urgency=low
 
   [ Colin Watson ]
   * Merge from Ubuntu:
@@ -10,7 +10,7 @@ os-prober (1.29) UNRELEASED; urgency=low
   [ Frans Pop ]
   * Remove myself as uploader.
 
- -- Colin Watson <cjwatson@debian.org>  Fri, 26 Dec 2008 14:10:19 +0000
+ -- Colin Watson <cjwatson@debian.org>  Wed, 11 Mar 2009 16:45:32 +0000
 
 os-prober (1.28) unstable; urgency=low
 
