@@ -16,10 +16,10 @@ case "$type" in
 	*) debug "$1 is not a MS partition: exiting"; exit 1 ;;
 esac
 
-# Vista/Longhorn
+# Vista (previously Longhorn)
 if item_in_dir -q bootmgr "$2" && item_in_dir -q boot "$2" &&
    item_in_dir -q bcd $2/$(item_in_dir boot "$2"); then
-	long="Windows Vista/Longhorn (loader)"
+	long="Windows Vista (loader)"
 	short=Windows
 # 2000/XP/NT4.0
 elif item_in_dir -q ntldr "$2" && item_in_dir -q ntdetect.com "$2"; then

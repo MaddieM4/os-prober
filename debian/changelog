@@ -4,6 +4,8 @@ os-prober (1.29) UNRELEASED; urgency=low
   * Merge from Ubuntu:
     - Load ext4 module if available.
     - Check dmraid's exit code rather than parsing its output.
+  * Windows Vista has been released for some time now, so just call it that
+    rather than "Vista/Longhorn".
 
   [ Frans Pop ]
   * Remove myself as uploader.
