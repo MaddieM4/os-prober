@@ -23,7 +23,7 @@ esac
 
 if [ -e "$2/mach_kernel" ]; then
   label="$(count_next_label MacOSX)"
-  echo "$1:Mac OS X:$label:macosx"
+  result "$1:Mac OS X:$label:macosx"
   exit 0
 else
   exit 1

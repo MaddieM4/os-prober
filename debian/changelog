@@ -1,3 +1,10 @@
+os-prober (1.30) UNRELEASED; urgency=low
+
+  * Use result function in macosx prober, so that its output appears in
+    syslog.
+
+ -- Colin Watson <cjwatson@debian.org>  Wed, 17 Jun 2009 09:32:00 +0100
+
 os-prober (1.29) unstable; urgency=low
 
   [ Colin Watson ]
