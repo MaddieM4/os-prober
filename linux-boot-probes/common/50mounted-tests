@@ -19,7 +19,7 @@ for type in $(grep -v nodev /proc/filesystems); do
 		for test in /usr/lib/linux-boot-probes/mounted/*; do
 			if [ -f $test ] && [ -x $test ]; then
 				debug "running $test $partition $bootpart $tmpmnt $type"
-				if $test $partition $bootpart $tmpmnt $type; then
+				if $test "$partition" "$bootpart" "$tmpmnt" "$type"; then
 					debug "$test succeeded"
 					umount $tmpmnt/boot 2>/dev/null || true 	
 					if ! umount $tmpmnt; then

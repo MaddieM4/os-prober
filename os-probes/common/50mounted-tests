@@ -25,12 +25,12 @@ for type in $(grep -v nodev /proc/filesystems); do
 done
 
 for type in $types $delaytypes; do
-	if mount -o ro -t $type $partition $tmpmnt 2>/dev/null; then
+	if mount -o ro -t "$type" "$partition" "$tmpmnt" 2>/dev/null; then
 		debug "mounted as $type filesystem"
 		for test in /usr/lib/os-probes/mounted/*; do
 			debug "running subtest $test"
 			if [ -f $test ] && [ -x $test ]; then
-				if $test $partition $tmpmnt $type; then
+				if $test "$partition" "$tmpmnt" "$type"; then
 					debug "os found by subtest $test"
 					if ! umount $tmpmnt; then
 						warn "failed to umount $tmpmnt"

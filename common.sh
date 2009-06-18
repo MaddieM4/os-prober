@@ -104,7 +104,7 @@ linux_mount_boot () {
 	mounted=""
 	if [ -e "$tmpmnt/etc/fstab" ]; then
 		# Try to mount any /boot partition.
-		bootmnt=$(parsefstab < $tmpmnt/etc/fstab | grep " /boot ") || true
+		bootmnt=$(parsefstab < "$tmpmnt/etc/fstab" | grep " /boot ") || true
 		if [ -n "$bootmnt" ]; then
 			set -- $bootmnt
 			boottomnt=""
@@ -133,18 +133,18 @@ linux_mount_boot () {
 			elif echo "$1" | grep -q "LABEL="; then
 				debug "mounting boot partition by label for linux system on $partition: $1"
 				label=$(echo "$1" | cut -d = -f 2)
-				if LD_LIBRARY_PATH=$smart_ldlp $smart_mount -L "$label" -o ro $tmpmnt/boot -t "$3"; then
+				if LD_LIBRARY_PATH=$smart_ldlp $smart_mount -L "$label" -o ro "$tmpmnt/boot" -t "$3"; then
 					mounted=1
-					bootpart=$(mount | grep $tmpmnt/boot | cut -d " " -f 1)
+					bootpart=$(mount | grep "$tmpmnt/boot" | cut -d " " -f 1)
 				else
 					error "failed to mount by label"
 				fi
 			elif echo "$1" | grep -q "UUID="; then
 				debug "mounting boot partition by UUID for linux system on $partition: $1"
 				uuid=$(echo "$1" | cut -d = -f 2)
-				if LD_LIBRARY_PATH=$smart_ldlp $smart_mount -U "$uuid" -o ro $tmpmnt/boot -t "$3"; then
+				if LD_LIBRARY_PATH=$smart_ldlp $smart_mount -U "$uuid" -o ro "$tmpmnt/boot" -t "$3"; then
 					mounted=1
-					bootpart=$(mount | grep $tmpmnt/boot | cut -d " " -f 1)
+					bootpart=$(mount | grep "$tmpmnt/boot" | cut -d " " -f 1)
 				else
 					error "failed to mount by UUID"
 				fi
@@ -157,7 +157,7 @@ linux_mount_boot () {
 					debug "found boot partition $1 for linux system on $partition, but cannot map to existing device"
 				else
 					debug "found boot partition $bootpart for linux system on $partition"
-					if mount -o ro "$boottomnt" $tmpmnt/boot -t "$3"; then
+					if mount -o ro "$boottomnt" "$tmpmnt/boot" -t "$3"; then
 						mounted=1
 					else
 						error "failed to mount $boottomnt on $tmpmnt/boot"

@@ -2,6 +2,9 @@ os-prober (1.30) UNRELEASED; urgency=low
 
   * Use result function in macosx prober, so that its output appears in
     syslog.
+  * Quote arguments to tests, and in general quote mountpoints that were
+    fetched from mounted-maps. I've seen the odd log with errors due to
+    funny characters in mount points.
 
  -- Colin Watson <cjwatson@debian.org>  Wed, 17 Jun 2009 09:32:00 +0100
 

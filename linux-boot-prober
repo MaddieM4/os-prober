@@ -17,7 +17,7 @@ if ! grep -q "^$mapped " "$OS_PROBER_TMP/mounted-map"; then
 	for test in /usr/lib/linux-boot-probes/*; do
 		debug "running $test"
 		if [ -x $test ] && [ -f $test ]; then
-			if $test $partition; then
+			if $test "$partition"; then
 				debug "linux detected by $test"
 				break
 			fi
@@ -38,14 +38,14 @@ else
 		for test in /usr/lib/linux-boot-probes/mounted/*; do
 			if [ -f $test ] && [ -x $test ]; then
 				debug "running $test on mounted $partition"
-				if $test $partition $bootpart $mpoint $type; then
+				if $test "$partition" "$bootpart" "$mpoint" "$type"; then
 					debug "$test succeeded"
 					break
 				fi
 			fi
 		done
 		if [ "$bootmounted" = 1 ]; then
-			if ! umount $mpoint/boot; then
+			if ! umount "$mpoint/boot"; then
 				warn "failed to umount $mpoint/boot"
 			fi
 		fi
