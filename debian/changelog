@@ -1,10 +1,15 @@
 os-prober (1.30) UNRELEASED; urgency=low
 
+  [ Colin Watson ]
   * Use result function in macosx prober, so that its output appears in
     syslog.
   * Quote arguments to tests, and in general quote mountpoints that were
     fetched from mounted-maps. I've seen the odd log with errors due to
     funny characters in mount points.
+
+  [ Otavio Salvador ]
+  * When there're both grub-legacy and grub2 configuration files available
+    we ought to use the most recently changed. Closes: 534478
 
  -- Colin Watson <cjwatson@debian.org>  Wed, 17 Jun 2009 09:32:00 +0100
 

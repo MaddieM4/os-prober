@@ -78,7 +78,7 @@ parse_grub_menu () {
 	entry_result
 }
 
-if [ -e "$mpoint/boot/grub/grub.cfg" ]; then
+if [ "$mpoint/boot/grub/grub.cfg" -nt "$mpoint/boot/grub/menu.lst" ]; then
 	debug "parsing grub.cfg"
 	parse_grub_menu "$mpoint" "$partition" "$bootpart" < "$mpoint/boot/grub/grub.cfg"
 fi
