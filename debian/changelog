@@ -1,4 +1,4 @@
-os-prober (1.30) UNRELEASED; urgency=low
+os-prober (1.30) unstable; urgency=low
 
   [ Colin Watson ]
   * Use result function in macosx prober, so that its output appears in
@@ -11,7 +11,7 @@ os-prober (1.30) UNRELEASED; urgency=low
   * When there're both grub-legacy and grub2 configuration files available
     we ought to use the most recently changed. Closes: 534478
 
- -- Colin Watson <cjwatson@debian.org>  Wed, 17 Jun 2009 09:32:00 +0100
+ -- Otavio Salvador <otavio@ossystems.com.br>  Tue, 21 Jul 2009 12:22:09 -0300
 
 os-prober (1.29) unstable; urgency=low
 
