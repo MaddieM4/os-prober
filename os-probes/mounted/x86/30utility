@@ -20,6 +20,9 @@ if item_in_dir -q dellbio.bin "$2" && \
    (item_in_dir -q delldiag.exe "$2" || item_in_dir -q delldiag.com "$2"); then
 	long="Dell Utility Partition"
 	short=DellUtility
+elif item_in_dir -q f11.sys "$2"; then
+	long="Acronis Secure Zone"
+	short=AcroneZone
 else
 	exit 1
 fi

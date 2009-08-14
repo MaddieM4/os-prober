@@ -1,6 +1,7 @@
 os-prober (1.31) UNRELEASED; urgency=low
 
   * Upgrade to debhelper v7.
+  * Detect Acronis Secure Zone (thanks, Alexey Fisher; LP: #354334).
 
  -- Colin Watson <cjwatson@debian.org>  Fri, 14 Aug 2009 23:38:50 +0100
 
