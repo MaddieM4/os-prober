@@ -3,7 +3,7 @@ Section: debian-installer
 Priority: optional
 Maintainer: Debian Install System Team <debian-boot@lists.debian.org>
 Uploaders: Joey Hess <joeyh@debian.org>, Colin Watson <cjwatson@debian.org>
-Build-Depends: debhelper (>= 4.2)
+Build-Depends: debhelper (>= 7.0.50)
 Standards-Version: 3.6.1.0
 Vcs-Svn: svn://svn.debian.org/d-i/trunk/packages/os-prober
 
@@ -21,6 +21,7 @@ Package: os-prober
 Architecture: any
 Section: utils
 Priority: extra
+Depends: ${misc:Depends}
 Description: utility to detect other OSes on a set of drives
  This package detects other OSes available on a system and outputs the
  results in a generic machine-readable format.

@@ -1,0 +1,2 @@
+os-prober linux-boot-prober usr/bin
+common.sh usr/share/os-prober
