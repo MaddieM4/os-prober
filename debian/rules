@@ -19,4 +19,7 @@ override_dh_install:
 			dh_install $$probes/$(ARCH)/* usr/lib/$$probes; \
 		fi; \
 	done
+ifeq ($(ARCH),x86)
+	dh_install os-probes/mounted/powerpc/20macosx usr/lib/os-probes/mounted
+endif
 	cp -a debian/os-prober-udeb/usr/lib debian/os-prober/usr/
