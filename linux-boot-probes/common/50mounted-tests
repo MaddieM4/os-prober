@@ -21,16 +21,20 @@ for type in $(grep -v nodev /proc/filesystems); do
 				debug "running $test $partition $bootpart $tmpmnt $type"
 				if $test "$partition" "$bootpart" "$tmpmnt" "$type"; then
 					debug "$test succeeded"
-					repeat_umount $tmpmnt/boot 2>/dev/null || true 	
-					repeat_umount $tmpmnt
+					umount $tmpmnt/boot 2>/dev/null || true 	
+					if ! umount $tmpmnt; then
+						warn "failed to umount $tmpmnt"
+					fi
 					rmdir $tmpmnt || true
 					exit 0
 				fi
 			fi
 		done
 		
-		repeat_umount $tmpmnt/boot 2>/dev/null || true 	
-		repeat_umount $tmpmnt
+		umount $tmpmnt/boot 2>/dev/null || true 	
+		if ! umount $tmpmnt; then
+			warn "failed to umount $tmpmnt"
+		fi
 
 		break
 	fi

@@ -32,13 +32,17 @@ for type in $types $delaytypes; do
 			if [ -f $test ] && [ -x $test ]; then
 				if $test "$partition" "$tmpmnt" "$type"; then
 					debug "os found by subtest $test"
-					repeat_umount $tmpmnt
+					if ! umount $tmpmnt; then
+						warn "failed to umount $tmpmnt"
+					fi
 					rmdir $tmpmnt || true
 					exit 0
 				fi
 			fi
 		done
-		repeat_umount $tmpmnt
+		if ! umount $tmpmnt; then
+			warn "failed to umount $tmpmnt"
+		fi
 		break
 	fi
 done
