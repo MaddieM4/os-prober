@@ -1,3 +1,7 @@
+newns () {
+  [ "$OS_PROBER_NEWNS" ] || exec /usr/lib/os-prober/newns "$0" "$@"
+}
+
 require_tmpdir() {
   if [ -z "$OS_PROBER_TMP" ]; then
     if type mktemp >/dev/null 2>&1; then

@@ -1,2 +1,3 @@
 os-prober linux-boot-prober usr/bin
+newns usr/lib/os-prober
 common.sh usr/share/os-prober

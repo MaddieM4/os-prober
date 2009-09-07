@@ -3,6 +3,7 @@ set -e
 
 . /usr/share/os-prober/common.sh
 
+newns
 require_tmpdir
 
 log_output () {

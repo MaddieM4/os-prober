@@ -3,6 +3,7 @@
 
 set -e
 
+newns
 require_tmpdir
 
 grep "^/dev/" /proc/mounts | parse_proc_mounts >"$OS_PROBER_TMP/mounted-map" || true
