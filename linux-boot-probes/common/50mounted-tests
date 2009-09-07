@@ -10,7 +10,16 @@ if [ ! -d $tmpmnt ]; then
 	mkdir $tmpmnt
 fi
 
-for type in $(grep -v nodev /proc/filesystems); do
+types="$(fs_type "$partition")"
+if [ "$types" = ntfs ]; then
+	if type ntfs-3g >/dev/null 2>&1; then
+		types='ntfs-3g ntfs'
+	fi
+elif [ -z "$types" ]; then
+	types="$(grep -v nodev /proc/filesystems)"
+fi
+
+for type in $types; do
 	if mount -o ro -t $type $partition $tmpmnt 2>/dev/null; then
 		mountboot="$(linux_mount_boot "$partition" "$tmpmnt")"
 		bootpart="${mountboot%% *}"

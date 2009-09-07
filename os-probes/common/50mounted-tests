@@ -10,19 +10,26 @@ if [ ! -d $tmpmnt ]; then
 	mkdir $tmpmnt
 fi
 
-for type in $(grep -v nodev /proc/filesystems); do
-	# hfsplus filesystems are mountable as hfs. Try hfs last so that we
-	# can tell the difference.
-	if [ "$type" = hfs ]; then
-		delaytypes="${delaytypes:+$delaytypes }$type"
-	elif [ "$type" = fuseblk ]; then
-		if type ntfs-3g >/dev/null 2>&1; then
-			types="${types:+$types }ntfs-3g"
-		fi
-	else
-		types="${types:+$types }$type"
+types="$(fs_type "$partition")"
+if [ "$types" = ntfs ]; then
+	if type ntfs-3g >/dev/null 2>&1; then
+		types='ntfs-3g ntfs'
 	fi
-done
+elif [ -z "$types" ]; then
+	for type in $(grep -v nodev /proc/filesystems); do
+		# hfsplus filesystems are mountable as hfs. Try hfs last so
+		# that we can tell the difference.
+		if [ "$type" = hfs ]; then
+			delaytypes="${delaytypes:+$delaytypes }$type"
+		elif [ "$type" = fuseblk ]; then
+			if type ntfs-3g >/dev/null 2>&1; then
+				types="${types:+$types }ntfs-3g"
+			fi
+		else
+			types="${types:+$types }$type"
+		fi
+	done
+fi
 
 for type in $types $delaytypes; do
 	if mount -o ro -t "$type" "$partition" "$tmpmnt" 2>/dev/null; then

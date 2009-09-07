@@ -79,6 +79,17 @@ item_in_dir () {
 	ls -1 "$2" | grep $q -i "^$1$"
 }
 
+# We can't always tell the filesystem type up front, but if we have the
+# information then we should use it. Note that we can't use block-attr here
+# as it's only available in udebs.
+fs_type () {
+	if (export PATH="/lib/udev:$PATH"; type vol_id) >/dev/null 2>&1; then
+		PATH="/lib/udev:$PATH" vol_id --type "$1" 2>/dev/null
+	elif type blkid >/dev/null 2>&1; then
+		blkid -o value -s TYPE "$1" 2>/dev/null
+	fi
+}
+
 parse_proc_mounts () {
 	while read line; do
 		set -- $line
