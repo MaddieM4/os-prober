@@ -8,6 +8,7 @@ os-prober (1.31) UNRELEASED; urgency=low
   * Use vol_id/blkid output if possible to avoid having to try every
     possible filesystem for every partition. This isn't actually very much
     faster for me, but it certainly cuts down on syslog noise.
+  * Skip extended and swap partitions (closes: #511518).
 
  -- Colin Watson <cjwatson@debian.org>  Fri, 14 Aug 2009 23:38:50 +0100
 

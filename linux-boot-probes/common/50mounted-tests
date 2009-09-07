@@ -10,8 +10,14 @@ if [ ! -d $tmpmnt ]; then
 	mkdir $tmpmnt
 fi
 
-types="$(fs_type "$partition")"
-if [ "$types" = ntfs ]; then
+types="$(fs_type "$partition")" || types=NOT-DETECTED
+if [ "$types" = NOT-DETECTED ]; then
+	debug "$1 type not recognised; skipping"
+	exit 0
+elif [ "$types" = swap ]; then
+	debug "$1 is a swap partition; skipping"
+	exit 0
+elif [ "$types" = ntfs ]; then
 	if type ntfs-3g >/dev/null 2>&1; then
 		types='ntfs-3g ntfs'
 	fi

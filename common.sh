@@ -87,6 +87,8 @@ fs_type () {
 		PATH="/lib/udev:$PATH" vol_id --type "$1" 2>/dev/null
 	elif type blkid >/dev/null 2>&1; then
 		blkid -o value -s TYPE "$1" 2>/dev/null
+	else
+		return 0
 	fi
 }
 
