@@ -46,9 +46,7 @@ else
 			fi
 		done
 		if [ "$bootmounted" = 1 ]; then
-			if ! umount "$mpoint/boot"; then
-				warn "failed to umount $mpoint/boot"
-			fi
+			repeat_umount "$mpoint/boot" || true
 		fi
 	fi
 fi

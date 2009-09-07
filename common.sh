@@ -179,3 +179,20 @@ linux_mount_boot () {
 
 	echo "$bootpart $mounted"
 }
+# Unmount a file system. If this fails, wait for a bit and try again, to
+# cope with crazy automounting systems opportunistically opening it.
+repeat_umount() {
+	local i=3
+	while [ "$i" != 0 ]; do
+		if umount "$1"; then
+			break
+		fi
+		i="$(($i - 1))"
+		if [ "$i" = 0 ]; then
+			warn "failed to unmount $1; things may go wrong"
+		else
+			warn "failed to unmount $1; trying again ($i)"
+			sleep 5
+		fi
+	done
+}

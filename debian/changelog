@@ -4,7 +4,7 @@ os-prober (1.31) UNRELEASED; urgency=low
   * Detect Acronis Secure Zone (thanks, Alexey Fisher; LP: #354334).
   * Run os-prober and linux-boot-prober in a private mount namespace if
     possible, to avoid desktop environments picking up the mounts. Thanks to
-    Gabor Gombas for the suggestion.
+    Gabor Gombas for the suggestion. (Closes: #476184)
 
  -- Colin Watson <cjwatson@debian.org>  Fri, 14 Aug 2009 23:38:50 +0100
 
