@@ -1,3 +1,10 @@
+os-prober (1.32) UNRELEASED; urgency=low
+
+  * Pass arguments properly to newns (thanks, Roger E Critchlow Jr; LP:
+    #426061).
+
+ -- Colin Watson <cjwatson@debian.org>  Tue, 08 Sep 2009 12:27:45 +0100
+
 os-prober (1.31) unstable; urgency=low
 
   * Upgrade to debhelper v7.
