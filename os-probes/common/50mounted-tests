@@ -17,11 +17,19 @@ if [ "$types" = NOT-DETECTED ]; then
 elif [ "$types" = swap ]; then
 	debug "$1 is a swap partition; skipping"
 	exit 0
+elif [ "$types" = crypto_LUKS ]; then
+	debug "$1 is a LUKS partition; skipping"
+	exit 0
 elif [ "$types" = ntfs ]; then
 	if type ntfs-3g >/dev/null 2>&1; then
 		types='ntfs-3g ntfs'
 	fi
 elif [ -z "$types" ]; then
+	if type cryptsetup >/dev/null 2>&1 && \
+	   cryptsetup luksDump "$partition" >/dev/null 2>&1; then
+		debug "$1 is a LUKS partition; skipping"
+		exit 0
+	fi
 	for type in $(grep -v nodev /proc/filesystems); do
 		# hfsplus filesystems are mountable as hfs. Try hfs last so
 		# that we can tell the difference.
