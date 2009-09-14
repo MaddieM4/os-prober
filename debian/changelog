@@ -1,3 +1,10 @@
+os-prober (1.33) UNRELEASED; urgency=low
+
+  * Distinguish Windows 7, based on a patch from "mattduckman"
+    (LP: #393565).
+
+ -- Colin Watson <cjwatson@debian.org>  Mon, 14 Sep 2009 12:12:12 +0100
+
 os-prober (1.32) unstable; urgency=low
 
   * Pass arguments properly to newns (thanks, Roger E Critchlow Jr; LP:
