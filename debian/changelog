@@ -1,11 +1,11 @@
-os-prober (1.33) UNRELEASED; urgency=low
+os-prober (1.33) unstable; urgency=low
 
   * Distinguish Windows 7, based on a patch from "mattduckman"
     (LP: #393565).
   * Don't try to mount LUKS partitions (thanks, Chow Loong Jin and Soren
     Hansen; closes: #546546, LP: #428785).
 
- -- Colin Watson <cjwatson@debian.org>  Mon, 14 Sep 2009 12:12:12 +0100
+ -- Colin Watson <cjwatson@debian.org>  Tue, 15 Sep 2009 14:02:45 +0100
 
 os-prober (1.32) unstable; urgency=low
 
