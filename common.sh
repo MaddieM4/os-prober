@@ -128,15 +128,16 @@ linux_mount_boot () {
 			# This is an awful hack and isn't guaranteed to
 			# work, but is the best we can do until busybox
 			# mount supports -L/-U.
-			if [ -x "$tmpmnt/bin/mount" ]; then
-				smart_ldlp="$tmpmnt/lib"
-				smart_mount="$tmpmnt/bin/mount"
-			elif [ -x /target/bin/mount ]; then
-				smart_ldlp=/target/lib
-				smart_mount=/target/bin/mount
-			else
-				smart_ldlp=
-				smart_mount=mount
+			smart_ldlp=
+			smart_mount=mount
+			if mount --help 2>&1 | head -n1 | grep -iq busybox; then
+				if [ -x "$tmpmnt/bin/mount" ]; then
+					smart_ldlp="$tmpmnt/lib"
+					smart_mount="$tmpmnt/bin/mount"
+				elif [ -x /target/bin/mount ]; then
+					smart_ldlp=/target/lib
+					smart_mount=/target/bin/mount
+				fi
 			fi
 			if [ -e "$1" ]; then
 				bootpart="$1"

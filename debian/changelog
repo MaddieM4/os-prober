@@ -1,3 +1,12 @@
+os-prober (1.34) UNRELEASED; urgency=low
+
+  * Only look for a smart version of mount if we're using busybox mount. In
+    a normal system, mount probably already handles labels and UUIDs, and
+    using mount from another filesystem is risky enough that it's worth
+    avoiding if possible.
+
+ -- Colin Watson <cjwatson@debian.org>  Thu, 17 Sep 2009 21:23:35 +0100
+
 os-prober (1.33) unstable; urgency=low
 
   * Distinguish Windows 7, based on a patch from "mattduckman"
