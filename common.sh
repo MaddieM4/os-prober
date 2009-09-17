@@ -40,8 +40,18 @@ count_next_label() {
   echo "${_labelprefix}${_cfor}"
 }
 
+progname=
+cache_progname() {
+  case $progname in
+    '')
+      progname="$(basename $0)"
+      ;;
+  esac
+}
+
 log() {
-  logger -t "$(basename $0)" "$@"
+  cache_progname
+  logger -t "$progname" "$@"
 }
 
 error() {
