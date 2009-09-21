@@ -16,6 +16,9 @@ os-prober (1.34) UNRELEASED; urgency=low
   * Try to map LABEL= and UUID= ourselves in linux_mount_boot rather than
     relying on mount to do it, to further reduce the chance that we need to
     use mount from another filesystem.
+  * If the filesystem identified by linux-boot-prober as /boot is already
+    mounted somewhere else, then bind-mount it rather than trying to mount
+    it again.
 
  -- Colin Watson <cjwatson@debian.org>  Thu, 17 Sep 2009 21:23:35 +0100
 

@@ -178,7 +178,21 @@ linux_mount_boot () {
 					smart_mount=/target/bin/mount
 				fi
 			fi
-			if [ -e "$1" ]; then
+			if grep -q "^$1 " "$OS_PROBER_TMP/mounted-map"; then
+				bindfrom="$(grep "^$1 " "$OS_PROBER_TMP/mounted-map" | head -n1 | cut -d " " -f 2)"
+				bindfrom="$(unescape_mount "$bindfrom")"
+				if [ "$bindfrom" != "$tmpmnt/boot" ]; then
+					if mount --bind "$bindfrom" "$tmpmnt/boot"; then
+						mounted=1
+						bootpart="$1"
+					else
+						debug "failed to bind-mount $bindfrom onto $tmpmnt/boot"
+					fi
+				fi
+			fi
+			if [ "$mounted" ]; then
+				:
+			elif [ -e "$1" ]; then
 				bootpart="$1"
 				boottomnt="$1"
 			elif [ -e "$tmpmnt/$1" ]; then
