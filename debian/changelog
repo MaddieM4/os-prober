@@ -1,4 +1,4 @@
-os-prober (1.34) UNRELEASED; urgency=low
+os-prober (1.34) unstable; urgency=low
 
   * Only look for a smart version of mount if we're using busybox mount. In
     a normal system, mount probably already handles labels and UUIDs, and
@@ -20,7 +20,7 @@ os-prober (1.34) UNRELEASED; urgency=low
     mounted somewhere else, then bind-mount it rather than trying to mount
     it again.
 
- -- Colin Watson <cjwatson@debian.org>  Thu, 17 Sep 2009 21:23:35 +0100
+ -- Colin Watson <cjwatson@debian.org>  Mon, 21 Sep 2009 14:55:23 +0100
 
 os-prober (1.33) unstable; urgency=low
 
