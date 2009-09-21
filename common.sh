@@ -140,6 +140,30 @@ linux_mount_boot () {
 		if [ -n "$bootmnt" ]; then
 			set -- $bootmnt
 			boottomnt=""
+
+			# Try to map labels and UUIDs ourselves if possible,
+			# so that we can check whether they're already
+			# mounted somewhere else.
+			if echo "$1" | grep -q "LABEL="; then
+				label="$(echo "$1" | cut -d = -f 2)"
+				if [ -h "/dev/disk/by-label/$label" ]; then
+					shift
+					set -- "$(readlink -f "/dev/disk/by-label/$label")" "$@"
+					debug "mapped LABEL=$label to $1"
+				fi
+			fi
+			if echo "$1" | grep -q "UUID="; then
+				uuid="$(echo "$1" | cut -d = -f 2)"
+				if [ -h "/dev/disk/by-uuid/$uuid" ]; then
+					shift
+					set -- "$(readlink -f "/dev/disk/by-uuid/$uuid")" "$@"
+					debug "mapped UUID=$uuid to $1"
+				fi
+			fi
+			tmppart="$1"
+			shift
+			set -- "$(mapdevfs "$tmppart")" "$@"
+
 			# This is an awful hack and isn't guaranteed to
 			# work, but is the best we can do until busybox
 			# mount supports -L/-U.
