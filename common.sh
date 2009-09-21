@@ -103,24 +103,29 @@ fs_type () {
 }
 
 parse_proc_mounts () {
-	while read line; do
+	while read -r line; do
 		set -- $line
-		echo "$(mapdevfs $1) $2 $3"
+		printf '%s %s %s\n' "$(mapdevfs $1)" "$2" "$3"
 	done
 }
 
 parsefstab () {
-	while read line; do
+	while read -r line; do
 		case "$line" in
 			"#"*)
 				:	
 			;;
 			*)
 				set -- $line
-				echo $1 $2 $3
+				printf '%s %s %s\n' "$1" "$2" "$3"
 			;;
 		esac
 	done
+}
+
+unescape_mount () {
+	printf %s "$1" | \
+		sed 's/\\011/	/g; s/\\012/\n/g; s/\\040/ /g; s/\\134/\\/g'
 }
 
 linux_mount_boot () {

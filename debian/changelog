@@ -5,6 +5,8 @@ os-prober (1.34) UNRELEASED; urgency=low
     using mount from another filesystem is risky enough that it's worth
     avoiding if possible.
   * Memoise calls to 'basename $0' in log function.
+  * Handle escaped special characters in /etc/fstab and /proc/mounts
+    (LP: #433910).
 
  -- Colin Watson <cjwatson@debian.org>  Thu, 17 Sep 2009 21:23:35 +0100
 
