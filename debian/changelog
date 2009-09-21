@@ -7,6 +7,12 @@ os-prober (1.34) UNRELEASED; urgency=low
   * Memoise calls to 'basename $0' in log function.
   * Handle escaped special characters in /etc/fstab and /proc/mounts
     (LP: #433910).
+  * dash defines test's -nt operator differently from bash, as it's entitled
+    to do since this is an extension not defined in POSIX. If file1 exists
+    and file2 does not, bash returns true but dash returns false. Don't rely
+    on bash's behaviour when checking whether to use GRUB Legacy or GRUB 2
+    configuration files, otherwise we end up using neither when only one set
+    of configuration exists and /bin/sh is dash.
 
  -- Colin Watson <cjwatson@debian.org>  Thu, 17 Sep 2009 21:23:35 +0100
 
