@@ -1,3 +1,10 @@
+os-prober (1.35) UNRELEASED; urgency=low
+
+  * Set LC_ALL=C when grepping out accented characters from Windows
+    descriptions (LP: #438095).
+
+ -- Colin Watson <cjwatson@debian.org>  Mon, 05 Oct 2009 23:07:35 +0100
+
 os-prober (1.34) unstable; urgency=low
 
   * Only look for a smart version of mount if we're using busybox mount. In
