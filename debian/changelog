@@ -1,3 +1,9 @@
+os-prober (1.36) UNRELEASED; urgency=low
+
+  * Suppress tedious fd leak warnings from LVM tools.
+
+ -- Colin Watson <cjwatson@debian.org>  Mon, 19 Oct 2009 15:59:38 +0100
+
 os-prober (1.35) unstable; urgency=medium
 
   * Set LC_ALL=C when grepping out accented characters from Windows
