@@ -1,8 +1,12 @@
 os-prober (1.36) UNRELEASED; urgency=low
 
+  [ Colin Watson ]
   * Suppress tedious fd leak warnings from LVM tools.
 
- -- Colin Watson <cjwatson@debian.org>  Mon, 19 Oct 2009 15:59:38 +0100
+  [ Frans Pop ]
+  * Drop support for the discontinued lpia architecture.
+
+ -- Frans Pop <fjp@debian.org>  Fri, 27 Nov 2009 05:27:45 +0100
 
 os-prober (1.35) unstable; urgency=medium
 

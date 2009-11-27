@@ -6,7 +6,7 @@
 	dh $@
 
 ARCH=$(shell dpkg-architecture -qDEB_HOST_ARCH)
-ifneq (,$(findstring :$(ARCH):,:i386:amd64:lpia:))
+ifneq (,$(findstring :$(ARCH):,:i386:amd64:))
 ARCH=x86
 endif
 
