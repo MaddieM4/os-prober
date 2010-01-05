@@ -6,6 +6,10 @@ os-prober (1.36) UNRELEASED; urgency=low
   [ Frans Pop ]
   * Drop support for the discontinued lpia architecture.
 
+  [ Christian Perrier ]
+  * Properly quote variable in os-probes/mounted/x86. Thanks
+    to Fabian Greffrath for the patch. Closes: #563825
+
  -- Frans Pop <fjp@debian.org>  Fri, 27 Nov 2009 05:27:45 +0100
 
 os-prober (1.35) unstable; urgency=medium
