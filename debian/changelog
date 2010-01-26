@@ -10,6 +10,10 @@ os-prober (1.36) UNRELEASED; urgency=low
   * Properly quote variable in os-probes/mounted/x86. Thanks
     to Fabian Greffrath for the patch. Closes: #563825
 
+  [ Otavio Salvador ]
+  * Applied patch from Brad Jorsch <anomie@users.sourceforge.net> to
+    properly detect Windows' recovery partitions. Closes: #547382
+
  -- Frans Pop <fjp@debian.org>  Fri, 27 Nov 2009 05:27:45 +0100
 
 os-prober (1.35) unstable; urgency=medium

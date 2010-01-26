@@ -21,6 +21,8 @@ if item_in_dir -q bootmgr "$2" && boot="$(item_in_dir boot "$2")" &&
    bcd="$(item_in_dir bcd "$2/$boot")"; then
 	if grep -qs "W.i.n.d.o.w.s. .7" "$2/$boot/$bcd"; then
 		long="Windows 7 (loader)"
+	elif grep -qs "W.i.n.d.o.w.s. .R.e.c.o.v.e.r.y. .E.n.v.i.r.o.n.m.e.n.t" "$2/$boot/$bcd"; then
+		long="Windows Recovery Environment (loader)"
 	else
 		long="Windows Vista (loader)"
 	fi
