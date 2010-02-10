@@ -15,16 +15,16 @@ exitcode=1
 for kernpat in /vmlinuz /vmlinux /boot/vmlinuz /boot/vmlinux "/boot/vmlinuz*" \
 	        "/boot/vmlinux*" "/vmlinuz*" "/vmlinux*"; do
 	if echo "$kernpat" | grep -q boot/; then
-		kernbootpart=$bootpart
+		kernbootpart="$bootpart"
 	else
-		kernbootpart=$partition
+		kernbootpart="$partition"
 	fi
-	for kernfile in $(eval ls $mpoint$kernpat 2>/dev/null); do
+	for kernfile in $(eval ls "$mpoint$kernpat" 2>/dev/null); do
 		kernbasefile=$(echo "$kernfile" | sed "s!^$mpoint!!")
 		if [ -f "$kernfile" ] && [ ! -L "$kernfile" ]; then
 			initrdname=$(echo "$kernfile" | sed "s/vmlinu[zx]/initrd\*/")
 			foundinitrd=0
-			for initrd in $(eval ls $initrdname 2>/dev/null); do
+			for initrd in $(eval ls "$initrdname" 2>/dev/null); do
 				if [ -f "$initrd" ] && [ ! -L "$initrd" ]; then
 					initrd=$(echo "$initrd" | sed "s!^$mpoint!!")
 					result "$partition:$kernbootpart::$kernbasefile:$initrd:root=$mappedpartition"
@@ -39,4 +39,4 @@ for kernpat in /vmlinuz /vmlinux /boot/vmlinuz /boot/vmlinux "/boot/vmlinuz*" \
 		fi
 	done
 done
-exit $exitcode
+exit "$exitcode"
