@@ -8,7 +8,7 @@ dir="$2"
 type="$3"
 
 if [ -e "$dir/servers/exec" ] && [ -x "$dir/hurd/init" ]; then
-        label=$(count_next_label Hurd)
+        label="$(count_next_label Hurd)"
 	result "$partition:GNU/Hurd:$label:hurd"
 	exit 0
 else

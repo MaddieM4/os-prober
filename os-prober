@@ -16,9 +16,9 @@ log_output () {
 
 on_sataraid () {
 	type dmraid >/dev/null 2>&1 || return 1
-	local parent=${1%/*}
-	local device=/dev/${parent##*/}
-	if dmraid -r -c | grep -q $device; then
+	local parent="${1%/*}"
+	local device="/dev/${parent##*/}"
+	if dmraid -r -c | grep -q "$device"; then
 		return 0
 	fi
 	return 1
@@ -89,8 +89,8 @@ parse_proc_mdstat () {
 rm -f /var/lib/os-prober/labels
 
 for prog in /usr/lib/os-probes/init/*; do
-	if [ -x $prog ] && [ -f $prog ]; then
-		$prog || true
+	if [ -x "$prog" ] && [ -f "$prog" ]; then
+		"$prog" || true
 	fi
 done
 
@@ -103,7 +103,7 @@ if [ -f /proc/mdstat ] ; then
 fi
 
 for partition in $(partitions); do
-	if ! mapped=$(mapdevfs $partition); then
+	if ! mapped="$(mapdevfs $partition)"; then
 		log "Device '$partition' does not exist; skipping"
 		continue
 	fi
@@ -116,9 +116,9 @@ for partition in $(partitions); do
 
 	if ! grep -q "^$mapped " "$OS_PROBER_TMP/mounted-map" ; then
 		for test in /usr/lib/os-probes/*; do
-			if [ -f $test ] && [ -x $test ]; then
+			if [ -f "$test" ] && [ -x "$test" ]; then
 				debug "running $test on $partition"
-				if $test "$partition"; then
+				if "$test" "$partition"; then
 					debug "os detected by $test"
 			   		break
 				fi
@@ -130,9 +130,9 @@ for partition in $(partitions); do
 		if [ "$mpoint" != "/target/boot" ] && [ "$mpoint" != "/target" ] && [ "$mpoint" != "/" ]; then
 			type=$(grep "^$mapped " "$OS_PROBER_TMP/mounted-map" | head -n1 | cut -d " " -f 3)
 			for test in /usr/lib/os-probes/mounted/*; do
-				if [ -f $test ] && [ -x $test ]; then
+				if [ -f "$test" ] && [ -x "$test" ]; then
 					debug "running $test on mounted $partition"
-					if $test "$partition" "$mpoint" "$type"; then
+					if "$test" "$partition" "$mpoint" "$type"; then
 						debug "os detected by $test"
 						break
 					fi

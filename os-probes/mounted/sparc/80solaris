@@ -11,7 +11,7 @@ dir="$2"
 type="$3"
 
 if [ -f "$dir/etc/system" ] && [ -f "$dir/etc/vfstab" ]; then
-        label=$(count_next_label Solaris)
+        label="$(count_next_label Solaris)"
 	result "$partition:Solaris/SPARC:$label:chain"
 	exit 0
 else

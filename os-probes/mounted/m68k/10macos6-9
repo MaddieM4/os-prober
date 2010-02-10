@@ -4,9 +4,9 @@
 
 set -e
 
-partition=$1
-mpoint=$2
-fstype=$3
+partition="$1"
+mpoint="$2"
+fstype="$3"
 
 case "$fstype" in
   hfs) debug "Partition is HFS" ;;
@@ -14,7 +14,7 @@ case "$fstype" in
 esac
 
 if [ -e "$dir/System Folder/System" ]; then
-  label=$(count_next_label MacOS)
+  label="$(count_next_label MacOS)"
   result "${partition}:Macintosh System 6/7, OS 8/9:${label}:chain"
   exit 0
 else

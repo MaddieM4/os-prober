@@ -1,13 +1,13 @@
 #!/bin/sh
 # Sub-tests that require a mounted partition.
 set -e
-partition=$1
+partition="$1"
 
 . /usr/share/os-prober/common.sh
 
 tmpmnt=/var/lib/os-prober/mount
-if [ ! -d $tmpmnt ]; then
-	mkdir $tmpmnt
+if [ ! -d "$tmpmnt" ]; then
+	mkdir "$tmpmnt"
 fi
 
 types="$(fs_type "$partition")" || types=NOT-DETECTED
@@ -50,25 +50,25 @@ for type in $types $delaytypes; do
 		debug "mounted as $type filesystem"
 		for test in /usr/lib/os-probes/mounted/*; do
 			debug "running subtest $test"
-			if [ -f $test ] && [ -x $test ]; then
-				if $test "$partition" "$tmpmnt" "$type"; then
+			if [ -f "$test" ] && [ -x "$test" ]; then
+				if "$test" "$partition" "$tmpmnt" "$type"; then
 					debug "os found by subtest $test"
-					if ! umount $tmpmnt; then
+					if ! umount "$tmpmnt"; then
 						warn "failed to umount $tmpmnt"
 					fi
-					rmdir $tmpmnt || true
+					rmdir "$tmpmnt" || true
 					exit 0
 				fi
 			fi
 		done
-		if ! umount $tmpmnt; then
+		if ! umount "$tmpmnt"; then
 			warn "failed to umount $tmpmnt"
 		fi
 		break
 	fi
 done
 
-rmdir $tmpmnt || true
+rmdir "$tmpmnt" || true
 
 # No tests found anything.
 exit 1

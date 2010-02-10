@@ -63,7 +63,7 @@ parse_yaboot_conf () {
 	while read line; do
 		debug "parsing: $line"
 		set -- $line
-		case $1 in
+		case "$1" in
 			root)
 				rootdev="$(dequote "$2")"
 			;;

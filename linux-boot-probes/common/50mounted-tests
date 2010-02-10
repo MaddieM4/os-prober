@@ -3,11 +3,11 @@
 . /usr/share/os-prober/common.sh
 set -e
 
-partition=$1
+partition="$1"
 
 tmpmnt=/var/lib/os-prober/mount
-if [ ! -d $tmpmnt ]; then
-	mkdir $tmpmnt
+if [ ! -d "$tmpmnt" ]; then
+	mkdir "$tmpmnt"
 fi
 
 types="$(fs_type "$partition")" || types=NOT-DETECTED
@@ -34,28 +34,28 @@ elif [ -z "$types" ]; then
 fi
 
 for type in $types; do
-	if mount -o ro -t $type $partition $tmpmnt 2>/dev/null; then
+	if mount -o ro -t "$type" "$partition" "$tmpmnt" 2>/dev/null; then
 		mountboot="$(linux_mount_boot "$partition" "$tmpmnt")"
 		bootpart="${mountboot%% *}"
 		mounted="${mountboot#* }"
 		
 		for test in /usr/lib/linux-boot-probes/mounted/*; do
-			if [ -f $test ] && [ -x $test ]; then
+			if [ -f "$test" ] && [ -x "$test" ]; then
 				debug "running $test $partition $bootpart $tmpmnt $type"
 				if $test "$partition" "$bootpart" "$tmpmnt" "$type"; then
 					debug "$test succeeded"
-					umount $tmpmnt/boot 2>/dev/null || true 	
-					if ! umount $tmpmnt; then
+					umount "$tmpmnt/boot" 2>/dev/null || true 	
+					if ! umount "$tmpmnt"; then
 						warn "failed to umount $tmpmnt"
 					fi
-					rmdir $tmpmnt || true
+					rmdir "$tmpmnt" || true
 					exit 0
 				fi
 			fi
 		done
 		
-		umount $tmpmnt/boot 2>/dev/null || true 	
-		if ! umount $tmpmnt; then
+		umount "$tmpmnt/boot" 2>/dev/null || true 	
+		if ! umount "$tmpmnt"; then
 			warn "failed to umount $tmpmnt"
 		fi
 
@@ -63,7 +63,7 @@ for type in $types; do
 	fi
 done
 
-rmdir $tmpmnt || true
+rmdir "$tmpmnt" || true
 
 # No tests found anything.
 exit 1

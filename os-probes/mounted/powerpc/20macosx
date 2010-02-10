@@ -2,9 +2,9 @@
 # Detects Mac OS X. I don't yet know how Mac OS <= 9 fits into this.
 . /usr/share/os-prober/common.sh
 
-partition=$1
-mpoint=$2
-type=$3
+partition="$1"
+mpoint="$2"
+type="$3"
 
 debug() {
   logger -t macosx-prober "debug: $@"

@@ -36,7 +36,7 @@ recordstanza () {
 				if [ "$rootdev" ]; then
 					parameters="root=$rootdev $parameters"
 				fi
-				parameters=${parameters% }
+				parameters="${parameters% }"
 				result "$rootpart:$bootpart:$title:$kernel:$initrd:$parameters"
 				found_item=1
 			else
@@ -69,7 +69,7 @@ parse_silo_conf () {
 	while read line; do
 		debug "parsing: $line"
 		set -- $line
-		case $1 in
+		case "$1" in
 			root)
 				rootdev=$(dequote "$2")
 			;;

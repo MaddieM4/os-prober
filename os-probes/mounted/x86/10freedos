@@ -2,9 +2,9 @@
 
 . /usr/share/os-prober/common.sh
 
-partition=$1
-mpoint=$2
-type=$3
+partition="$1"
+mpoint="$2"
+type="$3"
 
 # Weed out stuff that doesn't apply to us
 case "$type" in
@@ -14,7 +14,7 @@ case "$type" in
 esac
 
 if [ -e "$2/kernel.sys" -a -e "$2/command.com" ]; then
-  label=$(count_next_label FreeDOS)
+  label="$(count_next_label FreeDOS)"
   result "$1:FreeDOS:$label:chain"
   exit 0
 else

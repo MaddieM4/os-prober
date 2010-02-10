@@ -14,7 +14,7 @@ require_tmpdir() {
 }
 
 count_for() {
-  _labelprefix=$1
+  _labelprefix="$1"
   _result=$(grep "^${_labelprefix} " /var/lib/os-prober/labels 2>/dev/null || true)
 
   if [ -z "$_result" ]; then
@@ -27,8 +27,8 @@ count_for() {
 count_next_label() {
   require_tmpdir
 
-  _labelprefix=$1
-  _cfor="$(count_for ${_labelprefix})"
+  _labelprefix="$1"
+  _cfor="$(count_for "${_labelprefix}")"
 
   if [ -z "$_cfor" ]; then
     echo "${_labelprefix} 1" >> /var/lib/os-prober/labels

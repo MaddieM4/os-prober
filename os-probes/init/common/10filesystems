@@ -20,11 +20,11 @@ if [ ! -e /var/lib/os-prober/modules ]; then
 	fi
 
 	for fs in $FILESYSTEMS; do
-		case $fs in
+		case "$fs" in
 			fs-*)
 				;;
 			*)
-				modprobe $fs 2>/dev/null | logger -t os-prober
+				modprobe "$fs" 2>/dev/null | logger -t os-prober
 				;;
 		esac
 	done
