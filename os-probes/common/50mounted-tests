@@ -5,11 +5,6 @@ partition="$1"
 
 . /usr/share/os-prober/common.sh
 
-tmpmnt=/var/lib/os-prober/mount
-if [ ! -d "$tmpmnt" ]; then
-	mkdir "$tmpmnt"
-fi
-
 types="$(fs_type "$partition")" || types=NOT-DETECTED
 if [ "$types" = NOT-DETECTED ]; then
 	debug "$1 type not recognised; skipping"
@@ -43,6 +38,11 @@ elif [ -z "$types" ]; then
 			types="${types:+$types }$type"
 		fi
 	done
+fi
+
+tmpmnt=/var/lib/os-prober/mount
+if [ ! -d "$tmpmnt" ]; then
+	mkdir "$tmpmnt"
 fi
 
 for type in $types $delaytypes; do

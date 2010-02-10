@@ -5,11 +5,6 @@ set -e
 
 partition="$1"
 
-tmpmnt=/var/lib/os-prober/mount
-if [ ! -d "$tmpmnt" ]; then
-	mkdir "$tmpmnt"
-fi
-
 types="$(fs_type "$partition")" || types=NOT-DETECTED
 if [ "$types" = NOT-DETECTED ]; then
 	debug "$1 type not recognised; skipping"
@@ -31,6 +26,11 @@ elif [ -z "$types" ]; then
 		exit 0
 	fi
 	types="$(grep -v nodev /proc/filesystems)"
+fi
+
+tmpmnt=/var/lib/os-prober/mount
+if [ ! -d "$tmpmnt" ]; then
+	mkdir "$tmpmnt"
 fi
 
 for type in $types; do
