@@ -170,10 +170,7 @@ linux_mount_boot () {
 			smart_ldlp=
 			smart_mount=mount
 			if mount --help 2>&1 | head -n1 | grep -iq busybox; then
-				if [ -x "$tmpmnt/bin/mount" ]; then
-					smart_ldlp="$tmpmnt/lib"
-					smart_mount="$tmpmnt/bin/mount"
-				elif [ -x /target/bin/mount ]; then
+				if [ -x /target/bin/mount ]; then
 					smart_ldlp=/target/lib
 					smart_mount=/target/bin/mount
 				fi
