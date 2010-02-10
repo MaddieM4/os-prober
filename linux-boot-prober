@@ -9,6 +9,12 @@ require_tmpdir
 grep "^/dev/" /proc/mounts | parse_proc_mounts >"$OS_PROBER_TMP/mounted-map" || true
 
 partition="$1"
+
+if [ -z "$partition" ]; then
+	echo "usage: linux-boot-prober partition" >&2
+	exit 1
+fi
+
 if ! mapped="$(mapdevfs "$partition")"; then
 	log "Device '$partition' does not exist; skipping"
 	continue
