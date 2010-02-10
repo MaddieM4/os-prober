@@ -41,7 +41,7 @@ parse_grub_menu () {
 			title)
 				entry_result
 				shift 1
-				title="$(echo $@ | sed 's/://g')"
+				title="$(echo "$@" | sed 's/://g')"
 				if echo "$title" | grep -q '(on /dev/[^)]*)$'; then
 					log "Skipping entry '$title':"
 					log "appears to be an automatic reference taken from another menu.lst"
@@ -52,7 +52,7 @@ parse_grub_menu () {
 				# Hack alert: sed off any (hdn,n) but
 				# assume the kernel is on the same
 				# partition.
-				kernel="$(echo $2 | sed 's/(.*)//')"
+				kernel="$(echo "$2" | sed 's/(.*)//')"
 				shift 2
 				parameters="$@"
 				# Systems with a separate /boot will not have

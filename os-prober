@@ -43,7 +43,7 @@ partitions () {
 		if type dmraid >/dev/null 2>&1 && \
 		   dmraid -s -c >/dev/null 2>&1; then
 			for raidset in $(dmraid -sa -c); do
-				for part in /dev/mapper/$raidset*[0-9]; do
+				for part in /dev/mapper/"$raidset"*[0-9]; do
 					echo "$part"
 				done
 			done
@@ -80,7 +80,7 @@ parse_proc_mdstat () {
 				continue
 			fi
 			raidpart="/dev/$dev"
-			echo "$(mapdevfs $raidpart)"
+			echo "$(mapdevfs "$raidpart")"
 		done
 	done
 }
@@ -103,7 +103,7 @@ if [ -f /proc/mdstat ] ; then
 fi
 
 for partition in $(partitions); do
-	if ! mapped="$(mapdevfs $partition)"; then
+	if ! mapped="$(mapdevfs "$partition")"; then
 		log "Device '$partition' does not exist; skipping"
 		continue
 	fi

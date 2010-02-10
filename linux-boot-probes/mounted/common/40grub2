@@ -42,7 +42,7 @@ parse_grub_menu () {
 				entry_result
 				shift 1
 				# The double-quoted string is the title.
-				title="$(echo $@ | sed 's/.*"\(.*\)".*/\1/' | sed 's/://g')"
+				title="$(echo "$@" | sed 's/.*"\(.*\)".*/\1/' | sed 's/://g')"
 				if echo "$title" | grep -q '(on /dev/[^)]*)$'; then
 					log "Skipping entry '$title':"
 					log "appears to be an automatic reference taken from another menu.lst"
@@ -53,7 +53,7 @@ parse_grub_menu () {
 				# Hack alert: sed off any (hdn,n) but
 				# assume the kernel is on the same
 				# partition.
-				kernel="$(echo $2 | sed 's/(.*)//')"
+				kernel="$(echo "$2" | sed 's/(.*)//')"
 				shift 2
 				parameters="$@"
 				# Systems with a separate /boot will not have
@@ -63,7 +63,7 @@ parse_grub_menu () {
 				fi
 			;;
 			initrd)
-				initrd="$(echo $2 | sed 's/(.*)//')"
+				initrd="$(echo "$2" | sed 's/(.*)//')"
 				# Initrd same.
 				if [ "$partition" != "$bootpart" ]; then
 					initrd="/boot$initrd"

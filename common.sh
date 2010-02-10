@@ -44,7 +44,7 @@ progname=
 cache_progname() {
   case $progname in
     '')
-      progname="$(basename $0)"
+      progname="$(basename "$0")"
       ;;
   esac
 }
@@ -105,7 +105,7 @@ fs_type () {
 parse_proc_mounts () {
 	while read -r line; do
 		set -- $line
-		printf '%s %s %s\n' "$(mapdevfs $1)" "$2" "$3"
+		printf '%s %s %s\n' "$(mapdevfs "$1")" "$2" "$3"
 	done
 }
 

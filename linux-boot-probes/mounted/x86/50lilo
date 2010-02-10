@@ -85,18 +85,18 @@ parse_lilo_conf () {
 			image)
 				recordstanza
 				# Dereference if symbolic link
-				kernel=$(readlink -f $(dequote "$2"))
+				kernel="$(readlink -f "$(dequote "$2")")"
 			;;
 			append)
 				addparams "$(dequote "${line#append=}")"
 			;;
 			initrd)
 				# Dereference if symbolic link
-				initrd=$(readlink -f $(dequote "$2"))
+				initrd="$(readlink -f "$(dequote "$2")")"
 				;;
 			label)
 				shift 1
-				title=$(dequote "$*" | sed -e 's/:/ /g')
+				title="$(dequote "$*" | sed -e 's/:/ /g')"
 			;;
 			other)
 				recordstanza

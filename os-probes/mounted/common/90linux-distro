@@ -16,93 +16,93 @@ type="$3"
 if ls "$dir"/lib/ld*.so* >/dev/null 2>/dev/null; then
 	if [ -e "$dir/etc/debian_version" ]; then
 		short="Debian"
-		long=$(printf "Debian GNU/Linux (%s)\n" "$(cat $dir/etc/debian_version)")
+		long="$(printf "Debian GNU/Linux (%s)\n" "$(cat "$dir/etc/debian_version")")"
 	# RPM derived distributions may also have a redhat-release or
 	# mandrake-release, so check their files first.
 	elif [ -e "$dir/etc/altlinux-release" ]; then
 		short="ALTLinux"
-		long=$(cat "$dir/etc/altlinux-release")
+		long="$(cat "$dir/etc/altlinux-release")"
 	elif [ -e "$dir/etc/magic-release" ]; then
 		short="Magic"
-		long=$(cat "$dir/etc/magic-release")
+		long="$(cat "$dir/etc/magic-release")"
 	elif [ -e "$dir/etc/blackPanther-release" ]; then
 		short="blackPanther"
-		long=$(cat "$dir/etc/blackPanther-release")
+		long="$(cat "$dir/etc/blackPanther-release")"
 	elif [ -e "$dir/etc/ark-release" ]; then
 		short="Ark"
-		long=$(cat "$dir/etc/ark-release")
+		long="$(cat "$dir/etc/ark-release")"
 	elif [ -e "$dir/etc/arch-release" ]; then
 		short="Arch"
-		long=$(cat "$dir/etc/arch-release")
+		long="$(cat "$dir/etc/arch-release")"
 	elif [ -e "$dir/etc/asplinux-release" ]; then
 		short="ASPLinux"
-		long=$(cat "$dir/etc/asplinux-release")
+		long="$(cat "$dir/etc/asplinux-release")"
 	elif [ -e "$dir/etc/lvr-release" ]; then
 		short="LvR"
-		long=$(cat "$dir/etc/lvr-release")
+		long="$(cat "$dir/etc/lvr-release")"
 	elif [ -e "$dir/etc/caos-release" ]; then
 		short="cAos"
-		long=$(cat "$dir/etc/caos-release")
+		long="$(cat "$dir/etc/caos-release")"
 	elif [ -e "$dir/etc/aurox-release" ]; then
 		short="Aurox"
-		long=$(cat "$dir/etc/aurox-release")
+		long="$(cat "$dir/etc/aurox-release")"
 	elif [ -e "$dir/etc/engarde-release" ]; then
 		short="EnGarde"
-		long=$(cat "$dir/etc/engarde-release")
+		long="$(cat "$dir/etc/engarde-release")"
 	elif [ -e "$dir/etc/vine-release" ]; then
 		short="Vine"
-		long=$(cat "$dir/etc/vine-release")
+		long="$(cat "$dir/etc/vine-release")"
 	elif [ -e "$dir/etc/whitebox-release" ]; then
 		short="WhiteBox"
-		long=$(cat "$dir/etc/whitebox-release")
+		long="$(cat "$dir/etc/whitebox-release")"
 	elif [ -e "$dir/etc/pld-release" ]; then
 		short="PLD"
-		long=$(cat "$dir/etc/pld-release")
+		long="$(cat "$dir/etc/pld-release")"
 	elif [ -e "$dir/etc/startcom-release" ]; then
 		short="StartCom"
-		long=$(cat "$dir/etc/startcom-release")
+		long="$(cat "$dir/etc/startcom-release")"
 	elif [ -e "$dir/etc/trustix-release" ]; then
 		short="Trustix"
-		long=$(cat "$dir/etc/trustix-release")
+		long="$(cat "$dir/etc/trustix-release")"
 	elif [ -e "$dir/etc/openna-release" ]; then
 		short="OpenNA"
-		long=$(cat "$dir/etc/openna-release")
+		long="$(cat "$dir/etc/openna-release")"
 	elif [ -e "$dir/etc/conectiva-release" ]; then
 		short="Conectiva"
-		long=$(cat "$dir/etc/conectiva-release")
+		long="$(cat "$dir/etc/conectiva-release")"
 	elif [ -e "$dir/etc/mandrake-release" ]; then
 		short="Mandrake"
-		long=$(cat "$dir/etc/mandrake-release")
+		long="$(cat "$dir/etc/mandrake-release")"
 	elif [ -e "$dir/etc/fedora-release" ]; then
 		short="Fedora"
-		long=$(cat "$dir/etc/fedora-release")
+		long="$(cat "$dir/etc/fedora-release")"
 	elif [ -e "$dir/etc/redhat-release" ]; then
 		short="RedHat"
-		long=$(cat "$dir/etc/redhat-release")
+		long="$(cat "$dir/etc/redhat-release")"
 	elif [ -e "$dir/etc/SuSE-release" ]; then
 		short="SuSE"
-		long=$(head -n 1 "$dir/etc/SuSE-release")
+		long="$(head -n 1 "$dir/etc/SuSE-release")"
 	elif [ -e "$dir/etc/gentoo-release" ]; then
 		short="Gentoo"
-		long=$(cat "$dir/etc/gentoo-release")
+		long="$(cat "$dir/etc/gentoo-release")"
 	elif [ -e "$dir/etc/cobalt-release" ]; then
 		short="Cobalt"
-		long=$(cat "$dir/etc/cobalt-release")
+		long="$(cat "$dir/etc/cobalt-release")"
 	elif [ -e "$dir/etc/yellowdog-release" ]; then
 		short="YellowDog"
-		long=$(cat "$dir/etc/yellowdog-release")
+		long="$(cat "$dir/etc/yellowdog-release")"
 	elif [ -e "$dir/etc/turbolinux-release" ]; then
 		short="Turbolinux"
-		long=$(cat "$dir/etc/turbolinux-release")
+		long="$(cat "$dir/etc/turbolinux-release")"
 	elif [ -e "$dir/etc/pardus-release" ]; then
 		short="Pardus"
-		long=$(cat "$dir/etc/pardus-release")
+		long="$(cat "$dir/etc/pardus-release")"
 	elif [ -e "$dir/etc/kanotix-version" ]; then
 		short="Kanotix"
-		long=$(cat "$dir/etc/kanotix-version")
+		long="$(cat "$dir/etc/kanotix-version")"
 	elif [ -e "$dir/etc/slackware-version" ]; then
 		short="Slackware"
-		long=$(printf "Slackware Linux (%s)\n" "$(cat $dir/etc/slackware-version)")
+		long="$(printf "Slackware Linux (%s)\n" "$(cat "$dir/etc/slackware-version")")"
 	elif [ -e "$dir/sbin/pkgtool" ]; then
 		short="Slackware"
 		long="Slackware Linux"
@@ -111,10 +111,10 @@ if ls "$dir"/lib/ld*.so* >/dev/null 2>/dev/null; then
 		long="Caldera OpenLinux"
 	elif [ -e "$dir/etc/frugalware-release" ]; then
 		short="Frugalware Linux"
-		long=$(cat "$dir/etc/frugalware-release")
+		long="$(cat "$dir/etc/frugalware-release")"
 	elif [ -e "$dir/etc/kdemar-release" ]; then
 		short="K-DEMar"
-		long=$(printf "K-DEMar GNU/Linux (%s)\n" "$(cat $dir/etc/kdemar-release)")
+		long="$(printf "K-DEMar GNU/Linux (%s)\n" "$(cat "$dir/etc/kdemar-release")")"
 	else
 		short="Linux"
 		long="unknown Linux distribution"

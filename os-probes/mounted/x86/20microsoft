@@ -35,13 +35,13 @@ elif item_in_dir -q ntldr "$2" && item_in_dir -q ntdetect.com "$2"; then
 	if [ -n "$ini" ]; then
 		multicount="$(grep -e "^multi" "$2/$ini" | wc -l)"
 		scsicount="$(grep -e "^scsi" "$2/$ini" | wc -l)"
-		msoscount="$(expr ${multicount} + ${scsicount})"
+		msoscount="$(expr "${multicount}" + "${scsicount}")"
 		if [ "$msoscount" -eq 1 ]; then
 			# We need to remove a Carriage Return at the end of
 			# the line...
 			defaultmspart="$(grep -e "^default=" "$2/$ini" | cut -d '=' -f2 | tr -d '\r')"
 			# Escape any backslashes in defaultmspart
-			grepexp="^$(echo $defaultmspart | sed -e 's/\\/\\\\/')="
+			grepexp="^$(echo "$defaultmspart" | sed -e 's/\\/\\\\/')="
 			# Colons not allowed; replace by spaces
 			# Accented characters (non UTF-8) cause debconf to
 			# hang, so we fall back to the default if the name
@@ -61,7 +61,7 @@ elif [ -d "$(item_in_dir dos "$2")" ]; then
 	short=MS-DOS
 # 95/98/Me
 elif item_in_dir -q windows "$2" &&
-     item_in_dir -q win.com $2/$(item_in_dir windows "$2"); then
+     item_in_dir -q win.com "$2"/"$(item_in_dir windows "$2")"; then
 	long="Windows 95/98/Me"
 	short=Windows9xMe
 else
