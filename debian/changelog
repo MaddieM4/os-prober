@@ -1,4 +1,4 @@
-os-prober (1.36) UNRELEASED; urgency=low
+os-prober (1.36) unstable; urgency=low
 
   [ Colin Watson ]
   * Suppress tedious fd leak warnings from LVM tools.
@@ -23,7 +23,7 @@ os-prober (1.36) UNRELEASED; urgency=low
   * Avoid leaving a temporary mountpoint behind when exiting
     in some exceptional conditions. Closes: #569235
 
- -- Frans Pop <fjp@debian.org>  Fri, 27 Nov 2009 05:27:45 +0100
+ -- Otavio Salvador <otavio@debian.org>  Tue, 23 Feb 2010 15:50:17 -0300
 
 os-prober (1.35) unstable; urgency=medium
 
