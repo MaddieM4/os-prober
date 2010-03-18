@@ -1,3 +1,10 @@
+os-prober (1.37) UNRELEASED; urgency=low
+
+  * 90linux-distro: also allow for lib32 and lib64 directories when looking
+    for ld*.so*. With thanks to Maximilian Gerhard. Closes: #574407.
+
+ -- Frans Pop <fjp@debian.org>  Thu, 18 Mar 2010 01:44:04 +0100
+
 os-prober (1.36) unstable; urgency=low
 
   [ Colin Watson ]

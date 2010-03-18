@@ -13,7 +13,7 @@ type="$3"
 # better. Make sure this test has a high number so that more accurate tests
 # can come first.
 # TODO: look for ld-linux.so on arches that have it
-if ls "$dir"/lib/ld*.so* >/dev/null 2>/dev/null; then
+if ls "$dir"/lib*/ld*.so* >/dev/null 2>/dev/null; then
 	if [ -e "$dir/etc/debian_version" ]; then
 		short="Debian"
 		long="$(printf "Debian GNU/Linux (%s)\n" "$(cat "$dir/etc/debian_version")")"
