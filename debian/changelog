@@ -7,6 +7,10 @@ os-prober (1.37) UNRELEASED; urgency=low
   [ Colin Watson ]
   * Detect Windows Server 2008 and Windows Server 2008 R2, thanks to
     Thorsten. LP: #544117
+  * Detect Arch Linux initrds: http://wiki.archlinux.org/index.php/GRUB2 and
+    http://repos.archlinux.org/wsvn/packages/grub2/trunk/grubconfig.archlinux.patch
+    indicate that /boot/vmlinuz26 is associated with /boot/kernel26.img.
+    LP: #518826
 
  -- Frans Pop <fjp@debian.org>  Thu, 18 Mar 2010 01:44:04 +0100
 
