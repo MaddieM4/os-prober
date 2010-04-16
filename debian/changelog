@@ -1,3 +1,11 @@
+os-prober (1.38) UNRELEASED; urgency=low
+
+  * Handle single-quoted items in grub.cfg; this has been part of the syntax
+    for a while, but recently started being used upstream to avoid another
+    bug.
+
+ -- Colin Watson <cjwatson@debian.org>  Fri, 16 Apr 2010 12:10:26 +0100
+
 os-prober (1.37) unstable; urgency=low
 
   [ Frans Pop ]

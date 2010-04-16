@@ -42,8 +42,17 @@ parse_grub_menu () {
 				entry_result
 				shift 1
 				# The double-quoted string is the title.
-				title="$(echo "$@" | sed 's/.*"\(.*\)".*/\1/' | sed 's/://g')"
-				if echo "$title" | grep -q '(on /dev/[^)]*)$'; then
+				title="$(echo "$@" | sed -n 's/[^"]*"\(.*\)".*/\1/p' | sed 's/://g')"
+				if [ -z "$title" ]; then
+					# ... or single-quoted?  The
+					# unescaping here is odd because the
+					# 'set' above has already eaten
+					# backslash-escapes.
+					title="$(echo "$@" | sed -n "s/[^']*'\(.*\)'.*/\1/p" | sed "s/'''/'/; s/://g")"
+				fi
+				if [ -z "$title" ]; then
+					ignore_item=1
+				elif echo "$title" | grep -q '(on /dev/[^)]*)$'; then
 					log "Skipping entry '$title':"
 					log "appears to be an automatic reference taken from another menu.lst"
 					ignore_item=1
