@@ -1,3 +1,11 @@
+os-prober (1.39) UNRELEASED; urgency=low
+
+  * Fix FreeDOS test to use case-insensative filename lookup
+    as was already done for all other DOS/Windows tests. Closes: #582257
+    (Thanks, Harald Dunkel)
+
+ -- Joey Hess <joeyh@debian.org>  Wed, 19 May 2010 19:20:04 -0400
+
 os-prober (1.38) unstable; urgency=low
 
   * Handle single-quoted items in grub.cfg; this has been part of the syntax

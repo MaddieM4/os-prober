@@ -13,7 +13,7 @@ case "$type" in
 	*) debug "$1 is not a FAT partition: exiting"; exit 1 ;;
 esac
 
-if [ -e "$2/kernel.sys" -a -e "$2/command.com" ]; then
+if item_in_dir -q kernel.sys "$2" && item_in_dir -q command.com "$2"; then
 	label="$(count_next_label FreeDOS)"
 	result "$1:FreeDOS:$label:chain"
 	exit 0
