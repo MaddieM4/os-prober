@@ -1,8 +1,13 @@
 os-prober (1.39) UNRELEASED; urgency=low
 
+  [ Joey Hess ]
   * Fix FreeDOS test to use case-insensative filename lookup
     as was already done for all other DOS/Windows tests. Closes: #582257
     (Thanks, Harald Dunkel)
+
+  [ Colin Watson ]
+  * Handle Dracut-generated initramfs names in linux-boot-prober fallback
+    test.
 
  -- Joey Hess <joeyh@debian.org>  Wed, 19 May 2010 19:20:04 -0400
 

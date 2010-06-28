@@ -28,8 +28,10 @@ for kernpat in /vmlinuz /vmlinux /boot/vmlinuz /boot/vmlinux "/boot/vmlinuz*" \
 			# systems, since kernel.img could conceivably be a
 			# kernel itself.
 			initrdname2=$(echo "$kernfile" | sed -n 's/vmlinu[zx]\([0-9][0-9]*\)/kernel\1/p' | sed 's/$/.img/')
+			# Dracut initramfses are named differently again.
+			initrdname3=$(echo "$kernfile" | sed "s/vmlinu[zx]/initramfs\*/")
 			foundinitrd=0
-			for initrd in $(eval ls "$initrdname" "$initrdname2" 2>/dev/null); do
+			for initrd in $(eval ls "$initrdname" "$initrdname2" "$initrdname3" 2>/dev/null); do
 				if [ -f "$initrd" ] && [ ! -L "$initrd" ]; then
 					initrd=$(echo "$initrd" | sed "s!^$mpoint!!")
 					result "$partition:$kernbootpart::$kernbasefile:$initrd:root=$mappedpartition"
