@@ -7,7 +7,7 @@ os-prober (1.39) UNRELEASED; urgency=low
 
   [ Colin Watson ]
   * Handle Dracut-generated initramfs names in linux-boot-prober fallback
-    test.
+    test (thanks, Piscium).
 
  -- Joey Hess <joeyh@debian.org>  Wed, 19 May 2010 19:20:04 -0400
 
