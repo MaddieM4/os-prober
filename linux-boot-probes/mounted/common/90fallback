@@ -29,7 +29,7 @@ for kernpat in /vmlinuz /vmlinux /boot/vmlinuz /boot/vmlinux "/boot/vmlinuz*" \
 			# kernel itself.
 			initrdname2=$(echo "$kernfile" | sed -n 's/vmlinu[zx]\([0-9][0-9]*\)/kernel\1/p' | sed 's/$/.img/')
 			# Dracut initramfses are named differently again.
-			initrdname3=$(echo "$kernfile" | sed "s/vmlinu[zx]/initramfs\*/")
+			initrdname3=$(echo "$kernfile" | sed "s/vmlinu[zx]/initramfs\*/" | sed 's/$/.img/')
 			foundinitrd=0
 			for initrd in $(eval ls "$initrdname" "$initrdname2" "$initrdname3" 2>/dev/null); do
 				if [ -f "$initrd" ] && [ ! -L "$initrd" ]; then
