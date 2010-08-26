@@ -7,11 +7,20 @@ partition="$1"
 dir="$2"
 type="$3"
 
-if [ "$type" = minix ] && [ -f "$dir/minix" ]; then
-	# XXX will chain loading work?
-        label="$(count_next_label Minix)"
-	result "$partition:Minix:$label:chain"
-	exit 0
+if [ "$type" = minix ] || [ "$type" = ext2 ] ; then
+	if [ -f "$dir/minix" ] || [ -e "$dir/boot/image_big" ]; then
+		if [ -e "$dir/boot/image_latest" ]; then
+			boot="minix"
+		else
+			boot="chain"
+		fi
+
+		label="$(count_next_label Minix)"
+		result "$partition:Minix:$label:$boot"
+		exit 0
+	else
+		exit 1
+	fi
 else
 	exit 1
 fi
