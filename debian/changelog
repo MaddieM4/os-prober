@@ -1,3 +1,11 @@
+os-prober (1.40) UNRELEASED; urgency=low
+
+  * Fix Windows Vista and Windows Recovery Environment partitions
+    recognition. (Thanks, Bouke Bunnik)
+    Closes: #589676, LP: #476625
+
+ -- Christian Perrier <bubulle@debian.org>  Thu, 26 Aug 2010 22:03:05 +0200
+
 os-prober (1.39) unstable; urgency=low
 
   [ Joey Hess ]

@@ -21,12 +21,16 @@ if item_in_dir -q bootmgr "$2" && boot="$(item_in_dir boot "$2")" &&
    bcd="$(item_in_dir bcd "$2/$boot")"; then
 	if grep -qs "W.i.n.d.o.w.s. .7" "$2/$boot/$bcd"; then
 		long="Windows 7 (loader)"
-	elif grep -qs "W.i.n.d.o.w.s. .R.e.c.o.v.e.r.y. .E.n.v.i.r.o.n.m.e.n.t" "$2/$boot/$bcd"; then
-		long="Windows Recovery Environment (loader)"
+	elif grep -qs "W.i.n.d.o.w.s. .V.i.s.t.a" "$2/$boot/$bcd"; then
+		long="Windows Vista (loader)"
 	elif grep -qs "W.i.n.d.o.w.s. .S.e.r.v.e.r. .2.0.0.8. .R.2." "$2/$boot/$bcd"; then
 		long="Windows Server 2008 R2 (loader)"
 	elif grep -qs "W.i.n.d.o.w.s. .S.e.r.v.e.r. .2.0.0.8." "$2/$boot/$bcd"; then
 		long="Windows Server 2008 (loader)"
+	elif grep -qs "W.i.n.d.o.w.s. .R.e.c.o.v.e.r.y. .E.n.v.i.r.o.n.m.e.n.t" "$2/$boot/$bcd"; then
+		long="Windows Recovery Environment (loader)"
+	elif grep -qs "W.i.n.d.o.w.s. .S.e.t.u.p" "$2/$boot/$bcd"; then
+		long="Windows Recovery Environment (loader)"
 	else
 		long="Windows Vista (loader)"
 	fi
