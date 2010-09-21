@@ -1,11 +1,15 @@
 os-prober (1.40) UNRELEASED; urgency=low
 
+  [ Christian Perrier ]
   * Fix Windows Vista and Windows Recovery Environment partitions
     recognition. (Thanks, Bouke Bunnik)
     Closes: #589676, LP: #476625
   * Allow recognition of recent MINIX installations. 
     Thanks to Feiran Zheng
     Closes: #592924
+
+  [ Colin Watson ]
+  * Improve error message when /sys/block is missing.
 
  -- Christian Perrier <bubulle@debian.org>  Thu, 26 Aug 2010 22:03:05 +0200
 
