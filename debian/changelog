@@ -10,6 +10,9 @@ os-prober (1.40) UNRELEASED; urgency=low
 
   [ Colin Watson ]
   * Improve error message when /sys/block is missing.
+  * os-prober doesn't know how to probe other OSes on non-Linux kernels.
+    For now, just exit quietly rather than confusing people (closes:
+    #567953).
 
  -- Christian Perrier <bubulle@debian.org>  Thu, 26 Aug 2010 22:03:05 +0200
 

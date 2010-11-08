@@ -48,9 +48,13 @@ partitions () {
 				done
 			done
 		fi
-	else
+	elif [ "$(uname -s)" = Linux ]; then
 		echo "Cannot find list of partitions!  (Try mounting /sys.)" >&2
 		exit 1
+	else
+		# We don't know how to probe OSes on non-Linux kernels.  For
+		# now, just don't get in the way.
+		exit 0
 	fi
 
 	# Also detect OSes on LVM volumes (assumes LVM is active)
