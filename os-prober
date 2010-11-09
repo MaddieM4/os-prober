@@ -64,6 +64,13 @@ partitions () {
 	fi
 }
 
+parse_proc_swaps () {
+	while read line; do
+		set -- $line
+		echo "$(mapdevfs $1) swap"
+	done
+}
+
 parse_proc_mdstat () {
 	if type udevadm >/dev/null 2>&1; then
 		udevinfo () {
@@ -101,6 +108,7 @@ done
 # We need to properly canonicalize partitions with mount points and partitions
 # used in RAID
 grep "^/dev/" /proc/mounts | parse_proc_mounts >"$OS_PROBER_TMP/mounted-map" || true
+grep "^/dev/" /proc/swaps | parse_proc_swaps >"$OS_PROBER_TMP/swaps-map" || true
 : >"$OS_PROBER_TMP/raided-map"
 if [ -f /proc/mdstat ] ; then
 	grep "^md" /proc/mdstat | parse_proc_mdstat >"$OS_PROBER_TMP/raided-map" || true
@@ -115,6 +123,12 @@ for partition in $(partitions); do
 	# Skip partitions used in software RAID arrays
 	if grep -q "^$mapped" "$OS_PROBER_TMP/raided-map" ; then
 		debug "$partition: part of software raid array"
+		continue
+	fi
+
+	# Skip partitions used as active swap
+	if grep -q "^$mapped " "$OS_PROBER_TMP/swaps-map" ; then
+		debug "$partition: is active swap"
 		continue
 	fi
 
