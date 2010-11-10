@@ -1,4 +1,4 @@
-os-prober (1.40) UNRELEASED; urgency=low
+os-prober (1.40) unstable; urgency=low
 
   [ Christian Perrier ]
   * Fix Windows Vista and Windows Recovery Environment partitions
@@ -20,7 +20,7 @@ os-prober (1.40) UNRELEASED; urgency=low
   * Set partitions read-only before mounting them (based on a patch by Alex
     Owen; closes: #417407, #556739, #599203).
 
- -- Christian Perrier <bubulle@debian.org>  Thu, 26 Aug 2010 22:03:05 +0200
+ -- Colin Watson <cjwatson@debian.org>  Wed, 10 Nov 2010 11:51:19 +0000
 
 os-prober (1.39) unstable; urgency=low
 
