@@ -34,8 +34,9 @@ if [ ! -d "$tmpmnt" ]; then
 fi
 
 for type in $types; do
+	ro_partition "$partition"
 	if mount -o ro -t "$type" "$partition" "$tmpmnt" 2>/dev/null; then
-		mountboot="$(linux_mount_boot "$partition" "$tmpmnt")"
+		linux_mount_boot "$partition" "$tmpmnt"
 		bootpart="${mountboot%% *}"
 		mounted="${mountboot#* }"
 		

@@ -17,6 +17,8 @@ os-prober (1.40) UNRELEASED; urgency=low
   * Refactor linux_mount_boot to look up labels and UUIDs using blkid or
     /dev/disk/by-*/ rather than relying on mount being smart enough.  This
     removes some horrible code that executes mount from /target.
+  * Set partitions read-only before mounting them (based on a patch by Alex
+    Owen; closes: #417407, #556739, #599203).
 
  -- Christian Perrier <bubulle@debian.org>  Thu, 26 Aug 2010 22:03:05 +0200
 

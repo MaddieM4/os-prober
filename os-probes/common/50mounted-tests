@@ -45,6 +45,7 @@ if [ ! -d "$tmpmnt" ]; then
 	mkdir "$tmpmnt"
 fi
 
+ro_partition "$partition"
 for type in $types $delaytypes; do
 	if mount -o ro -t "$type" "$partition" "$tmpmnt" 2>/dev/null; then
 		debug "mounted as $type filesystem"

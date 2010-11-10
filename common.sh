@@ -2,11 +2,24 @@ newns () {
   [ "$OS_PROBER_NEWNS" ] || exec /usr/lib/os-prober/newns "$0" "$@"
 }
 
+cleanup_tmpdir=false
+cleanup_ro_partitions=
+cleanup () {
+  local partition
+  for partition in $cleanup_ro_partitions; do
+    blockdev --setrw "$partition"
+  done
+  if $cleanup_tmpdir; then
+    rm -rf "$OS_PROBER_TMP"
+  fi
+}
+
 require_tmpdir() {
   if [ -z "$OS_PROBER_TMP" ]; then
     if type mktemp >/dev/null 2>&1; then
       export OS_PROBER_TMP="$(mktemp -d /tmp/os-prober.XXXXXX)"
-      trap "rm -rf $OS_PROBER_TMP" EXIT HUP INT QUIT TERM
+      cleanup_tmpdir=:
+      trap cleanup EXIT HUP INT QUIT TERM
     else
       export OS_PROBER_TMP=/tmp
     fi
@@ -128,6 +141,15 @@ unescape_mount () {
 		sed 's/\\011/	/g; s/\\012/\n/g; s/\\040/ /g; s/\\134/\\/g'
 }
 
+ro_partition () {
+	if type blockdev >/dev/null 2>&1 && \
+	   [ "$(blockdev --getro "$1")" = 0 ] && \
+	   blockdev --setro "$1"; then
+		cleanup_ro_partitions="${cleanup_ro_partitions:+$cleanup_ro_partitions }$1"
+		trap cleanup EXIT HUP INT QUIT TERM
+	fi
+}
+
 find_label () {
 	local output
 	if type blkid >/dev/null 2>&1; then
@@ -156,6 +178,9 @@ find_uuid () {
 	fi
 }
 
+# Sets $mountboot as output variable.  (We do this rather than requiring a
+# subshell so that we can run ro_partition without the cleanup trap firing
+# when the subshell exits.)
 linux_mount_boot () {
 	partition="$1"
 	tmpmnt="$2"
@@ -179,7 +204,7 @@ linux_mount_boot () {
 					debug "mapped LABEL=$label to $tmppart"
 				else
 					debug "found boot partition LABEL=$label for Linux system on $partition, but cannot map to existing device"
-					echo "$partition 0"
+					mountboot="$partition 0"
 					return
 				fi
 			elif echo "$1" | grep -q "UUID="; then
@@ -188,7 +213,7 @@ linux_mount_boot () {
 					debug "mapped UUID=$uuid to $tmppart"
 				else
 					debug "found boot partition UUID=$uuid for Linux system on $partition, but cannot map to existing device"
-					echo "$partition 0"
+					mountboot="$partition 0"
 					return
 				fi
 			fi
@@ -227,6 +252,7 @@ linux_mount_boot () {
 					debug "found boot partition $1 for linux system on $partition, but cannot map to existing device"
 				else
 					debug "found boot partition $bootpart for linux system on $partition"
+					ro_partition "$boottomnt"
 					if mount -o ro "$boottomnt" "$tmpmnt/boot" -t "$3"; then
 						mounted=1
 					else
@@ -243,5 +269,5 @@ linux_mount_boot () {
 		mounted=0
 	fi
 
-	echo "$bootpart $mounted"
+	mountboot="$bootpart $mounted"
 }
