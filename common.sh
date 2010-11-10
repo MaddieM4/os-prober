@@ -128,6 +128,34 @@ unescape_mount () {
 		sed 's/\\011/	/g; s/\\012/\n/g; s/\\040/ /g; s/\\134/\\/g'
 }
 
+find_label () {
+	local output
+	if type blkid >/dev/null 2>&1; then
+		# Hopefully everyone has blkid by now
+		output="$(blkid -o device -t LABEL="$1")" || return 1
+		echo "$output" | head -n1
+	elif [ -h "/dev/disk/by-label/$1" ]; then
+		# Last-ditch fallback
+		readlink -f "/dev/disk/by-label/$1"
+	else
+		return 1
+	fi
+}
+
+find_uuid () {
+	local output
+	if type blkid >/dev/null 2>&1; then
+		# Hopefully everyone has blkid by now
+		output="$(blkid -o device -t UUID="$1")" || return 1
+		echo "$output" | head -n1
+	elif [ -h "/dev/disk/by-uuid/$1" ]; then
+		# Last-ditch fallback
+		readlink -f "/dev/disk/by-uuid/$1"
+	else
+		return 1
+	fi
+}
+
 linux_mount_boot () {
 	partition="$1"
 	tmpmnt="$2"
@@ -144,37 +172,29 @@ linux_mount_boot () {
 			# Try to map labels and UUIDs ourselves if possible,
 			# so that we can check whether they're already
 			# mounted somewhere else.
+			tmppart="$1"
 			if echo "$1" | grep -q "LABEL="; then
 				label="$(echo "$1" | cut -d = -f 2)"
-				if [ -h "/dev/disk/by-label/$label" ]; then
-					shift
-					set -- "$(readlink -f "/dev/disk/by-label/$label")" "$@"
-					debug "mapped LABEL=$label to $1"
+				if tmppart="$(find_label "$label")"; then
+					debug "mapped LABEL=$label to $tmppart"
+				else
+					debug "found boot partition LABEL=$label for Linux system on $partition, but cannot map to existing device"
+					echo "$partition 0"
+					return
 				fi
-			fi
-			if echo "$1" | grep -q "UUID="; then
+			elif echo "$1" | grep -q "UUID="; then
 				uuid="$(echo "$1" | cut -d = -f 2)"
-				if [ -h "/dev/disk/by-uuid/$uuid" ]; then
-					shift
-					set -- "$(readlink -f "/dev/disk/by-uuid/$uuid")" "$@"
-					debug "mapped UUID=$uuid to $1"
+				if tmppart="$(find_uuid "$uuid")"; then
+					debug "mapped UUID=$uuid to $tmppart"
+				else
+					debug "found boot partition UUID=$uuid for Linux system on $partition, but cannot map to existing device"
+					echo "$partition 0"
+					return
 				fi
 			fi
-			tmppart="$1"
 			shift
 			set -- "$(mapdevfs "$tmppart")" "$@"
 
-			# This is an awful hack and isn't guaranteed to
-			# work, but is the best we can do until busybox
-			# mount supports -L/-U.
-			smart_ldlp=
-			smart_mount=mount
-			if mount --help 2>&1 | head -n1 | grep -iq busybox; then
-				if [ -x /target/bin/mount ]; then
-					smart_ldlp=/target/lib
-					smart_mount=/target/bin/mount
-				fi
-			fi
 			if grep -q "^$1 " "$OS_PROBER_TMP/mounted-map"; then
 				bindfrom="$(grep "^$1 " "$OS_PROBER_TMP/mounted-map" | head -n1 | cut -d " " -f 2)"
 				bindfrom="$(unescape_mount "$bindfrom")"
@@ -198,24 +218,6 @@ linux_mount_boot () {
 			elif [ -e "/target/$1" ]; then
 				bootpart="$1"
 				boottomnt="/target/$1"
-			elif echo "$1" | grep -q "LABEL="; then
-				debug "mounting boot partition by label for linux system on $partition: $1"
-				label=$(echo "$1" | cut -d = -f 2)
-				if LD_LIBRARY_PATH=$smart_ldlp $smart_mount -L "$label" -o ro "$tmpmnt/boot" -t "$3"; then
-					mounted=1
-					bootpart=$(mount | grep "$tmpmnt/boot" | cut -d " " -f 1)
-				else
-					error "failed to mount by label"
-				fi
-			elif echo "$1" | grep -q "UUID="; then
-				debug "mounting boot partition by UUID for linux system on $partition: $1"
-				uuid=$(echo "$1" | cut -d = -f 2)
-				if LD_LIBRARY_PATH=$smart_ldlp $smart_mount -U "$uuid" -o ro "$tmpmnt/boot" -t "$3"; then
-					mounted=1
-					bootpart=$(mount | grep "$tmpmnt/boot" | cut -d " " -f 1)
-				else
-					error "failed to mount by UUID"
-				fi
 			else
 				bootpart=""
 			fi

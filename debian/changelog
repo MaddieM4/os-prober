@@ -14,6 +14,9 @@ os-prober (1.40) UNRELEASED; urgency=low
     For now, just exit quietly rather than confusing people (closes:
     #567953).
   * Ignore active swap partitions (thanks, Alex Owen; see #417407).
+  * Refactor linux_mount_boot to look up labels and UUIDs using blkid or
+    /dev/disk/by-*/ rather than relying on mount being smart enough.  This
+    removes some horrible code that executes mount from /target.
 
  -- Christian Perrier <bubulle@debian.org>  Thu, 26 Aug 2010 22:03:05 +0200
 
