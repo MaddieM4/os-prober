@@ -5,7 +5,7 @@
 set -e
 
 partition="$1"
-mpoint="$2"
+dir="$2"
 fstype="$3"
 
 case "$fstype" in
