@@ -1,9 +1,10 @@
-os-prober (1.41) UNRELEASED; urgency=low
+os-prober (1.41) unstable; urgency=low
 
+  [ Joey Hess ]
   * Fix probes for MacOS 9 on m68k and powerpc. Closes: #604192
     (Thanks, Milan Kupcevic)
 
- -- Joey Hess <joeyh@debian.org>  Sun, 21 Nov 2010 13:34:00 -0400
+ -- Otavio Salvador <otavio@debian.org>  Wed, 24 Nov 2010 09:58:18 -0200
 
 os-prober (1.40) unstable; urgency=low
 
