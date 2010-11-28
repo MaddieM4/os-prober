@@ -100,7 +100,7 @@ if type archdetect >/dev/null 2>&1; then
 	case "`archdetect`" in
 		powerpc/powermac_newworld)
 		;;
-		powerpc/chrp)
+		powerpc/chrp*)
 		;;
 		*)
 			exit 1

@@ -1,3 +1,9 @@
+os-prober (1.42) UNRELEASED; urgency=low
+
+  * Let yaboot linux-boot-prober work on all chrp machines.
+
+ -- Milan Kupcevic <milan@physics.harvard.edu>  Sun, 28 Nov 2010 00:31:32 -0500
+
 os-prober (1.41) unstable; urgency=low
 
   [ Joey Hess ]
