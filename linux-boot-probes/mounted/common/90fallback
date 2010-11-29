@@ -23,6 +23,8 @@ for kernpat in /vmlinuz /vmlinux /boot/vmlinuz /boot/vmlinux "/boot/vmlinuz*" \
 		kernbasefile=$(echo "$kernfile" | sed "s!^$mpoint!!")
 		if [ -f "$kernfile" ] && [ ! -L "$kernfile" ]; then
 			initrdname=$(echo "$kernfile" | sed "s/vmlinu[zx]/initrd\*/")
+			# Yellow Dog Linux appends .img to it.
+			initrdname1="${initrdname}.img"
 			# Arch Linux names its initrds weirdly.  We take
 			# some care here to avoid false positives on other
 			# systems, since kernel.img could conceivably be a
@@ -31,7 +33,7 @@ for kernpat in /vmlinuz /vmlinux /boot/vmlinuz /boot/vmlinux "/boot/vmlinuz*" \
 			# Dracut initramfses are named differently again.
 			initrdname3=$(echo "$kernfile" | sed "s/vmlinu[zx]/initramfs\*/" | sed 's/$/.img/')
 			foundinitrd=0
-			for initrd in $(eval ls "$initrdname" "$initrdname2" "$initrdname3" 2>/dev/null); do
+			for initrd in $(eval ls "$initrdname" "$initrdname1" "$initrdname2" "$initrdname3" 2>/dev/null); do
 				if [ -f "$initrd" ] && [ ! -L "$initrd" ]; then
 					initrd=$(echo "$initrd" | sed "s!^$mpoint!!")
 					result "$partition:$kernbootpart::$kernbasefile:$initrd:root=$mappedpartition"
