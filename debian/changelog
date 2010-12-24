@@ -1,9 +1,10 @@
-os-prober (1.42) UNRELEASED; urgency=low
+os-prober (1.42) unstable; urgency=low
 
+  [ Milan Kupcevic ]
   * Let yaboot linux-boot-prober work on all chrp machines.
   * Handle YDL initrd image in linux-boot-prober fallback test.
 
- -- Milan Kupcevic <milan@physics.harvard.edu>  Sun, 28 Nov 2010 23:07:03 -0500
+ -- Otavio Salvador <otavio@debian.org>  Fri, 24 Dec 2010 19:13:19 -0200
 
 os-prober (1.41) unstable; urgency=low
 
