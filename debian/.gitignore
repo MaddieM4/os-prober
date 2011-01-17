@@ -1,0 +1,6 @@
+*.debhelper*
+*.substvars
+os-prober
+os-prober-udeb
+files
+
