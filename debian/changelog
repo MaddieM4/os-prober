@@ -1,3 +1,11 @@
+os-prober (1.43) UNRELEASED; urgency=low
+
+  * Fix Gentoo detection (different name for kernel and initrd
+    files). Thanks to caillean for the patch
+    Closes: #611670
+
+ -- Christian Perrier <bubulle@debian.org>  Sat, 05 Feb 2011 13:01:41 +0100
+
 os-prober (1.42) unstable; urgency=low
 
   [ Milan Kupcevic ]
