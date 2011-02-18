@@ -4,10 +4,16 @@ os-prober (1.43) UNRELEASED; urgency=low
   * Fix Gentoo detection (different name for kernel and initrd
     files). Thanks to caillean for the patch
     Closes: #611670
+  * Detect Haiku on BeFS partitions.
+    Thanks to Jeroen Oortwijn for the proposed patch
+    Closes: #590897
 
   [ Joey Hess ]
   * 90fallback: Avoid ever accidentially identifying the same file
     as initrd and kernel. Closes: #612303
+
+  [ Christian Perrier ]
+  * 
 
  -- Christian Perrier <bubulle@debian.org>  Sat, 05 Feb 2011 13:01:41 +0100
 
