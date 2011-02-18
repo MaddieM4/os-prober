@@ -1,4 +1,6 @@
-os-prober (1.43) UNRELEASED; urgency=low
+os-prober (1.43) unstable; urgency=low
+
+  * Team upload
 
   [ Christian Perrier ]
   * Fix Gentoo detection (different name for kernel and initrd
@@ -12,10 +14,7 @@ os-prober (1.43) UNRELEASED; urgency=low
   * 90fallback: Avoid ever accidentially identifying the same file
     as initrd and kernel. Closes: #612303
 
-  [ Christian Perrier ]
-  * 
-
- -- Christian Perrier <bubulle@debian.org>  Sat, 05 Feb 2011 13:01:41 +0100
+ -- Christian Perrier <bubulle@debian.org>  Fri, 18 Feb 2011 06:02:22 +0100
 
 os-prober (1.42) unstable; urgency=low
 
