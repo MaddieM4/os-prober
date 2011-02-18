@@ -1,7 +1,7 @@
 #!/bin/sh
 # Detects Haiku on BeFS partitions.
 
-.. /usr/share/os-prober/common.sh
+. /usr/share/os-prober/common.sh
 
 partition="$1"
 mpoint="$2"
@@ -20,7 +20,7 @@ else
 	exit 1
 fi
 
-if system="$(item_in_dir "system" "$2")" &&
+if system="$(item_in_dir "system" "$mpoint")" &&
 	item_in_dir -q "haiku_loader" "$mpoint/$system" &&
 	item_in_dir -q "kernel_x86" "$mpoint/$system"
 then
