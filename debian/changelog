@@ -1,8 +1,9 @@
-os-prober (1.44) UNRELEASED; urgency=low
+os-prober (1.44) unstable; urgency=low
 
+  * Team upload
   * Fix syntax errors in 83haiku and make it executable
 
- -- Christian Perrier <bubulle@debian.org>  Fri, 18 Feb 2011 20:16:35 +0100
+ -- Christian Perrier <bubulle@debian.org>  Fri, 18 Feb 2011 20:17:55 +0100
 
 os-prober (1.43) unstable; urgency=low
 
