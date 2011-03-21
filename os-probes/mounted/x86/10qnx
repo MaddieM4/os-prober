@@ -12,7 +12,7 @@ case "$type" in
 	*) debug "$partition is not a QNX4 partition: exiting"; exit 1 ;;
 esac
 
-if [ -e "$mpount/.boot" ]; then
+if [ -e "$mpoint/.boot" ]; then
 	label="$(count_next_label QNX)"
 	result "$partition:QNX:$label:chain"
 	exit 0

@@ -4,6 +4,9 @@ os-prober (1.45) UNRELEASED; urgency=low
   * Improve MS-DOS detection by using an absolute path when verifying
     that "dos" is a directory.
 
+  [ Colin Watson ]
+  * Fix fatal typo in QNX prober.
+
  -- Christian Perrier <bubulle@debian.org>  Mon, 07 Mar 2011 19:11:22 +0100
 
 os-prober (1.44) unstable; urgency=low
