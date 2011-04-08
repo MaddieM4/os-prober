@@ -64,7 +64,8 @@ elif item_in_dir -q ntldr "$2" && item_in_dir -q ntdetect.com "$2"; then
 		fi
 	fi
 # MS-DOS
-elif [ -d "$2"/"$(item_in_dir dos "$2")" ]; then
+elif item_in_dir -q dos "$2" &&
+     [ -d "$2"/"$(item_in_dir dos "$2")" ]; then
 	long="MS-DOS 5.x/6.x/Win3.1"
 	short=MS-DOS
 # 95/98/Me
