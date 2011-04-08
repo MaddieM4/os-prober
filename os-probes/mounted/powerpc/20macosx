@@ -13,6 +13,7 @@ debug() {
 # Weed out stuff that doesn't apply to us
 case "$type" in
   hfsplus) debug "$1 is an HFS+ partition" ;;
+  fuse|fuseblk) debug "$1 is a FUSE partition" ;; # might be GRUB
   *) debug "$1 is not an HFS+ partition: exiting"; exit 1 ;;
 esac
 

@@ -33,36 +33,46 @@ if [ ! -d "$tmpmnt" ]; then
 	mkdir "$tmpmnt"
 fi
 
-for type in $types; do
+mounted=
+if which grub-mount >/dev/null 2>&1 && \
+   grub-mount "$partition" "$tmpmnt" 2>/dev/null; then
+	mounted=1
+	type=fuseblk
+else
 	ro_partition "$partition"
-	if mount -o ro -t "$type" "$partition" "$tmpmnt" 2>/dev/null; then
-		linux_mount_boot "$partition" "$tmpmnt"
-		bootpart="${mountboot%% *}"
-		mounted="${mountboot#* }"
-		
-		for test in /usr/lib/linux-boot-probes/mounted/*; do
-			if [ -f "$test" ] && [ -x "$test" ]; then
-				debug "running $test $partition $bootpart $tmpmnt $type"
-				if $test "$partition" "$bootpart" "$tmpmnt" "$type"; then
-					debug "$test succeeded"
-					umount "$tmpmnt/boot" 2>/dev/null || true 	
-					if ! umount "$tmpmnt"; then
-						warn "failed to umount $tmpmnt"
-					fi
-					rmdir "$tmpmnt" || true
-					exit 0
-				fi
-			fi
-		done
-		
-		umount "$tmpmnt/boot" 2>/dev/null || true 	
-		if ! umount "$tmpmnt"; then
-			warn "failed to umount $tmpmnt"
+	for type in $types; do
+		if mount -o ro -t "$type" "$partition" "$tmpmnt" 2>/dev/null; then
+			mounted=1
+			break
 		fi
+	done
+fi
 
-		break
+if [ "$mounted" ]; then
+	linux_mount_boot "$partition" "$tmpmnt"
+	bootpart="${mountboot%% *}"
+	mounted="${mountboot#* }"
+
+	for test in /usr/lib/linux-boot-probes/mounted/*; do
+		if [ -f "$test" ] && [ -x "$test" ]; then
+			debug "running $test $partition $bootpart $tmpmnt $type"
+			if $test "$partition" "$bootpart" "$tmpmnt" "$type"; then
+				debug "$test succeeded"
+				umount "$tmpmnt/boot" 2>/dev/null || true 	
+				if ! umount "$tmpmnt"; then
+					warn "failed to umount $tmpmnt"
+				fi
+				rmdir "$tmpmnt" || true
+				exit 0
+			fi
+		fi
+	done
+
+	umount "$tmpmnt/boot" 2>/dev/null || true 	
+	if ! umount "$tmpmnt"; then
+		warn "failed to umount $tmpmnt"
 	fi
-done
+fi
 
 rmdir "$tmpmnt" || true
 

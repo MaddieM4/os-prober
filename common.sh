@@ -252,11 +252,16 @@ linux_mount_boot () {
 					debug "found boot partition $1 for linux system on $partition, but cannot map to existing device"
 				else
 					debug "found boot partition $bootpart for linux system on $partition"
-					ro_partition "$boottomnt"
-					if mount -o ro "$boottomnt" "$tmpmnt/boot" -t "$3"; then
+					if which grub-mount >/dev/null 2>&1 && \
+					   grub-mount "$boottomnt" "$tmpmnt/boot" 2>/dev/null; then
 						mounted=1
 					else
-						error "failed to mount $boottomnt on $tmpmnt/boot"
+						ro_partition "$boottomnt"
+						if mount -o ro "$boottomnt" "$tmpmnt/boot" -t "$3"; then
+							mounted=1
+						else
+							error "failed to mount $boottomnt on $tmpmnt/boot"
+						fi
 					fi
 				fi
 			fi
