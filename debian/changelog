@@ -9,6 +9,8 @@ os-prober (1.45) UNRELEASED; urgency=low
   * Use grub-mount if it exists.  This lets us do true read-only mounts, and
     works better on journalling filesystems that were mounted uncleanly
     (LP: #683355).
+  * Attempt to load the fuse module, to improve the chances of grub-mount
+    working.
 
  -- Christian Perrier <bubulle@debian.org>  Mon, 07 Mar 2011 19:11:22 +0100
 
