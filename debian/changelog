@@ -7,7 +7,8 @@ os-prober (1.45) UNRELEASED; urgency=low
   [ Colin Watson ]
   * Fix fatal typo in QNX prober.
   * Use grub-mount if it exists.  This lets us do true read-only mounts, and
-    works better on journalling filesystems that were mounted uncleanly.
+    works better on journalling filesystems that were mounted uncleanly
+    (LP: #683355).
 
  -- Christian Perrier <bubulle@debian.org>  Mon, 07 Mar 2011 19:11:22 +0100
 
