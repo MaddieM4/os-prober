@@ -12,6 +12,9 @@ os-prober (1.45) UNRELEASED; urgency=low
   * Attempt to load the fuse module, to improve the chances of grub-mount
     working.
 
+  [ Armin Krejzi ]
+  * Add detection of Linux From Scratch distribution. Closes: #623939
+
  -- Christian Perrier <bubulle@debian.org>  Mon, 07 Mar 2011 19:11:22 +0100
 
 os-prober (1.44) unstable; urgency=low
