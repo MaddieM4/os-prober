@@ -1,4 +1,4 @@
-os-prober (1.45) UNRELEASED; urgency=low
+os-prober (1.45) unstable; urgency=low
 
   [ Matti Kurkela ]
   * Improve MS-DOS detection by using an absolute path when verifying
@@ -15,7 +15,7 @@ os-prober (1.45) UNRELEASED; urgency=low
   [ Armin Krejzi ]
   * Add detection of Linux From Scratch distribution. Closes: #623939
 
- -- Christian Perrier <bubulle@debian.org>  Mon, 07 Mar 2011 19:11:22 +0100
+ -- Christian Perrier <bubulle@debian.org>  Sun, 24 Apr 2011 20:02:10 +0200
 
 os-prober (1.44) unstable; urgency=low
 
