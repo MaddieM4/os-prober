@@ -115,7 +115,7 @@ if ls "$dir"/lib*/ld*.so* >/dev/null 2>/dev/null; then
 	elif [ -e "$dir/etc/kdemar-release" ]; then
 		short="K-DEMar"
 		long="$(printf "K-DEMar GNU/Linux (%s)\n" "$(cat "$dir/etc/kdemar-release")")"
-	if [ -e "$dir/etc/lfs-release" ]; then
+	elif [ -e "$dir/etc/lfs-release" ]; then
 		short="LFS"
 		long="$(printf "Linux From Scratch (%s)\n" "$(cat "$dir/etc/lfs-release")")"
 	else

@@ -1,3 +1,9 @@
+os-prober (1.46) UNRELEASED; urgency=low
+
+  * Correct syntax error in LFS detection. Closes: #623981
+
+ -- Christian Perrier <bubulle@debian.org>  Mon, 25 Apr 2011 07:08:21 +0200
+
 os-prober (1.45) unstable; urgency=low
 
   [ Matti Kurkela ]
