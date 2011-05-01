@@ -68,7 +68,9 @@ parse_silo_conf () {
 	IFS=" 	="
 	while read line; do
 		debug "parsing: $line"
+		set -f
 		set -- $line
+		set +f
 		case "$1" in
 			root)
 				rootdev=$(dequote "$2")

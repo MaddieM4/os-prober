@@ -117,7 +117,9 @@ fs_type () {
 
 parse_proc_mounts () {
 	while read -r line; do
+		set -f
 		set -- $line
+		set +f
 		printf '%s %s %s\n' "$(mapdevfs "$1")" "$2" "$3"
 	done
 }
@@ -129,7 +131,9 @@ parsefstab () {
 				:	
 			;;
 			*)
+				set -f
 				set -- $line
+				set +f
 				printf '%s %s %s\n' "$1" "$2" "$3"
 			;;
 		esac
@@ -191,7 +195,9 @@ linux_mount_boot () {
 		# Try to mount any /boot partition.
 		bootmnt=$(parsefstab < "$tmpmnt/etc/fstab" | grep " /boot ") || true
 		if [ -n "$bootmnt" ]; then
+			set -f
 			set -- $bootmnt
+			set +f
 			boottomnt=""
 
 			# Try to map labels and UUIDs ourselves if possible,

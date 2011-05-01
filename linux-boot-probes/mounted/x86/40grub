@@ -36,7 +36,9 @@ parse_grub_menu () {
 
 	while read line; do
 		#debug "parsing: $line"
+		set -f
 		set -- $line
+		set +f
 		case "$1" in
 			title)
 				entry_result

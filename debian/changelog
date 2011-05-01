@@ -1,3 +1,9 @@
+os-prober (1.47) UNRELEASED; urgency=low
+
+  * Fix unwanted wildcard expansions. Closes: #624815
+
+ -- Joey Hess <joeyh@debian.org>  Sun, 01 May 2011 16:54:16 -0400
+
 os-prober (1.46) unstable; urgency=low
 
   * Correct syntax error in LFS detection. Closes: #623981
