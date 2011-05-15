@@ -1,8 +1,9 @@
-os-prober (1.47) UNRELEASED; urgency=low
+os-prober (1.47) unstable; urgency=low
 
+  [ Joey Hess ]
   * Fix unwanted wildcard expansions. Closes: #624815
 
- -- Joey Hess <joeyh@debian.org>  Sun, 01 May 2011 16:54:16 -0400
+ -- Otavio Salvador <otavio@debian.org>  Sun, 15 May 2011 17:49:10 -0300
 
 os-prober (1.46) unstable; urgency=low
 
