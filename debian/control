@@ -11,7 +11,7 @@ Vcs-Git: git://git.debian.org/d-i/os-prober.git
 Package: os-prober-udeb
 XC-Package-Type: udeb
 Architecture: any
-Depends: ${shlibs:Depends}, di-utils-mapdevfs, anna (>= 1.16)
+Depends: ${shlibs:Depends}, di-utils-mapdevfs, anna (>= 1.16), grub-mount-udeb
 Provides: os-prober
 Description: utility to detect other OSes on a set of drives
  This package is to be used by boot loader installers to detect other OSes
