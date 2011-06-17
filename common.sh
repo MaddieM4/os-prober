@@ -92,6 +92,7 @@ if ! type mapdevfs >/dev/null 2>&1; then
 fi
 
 item_in_dir () {
+	[ -d "$2" ] || return 1
 	if [ "$1" = "-q" ]; then
 		q="-q"
 		shift 1
