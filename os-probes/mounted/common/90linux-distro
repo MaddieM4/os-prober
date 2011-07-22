@@ -118,6 +118,9 @@ if ls "$dir"/lib*/ld*.so* >/dev/null 2>/dev/null; then
 	elif [ -e "$dir/etc/lfs-release" ]; then
 		short="LFS"
 		long="$(printf "Linux From Scratch (%s)\n" "$(cat "$dir/etc/lfs-release")")"
+	elif [ -e "$dir/etc/meego-release" ]; then
+		short="MeeGo"
+		long="$(head -1 "$dir/etc/meego-release")"
 	else
 		short="Linux"
 		long="unknown Linux distribution"
