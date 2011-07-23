@@ -19,13 +19,10 @@ esac
 # Vista (previously Longhorn)
 if item_in_dir -q bootmgr "$2"; then
 	# there might be different boot directories in different case as:
-	# boot/ Boot/
-	for boot in "$(item_in_dir boot/ "$2")"; do
-		# drops the end slash
-		boot=${boot%/}
-
+	# boot Boot BOOT
+	for boot in "$(item_in_dir boot "$2")"; do
 		bcd=$(item_in_dir bcd "$2/$boot")
-		if [ -n "$bcd"]; then
+		if [ -n "$bcd" ]; then
 			if grep -qs "W.i.n.d.o.w.s. .7" "$2/$boot/$bcd"; then
 				long="Windows 7 (loader)"
 			elif grep -qs "W.i.n.d.o.w.s. .V.i.s.t.a" "$2/$boot/$bcd"; then
