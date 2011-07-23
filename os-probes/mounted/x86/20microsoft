@@ -16,6 +16,7 @@ case "$type" in
 	*) debug "$1 is not a MS partition: exiting"; exit 1 ;;
 esac
 
+found=
 # Vista (previously Longhorn)
 if item_in_dir -q bootmgr "$2"; then
 	# there might be different boot directories in different case as:
@@ -40,11 +41,15 @@ if item_in_dir -q bootmgr "$2"; then
 			fi
 			short=Windows
 
+			found=true
+
 			break
 		fi
 	done
+fi
+
 # 2000/XP/NT4.0
-elif item_in_dir -q ntldr "$2" && item_in_dir -q ntdetect.com "$2"; then
+if [ -z "$found" ] && item_in_dir -q ntldr "$2" && item_in_dir -q ntdetect.com "$2"; then
 	long="Windows NT/2000/XP"
 	short=Windows
 	ini=$(item_in_dir boot.ini "$2")
@@ -70,18 +75,26 @@ elif item_in_dir -q ntldr "$2" && item_in_dir -q ntdetect.com "$2"; then
 		else
 			long="Windows NT/2000/XP (loader)"
 		fi
+
+		found=true
 	fi
 # MS-DOS
-elif item_in_dir -q dos "$2" &&
+elif [ -z "$found" ] && item_in_dir -q dos "$2" &&
      [ -d "$2"/"$(item_in_dir dos "$2")" ]; then
 	long="MS-DOS 5.x/6.x/Win3.1"
 	short=MS-DOS
+
+	found=true
 # 95/98/Me
-elif item_in_dir -q windows "$2" &&
+elif [ -z "$found" ] && item_in_dir -q windows "$2" &&
      item_in_dir -q win.com "$2"/"$(item_in_dir windows "$2")"; then
 	long="Windows 95/98/Me"
 	short=Windows9xMe
-else
+
+	found=true
+fi
+
+if [ -z "$found" ]; then
 	exit 1
 fi
 
