@@ -92,13 +92,13 @@ if ! type mapdevfs >/dev/null 2>&1; then
 fi
 
 item_in_dir () {
-	[ -d "$2" ] || return 1
 	if [ "$1" = "-q" ]; then
 		q="-q"
 		shift 1
 	else
 		q=""
 	fi
+	[ -d "$2" ] || return 1
 	# find files with any case
 	ls -1 "$2" | grep $q -i "^$1$"
 }
