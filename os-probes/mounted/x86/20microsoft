@@ -21,7 +21,7 @@ found=
 if item_in_dir -q bootmgr "$2"; then
 	# there might be different boot directories in different case as:
 	# boot Boot BOOT
-	for boot in "$(item_in_dir boot "$2")"; do
+	for boot in $(item_in_dir boot "$2"); do
 		bcd=$(item_in_dir bcd "$2/$boot")
 		if [ -n "$bcd" ]; then
 			if grep -qs "W.i.n.d.o.w.s. .7" "$2/$boot/$bcd"; then
@@ -78,15 +78,19 @@ if [ -z "$found" ] && item_in_dir -q ntldr "$2" && item_in_dir -q ntdetect.com "
 
 		found=true
 	fi
+fi
+
 # MS-DOS
-elif [ -z "$found" ] && item_in_dir -q dos "$2" &&
+if [ -z "$found" ] && item_in_dir -q dos "$2" &&
      [ -d "$2"/"$(item_in_dir dos "$2")" ]; then
 	long="MS-DOS 5.x/6.x/Win3.1"
 	short=MS-DOS
 
 	found=true
+fi
+
 # 95/98/Me
-elif [ -z "$found" ] && item_in_dir -q windows "$2" &&
+if [ -z "$found" ] && item_in_dir -q windows "$2" &&
      item_in_dir -q win.com "$2"/"$(item_in_dir windows "$2")"; then
 	long="Windows 95/98/Me"
 	short=Windows9xMe
