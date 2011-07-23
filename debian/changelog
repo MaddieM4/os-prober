@@ -8,6 +8,8 @@ os-prober (1.48) UNRELEASED; urgency=low
   [ Otavio Salvador ]
   * add MeeGo detection support; thanks to Chengwei Yang
     <chengwei.yang@intel.com> for the patch.
+  * Fix Windows detection when there are more then one boot directories
+    (e.g boot and Boot). Closes: #634649.
 
  -- Colin Watson <cjwatson@debian.org>  Thu, 16 Jun 2011 22:51:13 +0100
 
