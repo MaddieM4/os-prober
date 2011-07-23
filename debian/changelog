@@ -1,4 +1,4 @@
-os-prober (1.48) UNRELEASED; urgency=low
+os-prober (1.48) unstable; urgency=low
 
   [ Colin Watson ]
   * Depend on grub-mount-udeb (see changelog for 1.45).
@@ -11,7 +11,7 @@ os-prober (1.48) UNRELEASED; urgency=low
   * Fix Windows detection when there are more then one boot directories
     (e.g boot and Boot). Closes: #634649.
 
- -- Colin Watson <cjwatson@debian.org>  Thu, 16 Jun 2011 22:51:13 +0100
+ -- Otavio Salvador <otavio@debian.org>  Sat, 23 Jul 2011 17:46:13 +0200
 
 os-prober (1.47) unstable; urgency=low
 
