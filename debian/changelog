@@ -1,3 +1,9 @@
+os-prober (1.49) UNRELEASED; urgency=low
+
+  * Depend on grub-mount-udeb only on architectures with FUSE support.
+
+ -- Robert Millan <rmh@debian.org>  Sun, 24 Jul 2011 23:25:08 +0200
+
 os-prober (1.48) unstable; urgency=low
 
   [ Colin Watson ]
