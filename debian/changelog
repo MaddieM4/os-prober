@@ -1,3 +1,12 @@
+os-prober (1.50) UNRELEASED; urgency=low
+
+  * Clarify license version is GPL-2+, for all code written by Joey Hess,
+    Colin Watson, and Joshua Kwan. The license had just been "GNU GPL";
+    other contributors to os-prober are encouraged to clarify which GPL
+    versions apply to their code.
+
+ -- Joey Hess <joeyh@debian.org>  Tue, 13 Dec 2011 17:54:33 -0400
+
 os-prober (1.49) unstable; urgency=low
 
   [ Robert Millan ]
