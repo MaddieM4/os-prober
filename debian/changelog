@@ -11,6 +11,10 @@ os-prober (1.50) UNRELEASED; urgency=low
   * Add support to detect BSD systems. Thanks to Gavrilin Andrey
     <gaal.dev@gmail.com> for the patch (refs: #659208).
 
+  [ Joey Hess ]
+  * Avoid false positives in MS-DOS detection by also looking for
+    autoexec.bat. Closes: #663540 
+
  -- Joey Hess <joeyh@debian.org>  Tue, 13 Dec 2011 17:54:33 -0400
 
 os-prober (1.49) unstable; urgency=low
