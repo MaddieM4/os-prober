@@ -9,8 +9,7 @@ type="$3"
 
 # Weed out stuff that doesn't apply to us
 case "$type" in
-	befs) debug "$partition is a BeFS partition" ;;
-	fuse|fuseblk) debug "$1 is a FUSE partition" ;; # might be GRUB
+	befs|befs_be) debug "$partition is a BeFS partition" ;;
 	*) debug "$partition is not a BeFS partition: exiting"; exit 1 ;;
 esac
 

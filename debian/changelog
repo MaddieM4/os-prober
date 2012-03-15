@@ -15,6 +15,11 @@ os-prober (1.50) UNRELEASED; urgency=low
   * Avoid false positives in MS-DOS detection by also looking for
     autoexec.bat. Closes: #663540 
 
+  [ Colin Watson ]
+  * When using grub-mount, pass the GRUB filesystem type to individual tests
+    rather than "fuseblk".  Adjust a number of tests to handle GRUB
+    filesystem names as well as OS names (closes: #663540).
+
  -- Joey Hess <joeyh@debian.org>  Tue, 13 Dec 2011 17:54:33 -0400
 
 os-prober (1.49) unstable; urgency=low

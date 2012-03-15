@@ -10,7 +10,7 @@ type="$3"
 case "$type" in
 	vfat) debug "$1 is a FAT32 partition" ;;
 	msdos) debug "$1 is a FAT16 partition" ;;
-	fuse|fuseblk) debug "$1 is a FUSE partition" ;; # might be GRUB
+	fat) debug "$1 is a FAT partition (mounted by GRUB)" ;;
 	*) debug "$1 is not a FAT partition: exiting"; exit 1 ;;
 esac
 

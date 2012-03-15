@@ -48,9 +48,14 @@ fi
 mounted=
 if which grub-mount >/dev/null 2>&1 && \
    grub-mount "$partition" "$tmpmnt" 2>/dev/null; then
-	debug "mounted using GRUB"
 	mounted=1
-	type=fuseblk
+	type="$(grub-probe -d "$partition" -t fs)"
+	if [ "$type" ]; then
+		debug "mounted using GRUB $type filesystem driver"
+	else
+		debug "mounted using GRUB, but unknown filesystem?"
+		type=fuseblk
+	fi
 else
 	ro_partition "$partition"
 	for type in $types $delaytypes; do
