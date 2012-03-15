@@ -1,3 +1,10 @@
+os-prober (1.51) UNRELEASED; urgency=low
+
+  * Relax the MS-DOS detection again now that it will not cause
+    false positives for non-FAT filesystems.
+
+ -- Joey Hess <joeyh@debian.org>  Thu, 15 Mar 2012 13:46:44 -0400
+
 os-prober (1.50) unstable; urgency=low
 
   [ Joey Hess ]

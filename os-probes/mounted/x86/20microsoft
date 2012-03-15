@@ -82,8 +82,7 @@ if [ -z "$found" ] && item_in_dir -q ntldr "$2" && item_in_dir -q ntdetect.com "
 fi
 
 # MS-DOS
-if [ -z "$found" ] && item_in_dir -q dos "$2" &&
-     (item_in_dir -q autoexec.bat "$2" || item_in_dir -q config.sys "$2"); then
+if [ -z "$found" ] && item_in_dir -q dos "$2"; then
 	long="MS-DOS 5.x/6.x/Win3.1"
 	short=MS-DOS
 
