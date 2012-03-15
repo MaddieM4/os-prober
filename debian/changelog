@@ -1,4 +1,4 @@
-os-prober (1.50) UNRELEASED; urgency=low
+os-prober (1.50) unstable; urgency=low
 
   [ Joey Hess ]
   * Clarify license version is GPL-2+, for all code written by Joey
@@ -20,7 +20,7 @@ os-prober (1.50) UNRELEASED; urgency=low
     rather than "fuseblk".  Adjust a number of tests to handle GRUB
     filesystem names as well as OS names (closes: #663540, #663600).
 
- -- Joey Hess <joeyh@debian.org>  Tue, 13 Dec 2011 17:54:33 -0400
+ -- Colin Watson <cjwatson@debian.org>  Thu, 15 Mar 2012 13:52:30 +0000
 
 os-prober (1.49) unstable; urgency=low
 
