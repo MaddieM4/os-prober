@@ -1,4 +1,4 @@
-os-prober (1.51) UNRELEASED; urgency=low
+os-prober (1.51) unstable; urgency=low
 
   [ Joey Hess ]
   * Relax the MS-DOS detection again now that it will not cause
@@ -10,7 +10,7 @@ os-prober (1.51) UNRELEASED; urgency=low
     currently in grub-mount-udeb and I'm going to need to add it
     (LP: #963471).
 
- -- Joey Hess <joeyh@debian.org>  Thu, 15 Mar 2012 13:46:44 -0400
+ -- Colin Watson <cjwatson@debian.org>  Tue, 27 Mar 2012 15:47:04 +0100
 
 os-prober (1.50) unstable; urgency=low
 
