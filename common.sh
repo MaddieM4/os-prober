@@ -259,7 +259,7 @@ linux_mount_boot () {
 					debug "found boot partition $1 for linux system on $partition, but cannot map to existing device"
 				else
 					debug "found boot partition $bootpart for linux system on $partition"
-					if which grub-mount >/dev/null 2>&1 && \
+					if type grub-mount >/dev/null 2>&1 && \
 					   grub-mount "$boottomnt" "$tmpmnt/boot" 2>/dev/null; then
 						mounted=1
 					else

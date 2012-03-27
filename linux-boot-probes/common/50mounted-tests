@@ -34,7 +34,8 @@ if [ ! -d "$tmpmnt" ]; then
 fi
 
 mounted=
-if which grub-mount >/dev/null 2>&1 && \
+if type grub-mount >/dev/null 2>&1 && \
+   type grub-probe >/dev/null 2>&1 && \
    grub-mount "$partition" "$tmpmnt" 2>/dev/null; then
 	mounted=1
 	type="$(grub-probe -d "$partition" -t fs)"
