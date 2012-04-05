@@ -3,6 +3,9 @@ os-prober (1.52) UNRELEASED; urgency=low
   [ Stéphane Graber ]
   * Add support for Windows 8.
 
+  [ Colin Watson ]
+  * Install README and TODO in the .deb.
+
  -- Colin Watson <cjwatson@debian.org>  Thu, 05 Apr 2012 09:23:59 +0100
 
 os-prober (1.51) unstable; urgency=low
