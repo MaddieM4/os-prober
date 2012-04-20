@@ -60,20 +60,9 @@ if type grub-mount >/dev/null 2>&1 && \
 else
 	ro_partition "$partition"
 	for type in $types $delaytypes; do
-		if [ "$type" = ufs ]; then
-			for ufstype in ufs2 44bsd; do
-				if mount -o ro,ufstype=$ufstype -t "$type" "$partition" "$tmpmnt" 2>/dev/null; then
-					mounted=1
-				fi
-			done
-		else
-			if mount -o ro -t "$type" "$partition" "$tmpmnt" 2>/dev/null; then
-				mounted=1
-			fi
-		fi
-
-		if [ "$mounted" ]; then
+		if mount -o ro -t "$type" "$partition" "$tmpmnt" 2>/dev/null; then
 			debug "mounted as $type filesystem"
+			mounted=1
 			break
 		fi
 	done
