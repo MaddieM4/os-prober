@@ -1,6 +1,8 @@
 os-prober (1.53) UNRELEASED; urgency=low
 
   * Team upload
+  * Use Package-Type instead of deprecated XC-Package-Type
+    for os-prober-udeb
   * sed off (hdn,n) from the front of an initrd path,
     as seen in Mandriva/Mageia grub configs.
     Thanks to François Jaouen and Barry Jackson for the patch

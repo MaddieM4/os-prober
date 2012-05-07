@@ -9,7 +9,7 @@ Vcs-Browser: http://git.debian.org/?p=d-i/os-prober.git
 Vcs-Git: git://git.debian.org/d-i/os-prober.git
 
 Package: os-prober-udeb
-XC-Package-Type: udeb
+Package-Type: udeb
 Architecture: any
 Depends: ${shlibs:Depends}, di-utils-mapdevfs, anna (>= 1.16), grub-mount-udeb [i386 amd64 powerpc ppc64 sparc mipsel kfreebsd-i386 kfreebsd-amd64]
 Provides: os-prober
