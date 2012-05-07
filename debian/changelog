@@ -1,3 +1,12 @@
+os-prober (1.53) UNRELEASED; urgency=low
+
+  * sed off (hdn,n) from the front of an initrd path,
+    as seen in Mandriva/Mageia grub configs.
+    Thanks to François Jaouen and Barry Jackson for the patch
+    Closes: #566102
+
+ -- Christian Perrier <bubulle@debian.org>  Mon, 07 May 2012 22:11:19 +0200
+
 os-prober (1.52) unstable; urgency=low
 
   [ Stéphane Graber ]

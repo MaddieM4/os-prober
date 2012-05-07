@@ -64,7 +64,9 @@ parse_grub_menu () {
 				fi
 			;;
 			initrd)
-				initrd="$2"
+				# Hack alert take 2: sed off any (hdn,n)
+				# See #566102
+				initrd="$(echo "$2" | sed 's/(.*)//')"
 				# Initrd same.
 				if [ "$partition" != "$bootpart" ]; then
 					initrd="/boot$initrd"
