@@ -110,7 +110,10 @@ done
 # We need to properly canonicalize partitions with mount points and partitions
 # used in RAID
 grep "^/dev/" /proc/mounts | parse_proc_mounts >"$OS_PROBER_TMP/mounted-map" || true
-grep "^/dev/" /proc/swaps | parse_proc_swaps >"$OS_PROBER_TMP/swaps-map" || true
+: >"$OS_PROBER_TMP/swaps-map"
+if [ -f /proc/swaps ]; then
+	grep "^/dev/" /proc/swaps | parse_proc_swaps >"$OS_PROBER_TMP/swaps-map" || true
+fi
 : >"$OS_PROBER_TMP/raided-map"
 if [ -f /proc/mdstat ] ; then
 	grep "^md" /proc/mdstat | parse_proc_mdstat >"$OS_PROBER_TMP/raided-map" || true
