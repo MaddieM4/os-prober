@@ -1,8 +1,11 @@
-os-prober (1.54) UNRELEASED; urgency=low
+os-prober (1.54) unstable; urgency=low
 
+  * Team upload
+
+  [ Joey Hess ]
   * Avoid noise when /proc/swaps does not exist. Closes: #673566
 
- -- Joey Hess <joeyh@debian.org>  Sat, 19 May 2012 15:02:26 -0400
+ -- Christian Perrier <bubulle@debian.org>  Sat, 07 Jul 2012 20:42:47 +0200
 
 os-prober (1.53) unstable; urgency=low
 
