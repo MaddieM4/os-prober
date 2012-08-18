@@ -1,3 +1,10 @@
+os-prober (1.55) UNRELEASED; urgency=low
+
+  * Improve detection of Haiku: detect the 64-bit version
+    Closes: #685228
+
+ -- Christian Perrier <bubulle@debian.org>  Sat, 18 Aug 2012 17:51:43 +0200
+
 os-prober (1.54) unstable; urgency=low
 
   * Team upload

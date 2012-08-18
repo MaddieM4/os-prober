@@ -22,7 +22,8 @@ fi
 
 if system="$(item_in_dir "system" "$mpoint")" &&
 	item_in_dir -q "haiku_loader" "$mpoint/$system" &&
-	item_in_dir -q "kernel_x86" "$mpoint/$system"
+	(item_in_dir -q "kernel_x86" "$mpoint/$system" ||
+		item_in_dir -q "kernel_x86_64" "$mpoint/$system")
 then
 	debug "Stage 2 bootloader and kernel found"
 	label="$(count_next_label Haiku)"
