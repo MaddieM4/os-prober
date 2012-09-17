@@ -94,6 +94,9 @@ if [ -e "$mpoint/boot/grub/grub.cfg" ] && \
     [ "$mpoint/boot/grub/grub.cfg" -nt "$mpoint/boot/grub/menu.lst" ]); then
 	debug "parsing grub.cfg"
 	parse_grub_menu "$mpoint" "$partition" "$bootpart" < "$mpoint/boot/grub/grub.cfg"
+elif [ -e "$mpoint/boot/grub2/grub.cfg" ]; then
+	debug "parsing grub.cfg"
+	parse_grub_menu "$mpoint" "$partition" "$bootpart" < "$mpoint/boot/grub2/grub.cfg"
 fi
 
 if [ "$found_item" = 0 ]; then

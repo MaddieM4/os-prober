@@ -1,3 +1,11 @@
+os-prober (1.56) UNRELEASED; urgency=low
+
+  [ Hedayat Vatankhah ]
+  * Add support for probing Fedora's location for the GRUB 2 configuration
+    file (closes: #674560).
+
+ -- Colin Watson <cjwatson@debian.org>  Mon, 17 Sep 2012 16:15:56 +0100
+
 os-prober (1.55) unstable; urgency=low
 
   * Improve detection of Haiku: detect the 64-bit version
