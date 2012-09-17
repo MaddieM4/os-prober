@@ -1,4 +1,4 @@
-os-prober (1.56) UNRELEASED; urgency=low
+os-prober (1.56) unstable; urgency=low
 
   [ Hedayat Vatankhah ]
   * Add support for probing Fedora's location for the GRUB 2 configuration
@@ -9,7 +9,7 @@ os-prober (1.56) UNRELEASED; urgency=low
     hopelessly confused by multiple single-quoted strings on the same line,
     as produced by GRUB 2.00.
 
- -- Colin Watson <cjwatson@debian.org>  Mon, 17 Sep 2012 16:15:56 +0100
+ -- Colin Watson <cjwatson@debian.org>  Mon, 17 Sep 2012 19:02:29 +0100
 
 os-prober (1.55) unstable; urgency=low
 
