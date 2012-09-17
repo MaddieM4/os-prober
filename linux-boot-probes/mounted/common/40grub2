@@ -44,13 +44,17 @@ parse_grub_menu () {
 				entry_result
 				shift 1
 				# The double-quoted string is the title.
-				title="$(echo "$@" | sed -n 's/[^"]*"\(.*\)".*/\1/p' | sed 's/://g')"
+				# Make sure to look at the text of the line
+				# before 'set' mangled it.
+				title="$(echo "$line" | sed -n 's/[^"]*"\(.*\)".*/\1/p' | sed 's/://g')"
 				if [ -z "$title" ]; then
-					# ... or single-quoted?  The
-					# unescaping here is odd because the
-					# 'set' above has already eaten
-					# backslash-escapes.
-					title="$(echo "$@" | sed -n "s/[^']*'\(.*\)'.*/\1/p" | sed "s/'''/'/; s/://g")"
+					# ... or single-quoted?  Be careful
+					# to handle constructions like
+					# 'foo'\''bar' (which expands to
+					# foo'bar, as in shell), and to
+					# handle multiple single-quoted
+					# strings on the same line.
+					title="$(echo "$line" | sed -n "s/[^']*'\(\([^']\|'\\\\''\)*\)'.*/\1/p" | sed "s/'\\\\''/'/; s/://g")"
 				fi
 				if [ -z "$title" ]; then
 					ignore_item=1

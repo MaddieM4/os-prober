@@ -4,6 +4,11 @@ os-prober (1.56) UNRELEASED; urgency=low
   * Add support for probing Fedora's location for the GRUB 2 configuration
     file (closes: #674560).
 
+  [ Colin Watson ]
+  * Fix the parsing code in the grub2 handler so that it no longer gets
+    hopelessly confused by multiple single-quoted strings on the same line,
+    as produced by GRUB 2.00.
+
  -- Colin Watson <cjwatson@debian.org>  Mon, 17 Sep 2012 16:15:56 +0100
 
 os-prober (1.55) unstable; urgency=low
