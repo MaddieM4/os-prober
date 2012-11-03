@@ -50,7 +50,7 @@ if type grub-mount >/dev/null 2>&1 && \
    type grub-probe >/dev/null 2>&1 && \
    grub-mount "$partition" "$tmpmnt" 2>/dev/null; then
 	mounted=1
-	type="$(grub-probe -d "$partition" -t fs)"
+	type="$(grub-probe -d "$partition" -t fs)" || true
 	if [ "$type" ]; then
 		debug "mounted using GRUB $type filesystem driver"
 	else

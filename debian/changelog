@@ -1,3 +1,11 @@
+os-prober (1.57) UNRELEASED; urgency=low
+
+  * Deal with grub-probe exiting with non zero status on some
+    devices, which in turns can stuck update-grub
+    Closes: #680084
+
+ -- Christian Perrier <bubulle@debian.org>  Sat, 03 Nov 2012 17:48:32 +0100
+
 os-prober (1.56) unstable; urgency=low
 
   [ Hedayat Vatankhah ]
