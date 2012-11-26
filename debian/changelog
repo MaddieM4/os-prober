@@ -1,8 +1,14 @@
 os-prober (1.57) UNRELEASED; urgency=low
 
+  [ Christian Perrier ]
   * Deal with grub-probe exiting with non zero status on some
     devices, which in turns can stuck update-grub
     Closes: #680084
+
+  [ Joey Hess ]
+  * Fix detection of Fedora and other distros that moved /lib into /usr
+    and left behind a symlink. Grub's filesystem code does not support
+    symlinks. Closes: #685159 Thanks Andreas Bombe for the patch.
 
  -- Christian Perrier <bubulle@debian.org>  Sat, 03 Nov 2012 17:48:32 +0100
 
