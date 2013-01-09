@@ -10,6 +10,23 @@ ifneq (,$(findstring :$(ARCH):,:i386:amd64:))
 ARCH=x86
 endif
 
+DEB_HOST_GNU_TYPE  ?= $(shell dpkg-architecture -qDEB_HOST_GNU_TYPE)
+DEB_BUILD_GNU_TYPE ?= $(shell dpkg-architecture -qDEB_BUILD_GNU_TYPE)
+
+ifeq ($(DEB_BUILD_GNU_TYPE),$(DEB_HOST_GNU_TYPE))
+CC := gcc
+else
+CC := $(DEB_HOST_GNU_TYPE)-gcc
+endif
+
+export DEB_CFLAGS_MAINT_APPEND := -Os -Wall
+
+CFLAGS := $(shell dpkg-buildflags --get CPPFLAGS; dpkg-buildflags --get CFLAGS)
+LDFLAGS := $(shell dpkg-buildflags --get LDFLAGS)
+
+override_dh_auto_build:
+	$(MAKE) CC=$(CC) CFLAGS="$(CFLAGS)" LDFLAGS="$(LDFLAGS)"
+
 override_dh_install:
 	dh_install
 	for probes in os-probes os-probes/mounted os-probes/init \
