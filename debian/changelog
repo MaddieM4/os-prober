@@ -1,3 +1,13 @@
+os-prober (1.58) unstable; urgency=low
+
+  [ Steve McIntyre ]
+  * add UEFI support, patch from Andrey Borzenkov:
+    + skip legacy MS loader detection on UEFI platform
+    + add framework for searching EFI System Partition
+    + add scripts that detect Microsoft bootloader and ELILO.
+
+ -- Steve McIntyre <93sam@debian.org>  Thu, 25 Apr 2013 00:55:53 +0100
+
 os-prober (1.57) unstable; urgency=low
 
   [ Christian Perrier ]
