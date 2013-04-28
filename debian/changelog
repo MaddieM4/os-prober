@@ -5,8 +5,9 @@ os-prober (1.58) unstable; urgency=low
     + skip legacy MS loader detection on UEFI platform
     + add framework for searching EFI System Partition
     + add scripts that detect Microsoft bootloader and ELILO.
+  * Add myself to uploaders.
 
- -- Steve McIntyre <93sam@debian.org>  Thu, 25 Apr 2013 00:55:53 +0100
+ -- Steve McIntyre <93sam@debian.org>  Sun, 28 Apr 2013 16:01:50 +0100
 
 os-prober (1.57) unstable; urgency=low
 
