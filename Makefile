@@ -3,7 +3,7 @@ CFLAGS := -Os -g -Wall
 all: newns
 
 newns: newns.c
-	$(CC) $(CFLAGS) $^ -o $@
+	$(CC) $(CFLAGS) $(LDFLAGS) $^ -o $@
 
 clean:
 	rm -f newns
