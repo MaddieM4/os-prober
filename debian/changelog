@@ -1,8 +1,9 @@
-os-prober (1.59) UNRELEASED; urgency=low
+os-prober (1.59) unstable; urgency=low
 
+  [ Colin Watson ]
   * Fix cross-building and use dpkg-buildflags.
 
- -- Colin Watson <cjwatson@debian.org>  Tue, 14 May 2013 21:06:35 +0100
+ -- Christian Perrier <bubulle@debian.org>  Wed, 15 May 2013 17:36:49 +0200
 
 os-prober (1.58) unstable; urgency=low
 
