@@ -17,6 +17,7 @@ fi
 case "$type" in
 	vfat) debug "$1 is a FAT32 partition" ;;
 	msdos) debug "$1 is a FAT16 partition" ;;
+	fat) debug "$1 is a FAT partition (mounted by GRUB)" ;;
 	*) debug "$1 is $type partition: exiting"; exit 1 ;;
 esac
 

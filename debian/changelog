@@ -1,3 +1,10 @@
+os-prober (1.60) UNRELEASED; urgency=low
+
+  * os-probes/mounted/x86/05efi: Handle the case where we used grub-mount to
+    mount the EFI System Partition.
+
+ -- Colin Watson <cjwatson@debian.org>  Fri, 17 May 2013 13:02:05 +0100
+
 os-prober (1.59) unstable; urgency=low
 
   [ Colin Watson ]
