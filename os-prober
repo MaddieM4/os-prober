@@ -81,7 +81,7 @@ parse_proc_mdstat () {
 	fi
 	while read line; do
 		for word in $line; do
-			dev="${word%%[*}"
+			dev="${word%%\[*}"
 			# TODO: factor this out to something in di-utils if
 			# it's needed elsewhere
 			if [ -d /sys/block ] && type udevinfo >/dev/null 2>&1; then

@@ -1,3 +1,10 @@
+os-prober (1.61) UNRELEASED; urgency=low
+
+  * Add an extra backslash to the code in parse_proc_mdstat to remove [...],
+    so that it works properly in dash (thanks, John Ryan; LP: #905607).
+
+ -- Colin Watson <cjwatson@debian.org>  Tue, 21 May 2013 22:37:14 +0100
+
 os-prober (1.60) unstable; urgency=low
 
   * os-probes/mounted/x86/05efi: Handle the case where we used grub-mount to
