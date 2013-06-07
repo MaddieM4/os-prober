@@ -1,3 +1,11 @@
+os-prober (1.62) UNRELEASED; urgency=low
+
+  * Set debian source format to '3.0 (native)'.
+  * Bump debhelper compat level to 9.
+  * Set Vcs-* to canonical format.
+
+ -- Dmitrijs Ledkovs <xnox@debian.org>  Fri, 07 Jun 2013 00:26:07 +0100
+
 os-prober (1.61) unstable; urgency=low
 
   * Add an extra backslash to the code in parse_proc_mdstat to remove [...],
