@@ -1,4 +1,4 @@
-os-prober (1.62) UNRELEASED; urgency=low
+os-prober (1.62) unstable; urgency=low
 
   [ Dmitrijs Ledkovs ]
   * Set debian source format to '3.0 (native)'.
@@ -8,7 +8,7 @@ os-prober (1.62) UNRELEASED; urgency=low
   [ Christian Perrier ]
   * Update Standards to 3.9.4 (checked)
 
- -- Dmitrijs Ledkovs <xnox@debian.org>  Fri, 07 Jun 2013 00:26:07 +0100
+ -- Christian Perrier <bubulle@debian.org>  Sun, 14 Jul 2013 12:43:27 +0200
 
 os-prober (1.61) unstable; urgency=low
 
