@@ -2,7 +2,7 @@
 # Make sure filesystems are available.
 set +e	# ignore errors from modprobe
 
-FILESYSTEMS='ext2 ext3 ext4 reiserfs xfs jfs msdos vfat ntfs minix hfs hfsplus qnx4 ufs btrfs'
+FILESYSTEMS='ext2 ext3 ext4 xfs jfs msdos vfat ntfs minix hfs hfsplus qnx4 ufs btrfs'
 # fuse is needed to make grub-mount work.
 FILESYSTEMS="$FILESYSTEMS fuse"
 # The Ubuntu kernel udebs put a number of filesystem modules in
