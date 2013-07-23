@@ -1,8 +1,9 @@
-os-prober (1.63) UNRELEASED; urgency=low
+os-prober (1.63) unstable; urgency=low
 
+  [ Cyril Brulebois ]
   * Drop reiserfs, it's no longer supported.
 
- -- Cyril Brulebois <kibi@debian.org>  Mon, 22 Jul 2013 03:55:54 +0200
+ -- Christian Perrier <bubulle@debian.org>  Tue, 23 Jul 2013 09:38:17 +0200
 
 os-prober (1.62) unstable; urgency=low
 
