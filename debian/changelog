@@ -1,3 +1,10 @@
+os-prober (1.64) UNRELEASED; urgency=medium
+
+  [ Frederic Bonnard ]
+  * Add ppc64el support.  Closes: #752416.
+
+ -- Aurelien Jarno <aurel32@debian.org>  Sun, 17 Aug 2014 23:32:06 +0200
+
 os-prober (1.63) unstable; urgency=low
 
   [ Cyril Brulebois ]

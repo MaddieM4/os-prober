@@ -11,7 +11,7 @@ Vcs-Git: git://anonscm.debian.org/d-i/os-prober.git
 Package: os-prober-udeb
 Package-Type: udeb
 Architecture: any
-Depends: ${misc:Depends}, ${shlibs:Depends}, di-utils-mapdevfs, anna (>= 1.16), grub-mount-udeb [i386 amd64 powerpc ppc64 sparc mipsel kfreebsd-i386 kfreebsd-amd64]
+Depends: ${misc:Depends}, ${shlibs:Depends}, di-utils-mapdevfs, anna (>= 1.16), grub-mount-udeb [i386 amd64 powerpc ppc64 ppc64el sparc mipsel kfreebsd-i386 kfreebsd-amd64]
 Provides: os-prober
 Description: utility to detect other OSes on a set of drives
  This package is to be used by boot loader installers to detect other OSes
