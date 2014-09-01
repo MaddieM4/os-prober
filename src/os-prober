@@ -1,7 +1,9 @@
 #!/bin/sh
 set -e
 
-. /usr/share/os-prober/common.sh
+replace LIB_DIR
+
+. $LIB_DIR/common.sh
 
 newns "$@"
 require_tmpdir

@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+set -e
+
+sed < /dev/stdin > /dev/stdout \
+    -e "s/replace LIB_DIR/export LIB_DIR=$LIB_DIR/" \
+    -e "s/replace BIN_DIR/export BIN_DIR=$BIN_DIR/"
