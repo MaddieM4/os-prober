@@ -101,9 +101,9 @@ parse_proc_mdstat () {
 }
 
 # Needed for idempotency
-rm -f /var/lib/os-prober/labels
+rm -f $LIB_DIR/labels
 
-for prog in /usr/lib/os-probes/init/*; do
+for prog in $LIB_DIR/probes/os/init/*; do
 	if [ -x "$prog" ] && [ -f "$prog" ]; then
 		"$prog" || true
 	fi
@@ -140,7 +140,7 @@ for partition in $(partitions); do
 	fi
 
 	if ! grep -q "^$mapped " "$OS_PROBER_TMP/mounted-map" ; then
-		for test in /usr/lib/os-probes/*; do
+		for test in $LIB_DIR/probes/os/*; do
 			if [ -f "$test" ] && [ -x "$test" ]; then
 				debug "running $test on $partition"
 				if "$test" "$partition"; then
@@ -154,7 +154,7 @@ for partition in $(partitions); do
 		mpoint="$(unescape_mount "$mpoint")"
 		if [ "$mpoint" != "/target/boot" ] && [ "$mpoint" != "/target" ] && [ "$mpoint" != "/" ]; then
 			type=$(grep "^$mapped " "$OS_PROBER_TMP/mounted-map" | head -n1 | cut -d " " -f 3)
-			for test in /usr/lib/os-probes/mounted/*; do
+			for test in $LIB_DIR/probes/os/mounted/*; do
 				if [ -f "$test" ] && [ -x "$test" ]; then
 					debug "running $test on mounted $partition"
 					if "$test" "$partition" "$mpoint" "$type"; then
