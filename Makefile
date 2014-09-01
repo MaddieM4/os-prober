@@ -30,10 +30,10 @@ build/lib/common.sh: build_dirs src/common.sh
 	./do-build-replace < src/common.sh > build/lib/common.sh
 
 check: build/lib/newns
-	./build/lib/os-prober
-	./build/lib/os-prober | grep ':'
-	./build/lib/linux-boot-prover
-	./build/lib/linux-boot-prover | grep ':'
+	./build/bin/os-prober
+	./build/bin/os-prober | grep ':'
+	./build/bin/linux-boot-prover
+	./build/bin/linux-boot-prover | grep ':'
 
 install: all
 	mkdir -p $(LIB_DIR) $(BIN_DIR)
