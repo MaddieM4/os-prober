@@ -1,23 +1,29 @@
+.PHONY: build_dirs
 CFLAGS := -Os -g -Wall
+
+ifeq "$(out)" ""
+	export LIB_DIR := /usr/lib/os-prober/
+	export BIN_DIR := /usr/bin/os-prober/
+else
+	export LIB_DIR := $(out)/lib/
+	export BIN_DIR := $(out)/bin/
+endif
 
 all: build/bin/os-prober build/bin/linux-boot-prober build/lib/newns
 
-build/lib/newns: newns.c build/lib
-	$(CC) $(CFLAGS) $(LDFLAGS) $^ -o "$@"
+build_dirs:
+	mkdir -p build/bin build/lib
 
-build/bin:
-	mkdir -p build/bin
+build/lib/newns: build_dirs src/newns.c
+	$(CC) $(CFLAGS) $(LDFLAGS) src/newns.c -o build/lib/newns
 
-build/lib:
-	mkdir -p build/lib
-
-build/bin/os-prober: build/bin src/os-prober
+build/bin/os-prober: build/lib/common.sh src/os-prober
 	./do-build-replace < src/os-prober > build/bin/os-prober
 
-build/bin/linux-boot-prober: build/bin src/linux-boot-prober
+build/bin/linux-boot-prober: build/lib/common.sh src/linux-boot-prober
 	./do-build-replace < src/linux-boot-prober > build/bin/linux-boot-prober
 
-build/lib/common.sh: build/lib src/common.sh
+build/lib/common.sh: build_dirs src/common.sh
 	./do-build-replace < src/common.sh > build/lib/common.sh
 
 check: build/lib/newns
