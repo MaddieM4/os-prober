@@ -1,8 +1,7 @@
-replace USERLIB_DIR
-replace VARLIB_DIR
+replace LIB_DIR
 
 newns () {
-  [ "$OS_PROBER_NEWNS" ] || exec USERLIB_DIR/newns "$0" "$@"
+  [ "$OS_PROBER_NEWNS" ] || exec LIB_DIR/newns "$0" "$@"
 }
 
 cleanup_tmpdir=false
@@ -31,7 +30,7 @@ require_tmpdir() {
 
 count_for() {
   _labelprefix="$1"
-  _result=$(grep "^${_labelprefix} " /var/lib/os-prober/labels 2>/dev/null || true)
+  _result=$(grep "^${_labelprefix} " $LIB_DIR/os-prober/labels 2>/dev/null || true)
 
   if [ -z "$_result" ]; then
     return
@@ -47,10 +46,10 @@ count_next_label() {
   _cfor="$(count_for "${_labelprefix}")"
 
   if [ -z "$_cfor" ]; then
-    echo "${_labelprefix} 1" >> $VARLIB_DIR/labels
+    echo "${_labelprefix} 1" >> $LIB_DIR/labels
   else
-    sed "s/^${_labelprefix} ${_cfor}/${_labelprefix} $(($_cfor + 1))/" $VARLIB_DIR/labels > "$OS_PROBER_TMP/os-prober.tmp"
-    mv "$OS_PROBER_TMP/os-prober.tmp" $VARLIB_DIR/labels
+    sed "s/^${_labelprefix} ${_cfor}/${_labelprefix} $(($_cfor + 1))/" $LIB_DIR/labels > "$OS_PROBER_TMP/os-prober.tmp"
+    mv "$OS_PROBER_TMP/os-prober.tmp" $LIB_DIR/labels
   fi
   
   echo "${_labelprefix}${_cfor}"
