@@ -39,6 +39,7 @@ install: all
 	mkdir -p $(LIB_DIR) $(BIN_DIR)
 	cp -r build/lib/* $(LIB_DIR)
 	cp -a build/bin/* $(BIN_DIR)
+	cp -r src/probes $(LIB_DIR)
 
 clean:
 	rm -f newns
