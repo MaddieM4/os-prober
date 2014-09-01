@@ -3,11 +3,11 @@ CFLAGS := -Os -g -Wall
 
 # NixOS uses the $out variable to indicate build output location
 ifeq "$(out)" ""
-	export LIB_DIR := /usr/lib/os-prober/
-	export BIN_DIR := /usr/bin/os-prober/
+	export LIB_DIR := /usr/lib/os-prober
+	export BIN_DIR := /usr/bin/os-prober
 else
-	export LIB_DIR := $(out)/lib/
-	export BIN_DIR := $(out)/bin/
+	export LIB_DIR := $(out)/lib
+	export BIN_DIR := $(out)/bin
 endif
 
 all: build/bin/os-prober build/bin/linux-boot-prober build/lib/newns
@@ -20,9 +20,11 @@ build/lib/newns: build_dirs src/newns.c
 
 build/bin/os-prober: build/lib/common.sh src/os-prober
 	./do-build-replace < src/os-prober > build/bin/os-prober
+	chmod +x build/bin/os-prober
 
 build/bin/linux-boot-prober: build/lib/common.sh src/linux-boot-prober
 	./do-build-replace < src/linux-boot-prober > build/bin/linux-boot-prober
+	chmod +x build/bin/linux-boot-prober
 
 build/lib/common.sh: build_dirs src/common.sh
 	./do-build-replace < src/common.sh > build/lib/common.sh
@@ -36,7 +38,7 @@ check: build/lib/newns
 install: all
 	mkdir -p $(LIB_DIR) $(BIN_DIR)
 	cp -r build/lib/* $(LIB_DIR)
-	cp -r build/bin/* $(BIN_DIR)
+	cp -a build/bin/* $(BIN_DIR)
 
 clean:
 	rm -f newns

@@ -1,7 +1,7 @@
 replace LIB_DIR
 
 newns () {
-  [ "$OS_PROBER_NEWNS" ] || exec LIB_DIR/newns "$0" "$@"
+  [ "$OS_PROBER_NEWNS" ] || exec $LIB_DIR/newns "$0" "$@"
 }
 
 cleanup_tmpdir=false
