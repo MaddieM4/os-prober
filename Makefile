@@ -1,6 +1,7 @@
 .PHONY: build_dirs
 CFLAGS := -Os -g -Wall
 
+# NixOS uses the $out variable to indicate build output location
 ifeq "$(out)" ""
 	export LIB_DIR := /usr/lib/os-prober/
 	export BIN_DIR := /usr/bin/os-prober/
@@ -31,6 +32,11 @@ check: build/lib/newns
 	./build/lib/os-prober | grep ':'
 	./build/lib/linux-boot-prover
 	./build/lib/linux-boot-prover | grep ':'
+
+install: all
+	mkdir -p $(LIB_DIR) $(BIN_DIR)
+	cp -r build/lib/* $(LIB_DIR)
+	cp -r build/bin/* $(BIN_DIR)
 
 clean:
 	rm -f newns
