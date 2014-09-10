@@ -125,6 +125,7 @@ if [ -f /proc/mdstat ] ; then
 fi
 
 for partition in $(partitions); do
+    echo "==== Partition $partition ====" >&2
     if ! mapped="$(mapdevfs "$partition")"; then
         log "Device '$partition' does not exist; skipping"
         continue
