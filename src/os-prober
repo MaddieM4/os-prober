@@ -61,8 +61,10 @@ partitions () {
 
 	# Also detect OSes on LVM volumes (assumes LVM is active)
 	if type lvs >/dev/null 2>&1; then
-		echo "$(LVM_SUPPRESS_FD_WARNINGS=1 log_output lvs --noheadings --separator : -o vg_name,lv_name |
-			sed "s|-|--|g;s|^[[:space:]]*\(.*\):\(.*\)$|/dev/mapper/\1-\2|")"
+		echo "$(LVM_SUPPRESS_FD_WARNINGS=1 log_output lvs --noheadings --separator : -o vg_name,lv_name 2>&1 |
+			sed "s|-|--|g;s|^[[:space:]]*\(.*\):\(.*\)$|/dev/mapper/\1-\2|" |
+			grep -v "No volume groups found"
+		)"
 	fi
 }
 
@@ -105,6 +107,7 @@ rm -f $LIB_DIR/labels
 
 for prog in $LIB_DIR/probes/os/init/*; do
 	if [ -x "$prog" ] && [ -f "$prog" ]; then
+		echo "Running init probe $(basename $prog)..."
 		"$prog" || true
 	fi
 done
@@ -144,7 +147,7 @@ for partition in $(partitions); do
 			if [ -f "$test" ] && [ -x "$test" ]; then
 				debug "running $test on $partition"
 				if "$test" "$partition"; then
-					debug "os detected by $test"
+					echo "os detected by $test"
 			   		break
 				fi
 			fi
@@ -155,10 +158,11 @@ for partition in $(partitions); do
 		if [ "$mpoint" != "/target/boot" ] && [ "$mpoint" != "/target" ] && [ "$mpoint" != "/" ]; then
 			type=$(grep "^$mapped " "$OS_PROBER_TMP/mounted-map" | head -n1 | cut -d " " -f 3)
 			for test in $LIB_DIR/probes/os/mounted/*; do
+				echo "Running test $test on $partition" >&2
 				if [ -f "$test" ] && [ -x "$test" ]; then
 					debug "running $test on mounted $partition"
 					if "$test" "$partition" "$mpoint" "$type"; then
-						debug "os detected by $test"
+						echo "os detected by $test"
 						break
 					fi
 				fi
