@@ -143,6 +143,7 @@ for partition in $(partitions); do
         continue
     fi
 
+    # Not currently mounted
     if ! grep -q "^$mapped " "$OS_PROBER_TMP/mounted-map" ; then
         for test in $LIB_DIR/probes/os/*; do
             if [ -f "$test" ] && [ -x "$test" ]; then

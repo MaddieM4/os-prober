@@ -1,6 +1,15 @@
 .PHONY: build_dirs
 CFLAGS := -Os -g -Wall
 
+ifeq ($(ARCH),)
+	export ARCH := $(shell uname -m)
+endif
+ifeq ($(ARCH),x86_64)
+	export ARCH = x86
+endif
+
+$(info Architecture: $(ARCH))
+
 # NixOS uses the $out variable to indicate build output location
 ifeq "$(out)" ""
 	export LIB_DIR := /usr/lib/os-prober
@@ -39,7 +48,13 @@ install: all
 	mkdir -p $(LIB_DIR) $(BIN_DIR)
 	cp -r build/lib/* $(LIB_DIR)
 	cp -a build/bin/* $(BIN_DIR)
-	cp -r src/probes $(LIB_DIR)
+	for probes in os os/init os/mounted; do \
+		mkdir -p $(LIB_DIR)/probes/$$probes; \
+		cp src/probes/$$probes/common/* $(LIB_DIR)/probes/$$probes; \
+		if [ -e "src/probes/$$probes/$(ARCH)" ]; then \
+			cp -r src/probes/$$probes/$(ARCH)/* $(LIB_DIR)/probes/$$probes; \
+		fi; \
+	done
 
 clean:
 	rm -f newns
